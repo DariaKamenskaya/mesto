@@ -1,0 +1,10 @@
+.element__heart-button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+}
+
+.element__heart-button:active {
+    background-color: black;
+}

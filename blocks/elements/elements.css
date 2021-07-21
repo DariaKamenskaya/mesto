@@ -1,8 +1,7 @@
 .elements {
-    margin: 50px auto 0;
+    margin: 50px 200px 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    grid-column-gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
     grid-row-gap: 12px;
     list-style: none;
     padding-inline-start: 0;

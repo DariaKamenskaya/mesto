@@ -5,5 +5,38 @@
     /* выше установили ограничение по максимальной ширине с учетом внутренних отступов*/
     margin: 0 auto 0;
     /* выше для экранов больше 1280px отцентрировали весь контент */
+    padding: 0 200px;
     font-family: Inter, Arial, sans-serif;
 }
+
+@media screen and (max-width: 1270px) {
+    .page {
+        padding: 0 180px;
+    }
+  } 
+
+  @media screen and (max-width: 1230px) {
+    .page {
+        padding: 0 10%;
+    }
+  } 
+
+  @media screen and (max-width: 1090px) {
+    .page {
+        padding: 0 5%;
+    }
+  } 
+
+  
+  @media screen and (max-width: 970px) {
+    .page {
+        padding: 0 3%;
+    }
+  } 
+
+    
+  @media screen and (max-width: 925px) {
+    .page {
+        padding: 0 2%;
+    }
+  } 

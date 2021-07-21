@@ -1,5 +1,6 @@
 .elements {
-    margin: 50px 200px 0;
+    margin: 50px 0 0;
+    /*margin: 50px 200px 0;*/
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
     grid-row-gap: 12px;
@@ -7,3 +8,4 @@
     padding-inline-start: 0;
     justify-items: center;
 }
+

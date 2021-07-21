@@ -9,3 +9,12 @@
     max-width: 24px;
     max-height: 24px;
 }
+
+@media screen and (max-width: 400px) {
+    .profile__edit-button {
+        margin-left: 15px;
+        margin-top: 5px;
+        max-width: 18px;
+        max-height: 18px;
+    }
+}

@@ -2,10 +2,17 @@
     margin: 50px 0 0;
     /*margin: 50px 200px 0;*/
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
     grid-row-gap: 12px;
     list-style: none;
     padding-inline-start: 0;
     justify-items: center;
+}
+
+
+@media screen and (max-width: 400px) {
+    .elements {
+        grid-row-gap: 20px;
+    }
 }
 

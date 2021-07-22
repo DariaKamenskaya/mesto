@@ -8,6 +8,12 @@
     border-color: white;
     max-width: 24px;
     max-height: 24px;
+    cursor: pointer;
+    opacity: 1.0;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
 }
 
 @media screen and (max-width: 400px) {

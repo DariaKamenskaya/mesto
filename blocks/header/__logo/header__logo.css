@@ -4,6 +4,9 @@
     max-width: 142px;
 }
 
+.header__logo:hover {
+    background: black;
+}
 
 @media screen and (max-width: 400px) {
     .header__logo {

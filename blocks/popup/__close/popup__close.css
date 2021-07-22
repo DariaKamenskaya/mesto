@@ -17,3 +17,12 @@
     opacity: 0.6;
 }
 
+
+@media screen and (max-width: 400px) {
+    .popup__close {
+        width: 20px;
+        height: 20px;
+        top: -35px;
+        right: 0px;
+    }
+}

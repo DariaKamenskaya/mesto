@@ -5,6 +5,13 @@
     background-color: white;
 }
 
-.element__heart-button:active {
+.element__heart-button:hover {
+    opacity: 0.5;
+}
+
+.element__black-heart-button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
     background-color: black;
 }

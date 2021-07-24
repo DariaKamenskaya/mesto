@@ -9,8 +9,15 @@
 }
 
 
+@media screen and (max-width: 900px) {
+    .elements {
+        margin: 45px 45px 0;
+    }
+}
+
 @media screen and (max-width: 400px) {
     .elements {
+        margin: 45px 0 0;
         grid-row-gap: 20px;
     }
 }

@@ -10,6 +10,7 @@
     max-height: 24px;
     cursor: pointer;
     opacity: 1.0;
+    vertical-align: middle;
 }
 
 .profile__edit-button:hover {

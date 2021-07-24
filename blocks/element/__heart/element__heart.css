@@ -1,8 +1,0 @@
-.element__heart {
-    margin: 0;
-    background-color: white;
-}
-
-.element__heart:active {
-    background-color: black;
-}

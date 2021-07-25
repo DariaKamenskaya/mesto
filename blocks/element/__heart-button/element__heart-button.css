@@ -3,7 +3,7 @@
     border: none;
     cursor: pointer;
     background-color: white;
-    background: url(../../../images/heart.svg);
+    background-image: url(../../../images/heart.svg);
     background-position: center center;
     background-repeat: no-repeat;
     width: 22px;
@@ -11,9 +11,10 @@
 }
 
 .element__heart-button:hover {
-    opacity: 0.5;
+    opacity: .5;
 }
 
 .element__heart-button:active {
-    background: url(../../../images/black-heart.png);
+    background-image: url(../../../images/black-heart.svg);
+    opacity: 1.0;
 }

@@ -1,7 +1,8 @@
 .profile__add-button {
     margin: 0;
     margin-top: 30px;
-    margin-left: 75px;
+    /*margin-left: 75px;*/
+    align-self: flex-end;
     background: black;
     border-style: solid;
     border-width: 1px;
@@ -19,14 +20,9 @@
     opacity: 0.6;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
     .profile__add-button {
-        margin-left: 0px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .profile__add-button {
+        align-self: center;
         width: 280px;
     }
 }

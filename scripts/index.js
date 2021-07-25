@@ -28,10 +28,11 @@ function formSubmitHandler (evt) {
     // Вставим новые значения с помощью textContent
     profileNameInput.textContent = ValNameInput;
     profileJobInput.textContent =  ValJobInput;
+    popup.classList.toggle("popup_is-opened");
 }
 
 popupButton.addEventListener("click", togglePopup);
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener("submit", formSubmitHandler); 
-formElement.addEventListener("submit", togglePopup); 
+/*formElement.addEventListener("submit", togglePopup); */
 closeButton.addEventListener("click", togglePopup);

@@ -7,7 +7,6 @@
     color: #FFFFFF;
 }
 
-  
 @media screen and (max-width: 400px) {
     .profile__text {
         font-size: 14px;

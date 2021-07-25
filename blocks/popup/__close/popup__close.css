@@ -17,7 +17,6 @@
     opacity: 0.6;
 }
 
-
 @media screen and (max-width: 400px) {
     .popup__close {
         width: 20px;

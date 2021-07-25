@@ -8,7 +8,6 @@
     justify-items: center;
 }
 
-
 @media screen and (max-width: 900px) {
     .elements {
         margin: 45px 45px 0;

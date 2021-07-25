@@ -19,24 +19,22 @@
     .page {
         padding: 0 10%;
     }
-  } 
+  }
 
   @media screen and (max-width: 1090px) {
     .page {
         padding: 0 5%;
     }
-  } 
+  }
 
-  
   @media screen and (max-width: 970px) {
     .page {
         padding: 0 3%;
     }
-  } 
+  }
 
-    
   @media screen and (max-width: 925px) {
     .page {
         padding: 0 2%;
     }
-  } 
+  }

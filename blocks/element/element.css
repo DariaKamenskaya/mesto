@@ -2,7 +2,7 @@
     margin: 0;
     background-color: white;
     border-radius: 10px;
-    max-height: 360px;
+    min-height: 360px;
     max-width: 280px;
     overflow: hidden;
 }

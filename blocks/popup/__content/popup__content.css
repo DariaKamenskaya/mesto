@@ -4,7 +4,7 @@
     justify-content: space-between;*/
     background-color: white;
     border-radius: 10px;
-    max-height: 330px;
+    min-height: 330px;
     position: relative;
     width: 100%;
     max-width: 430px;

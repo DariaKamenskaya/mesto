@@ -1,12 +1,13 @@
 .profile__edit-button {
     margin: 0;
-    margin-left: 20px;
+    margin-left: 15px;
     margin-top: 15px;
     background: black;
     border-style: solid;
     border-width: 1px;
     border-color: white;
     width: 24px;
+    height: 21px;
     cursor: pointer;
     opacity: 1.0;
     vertical-align: middle;

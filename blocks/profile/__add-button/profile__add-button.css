@@ -24,6 +24,7 @@
     .profile__add-button {
         align-self: center;
         width: 280px;
+        background-size: 16px;
     }
 }
 

@@ -11,3 +11,10 @@
     /*padding: 284px 84px 0px;*/
     display: none;
 }
+
+@media screen and (max-width: 400px) {
+    .popup {
+      top: -315px;
+      bottom: 0px;
+    }
+}

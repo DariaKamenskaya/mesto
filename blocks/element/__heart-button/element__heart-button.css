@@ -6,8 +6,8 @@
     background-image: url(../../../images/heart.svg);
     background-position: center center;
     background-repeat: no-repeat;
-    width: 24px;
-    max-height: 19px;
+    width: 27px;
+    background-size: 22px;
 }
 
 .element__heart-button:hover {
@@ -21,6 +21,6 @@
 
 @media screen and (max-width: 400px) {
     .element__heart-button {
-        margin-top: 7px;
+        margin-top: 4px;
     }
 }

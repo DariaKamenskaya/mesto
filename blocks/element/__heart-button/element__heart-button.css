@@ -6,7 +6,7 @@
     background-image: url(../../../images/heart.svg);
     background-position: center center;
     background-repeat: no-repeat;
-    width: 22px;
+    width: 24px;
     max-height: 19px;
 }
 
@@ -17,4 +17,10 @@
 .element__heart-button:active {
     background-image: url(../../../images/black-heart.svg);
     opacity: 1.0;
+}
+
+@media screen and (max-width: 400px) {
+    .element__heart-button {
+        margin-top: 7px;
+    }
 }

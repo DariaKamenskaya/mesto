@@ -5,3 +5,9 @@
     width: 100%;
     height: 80%;
 }
+
+@media screen and (max-width: 400px) {
+    .element__image {
+        height: 78%;
+    }
+}

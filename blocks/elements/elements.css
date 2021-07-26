@@ -16,8 +16,8 @@
 
 @media screen and (max-width: 400px) {
     .elements {
-        margin: 45px 0 0;
-        grid-row-gap: 20px;
+        margin: 36px 0 0;
+        grid-row-gap: 21px;
     }
 }
 

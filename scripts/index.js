@@ -28,7 +28,8 @@ function formSubmitHandler (evt) {
     // Вставим новые значения с помощью textContent
     profileNameInput.textContent = ValNameInput;
     profileJobInput.textContent =  ValJobInput;
-    popup.classList.toggle("popup_is-opened");
+    togglePopup()
+    /*popup.classList.toggle("popup_is-opened");*/
 }
 
 popupButton.addEventListener("click", togglePopup);

@@ -2,7 +2,7 @@
     margin: 40px 0 20px;
     /*margin: 40px 200px 20px;*/
     display: flex;
-    /*justify-content: space-between;*/
+    justify-content: space-between;
     width: 880px;
 }
 

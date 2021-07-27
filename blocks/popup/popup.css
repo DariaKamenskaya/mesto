@@ -1,10 +1,11 @@
 .popup {
+    height: 100%;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0px;
-    bottom: 155px;
+    bottom: 0px;
     left: 0px;
     right: 0px;
     box-sizing: border-box;
@@ -12,9 +13,9 @@
     display: none;
 }
 
-@media screen and (max-width: 400px) {
+/*@media screen and (max-width: 400px) {
     .popup {
       top: -315px;
       bottom: 0px;
     }
-}
+}*/

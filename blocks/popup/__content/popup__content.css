@@ -10,6 +10,7 @@
     max-width: 430px;
     box-sizing: border-box;
     padding: 35px;
+    margin-top: -160px; /* чтобы сходилось в PerPix с макетом*/
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -18,5 +19,6 @@
         max-width: 280px;
         padding: 21px;
         min-height: 324px;
+        margin-top: -315px; /* чтобы сходилось в PerPix с макетом*/
     }
 }

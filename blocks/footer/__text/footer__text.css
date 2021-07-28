@@ -7,9 +7,9 @@
   color: #545454;
 }
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 950px) {
   .footer__text {
-      margin-left: 10%;
+      margin-left: 25px;
   }
 }
 

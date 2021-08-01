@@ -63,9 +63,9 @@ function togglePopupAdd() {
 
 // функция  окрашивания лайка
 function toggleLike(e) {
-    const Like = e.target.closest(element).querySelector('.element__heart-button');
-    console.log("click", Like);
-    Like.classList.toggle("element__heart-button-active");
+    like = e.target.closest('.element__heart-button')
+    console.log("click", like);
+    like.classList.toggle("element__heart-button-active");
 }
 
 // функция удаления карточки/элемента
@@ -74,10 +74,8 @@ function removeElm(e) {
 }
 
 function initEventListeners (elm) {
-    const Like = document.querySelector('.element__heart-button');
-    console.log(Like);
     elm.querySelector('.element__remove-button').addEventListener('click', removeElm);
-    // Like.addEventListener('click', toggleLike);
+    elm.querySelector('.element__heart-button').addEventListener('click', toggleLike);
 }
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет

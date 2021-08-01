@@ -84,7 +84,29 @@
           </form>
         </div>
       </section>
+      <section class="popup" id="popup-add">
+        <div class="popup__content" >
+          <button class="popup__close"  type="button" id='closeButtonAdd'></button>
+          <h3 class="popup__title">Новое место</h3>
+          <form class="popup__input" name="submit-user">
+            <input type="text" placeholder="Название" class="popup__input-text popup__input-text_type_place-name" name='place-name'>
+            <input type="text" placeholder="Ссылка на картинку" class="popup__input-text popup__input-text_type_place-img" name='place-img'>
+            <button class="popup__submit-btn"  type="submit">
+              Создать
+            </button>
+          </form>
+        </div>
+      </section>
     </div>
+    <template id="element-template">
+      <article class="element">
+        <img src="./images/element_Karachaevsk.jpg" alt="Карачаево-Черкессия" class="element__image">
+        <div class="element__title-block">
+          <p class="element__title">Карачаево-Черкессия</p>
+          <button class="element__heart-button"  type="button"></button>
+        </div>
+      </article>
+    </template>
   <script src="./scripts/index.js" defer></script>
   </body>
 </html>

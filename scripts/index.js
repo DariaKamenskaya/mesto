@@ -4,6 +4,7 @@ const popup = document.querySelector('.popup');
 const popupAdd = document.getElementById('popup-add');
 const closeButtonAdd = document.getElementById('closeButtonAdd');
 
+
 console.log(popupButton, closeButton, popup, popupAdd);
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__input');
@@ -60,6 +61,12 @@ function togglePopupAdd() {
     popupAdd.classList.toggle("popup_is-opened");
 }
 
+// функция  окрашивания лайка
+function toggleLike() {
+    console.log("click", Like);
+    Like.classList.toggle("element__heart-button-active");
+}
+
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
@@ -88,12 +95,14 @@ function initElement (elm) {
     Element.prepend(NewElement);
 } 
 
+
 popupButton.addEventListener("click", togglePopup);
 AddButton.addEventListener('click',togglePopupAdd);
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener("submit", formSubmitHandler); 
 closeButton.addEventListener("click", togglePopup);
 closeButtonAdd.addEventListener("click", togglePopupAdd);
+// Like.addEventListener('click',toggleLike);
 
 // функция создания нового элемента/карточки
 formElementAdd.addEventListener('submit', (e) => {
@@ -110,3 +119,5 @@ formElementAdd.addEventListener('submit', (e) => {
 }); 
 
 initialElement.forEach(initElement); 
+const Like = document.querySelector('.element__heart-button');
+Like.addEventListener('click',toggleLike);

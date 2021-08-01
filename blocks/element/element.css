@@ -2,7 +2,9 @@
     margin: 0;
     background-color: white;
     border-radius: 10px;
-    min-height: 360px;
-    max-width: 280px;
+    /*min-height: 360px;*/
+    height: 360px;
+    /*max-width: 280px;*/
+    width: 280px;
     overflow: hidden;
 }

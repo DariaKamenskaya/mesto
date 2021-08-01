@@ -7,12 +7,15 @@ const closeButtonAdd = document.getElementById('closeButtonAdd');
 console.log(popupButton, closeButton, popup, popupAdd);
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__input');
+let formElementAdd = document.getElementById('form-add');
 // Находим поля формы в DOM
 let nameInput = document.querySelector('.popup__input-text_type_name');
 let jobInput = document.querySelector('.popup__input-text_type_work');
+let placeName = document.querySelector('.popup__input-text_type_place-name');
+let placeImg = document.querySelector('.popup__input-text_type_place-img');
 // Находим template-элемент и сам элемент в html
 const ElementTemplate = document.getElementById('element-template');
-const Element = document.querySelector('.element');
+const Element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
 const AddButton = document.querySelector('.profile__add-button');
 // Находим поля заполнения карточки: картинка, заголовок
@@ -71,17 +74,19 @@ function formSubmitHandler (evt) {
     // Вставим новые значения с помощью textContent
     profileNameInput.textContent = ValNameInput;
     profileJobInput.textContent =  ValJobInput;
-    togglePopup(popup);
+    togglePopup();
 }
 
 // функция инициализации элементов/карточек
-/*function initElement (card) {
-    
-    const NewElement = ElementTemplate.contentEditable.firstElementChild.cloneNode(true);
-    NewElement.querySelector('.element__title').innerText = ElementName.value;
+function initElement (elm) {
+    console.log(elm.name,elm.link);
+    const NewElement = ElementTemplate.content.firstElementChild.cloneNode(true);
+    NewElement.querySelector('.element__title').innerText = elm.name;
+    NewElement.querySelector('.element__image').alt = elm.name;
+    NewElement.querySelector('.element__image').src = elm.link;
 
-    Element.appendChild(NewElement);
-} */
+    Element.prepend(NewElement);
+} 
 
 popupButton.addEventListener("click", togglePopup);
 AddButton.addEventListener('click',togglePopupAdd);
@@ -91,11 +96,17 @@ closeButton.addEventListener("click", togglePopup);
 closeButtonAdd.addEventListener("click", togglePopupAdd);
 
 // функция создания нового элемента/карточки
-/*AddButton.addEventListener('click', (e) => {
+formElementAdd.addEventListener('submit', (e) => {
     e.preventDefault();
-    initElement();
-    nameInput.value = '';
+    let newElm = [];
+    newElm.name=placeName.value;
+    newElm.link=placeImg.value;
+    initElement(newElm);
+    placeName.value = '';
+    placeImg.value = '';
+
+    togglePopupAdd();
 
 }); 
 
-initialElement.forEach(initElement); */
+initialElement.forEach(initElement); 

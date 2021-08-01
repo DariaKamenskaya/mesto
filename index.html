@@ -24,7 +24,7 @@
           <button class="profile__add-button" type="button"></button>
         </section>
         <section class="elements">
-          <article class="element">
+          <!--article class="element">
             <img src="./images/element_Karachaevo.png" alt="Карачаевск" class="element__image">
             <div class="element__title-block">
               <p class="element__title">Карачаевск</p>
@@ -65,7 +65,7 @@
               <p class="element__title">Карачаево-Черкессия</p>
               <button class="element__heart-button"  type="button"></button>
             </div>
-          </article>
+          </article-->
         </section>
       </main>
       <footer class="footer">
@@ -88,10 +88,10 @@
         <div class="popup__content" >
           <button class="popup__close"  type="button" id='closeButtonAdd'></button>
           <h3 class="popup__title">Новое место</h3>
-          <form class="popup__input" name="submit-user">
+          <form class="popup__input" name="submit-element" id="form-add">
             <input type="text" placeholder="Название" class="popup__input-text popup__input-text_type_place-name" name='place-name'>
             <input type="text" placeholder="Ссылка на картинку" class="popup__input-text popup__input-text_type_place-img" name='place-img'>
-            <button class="popup__submit-btn"  type="submit">
+            <button class="popup__submit-btn"  type="submit" id='submitAdd'> 
               Создать
             </button>
           </form>

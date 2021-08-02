@@ -10,9 +10,9 @@
     background-size: 22px;
 }
 
-/*.element__heart-button:hover {
+.element__heart-button:hover {
     opacity: .5;
-}*/
+}
 
 /* .element__heart-button:active {
     background-image: url(../../../images/black-heart.svg);

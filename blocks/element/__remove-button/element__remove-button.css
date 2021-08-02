@@ -9,9 +9,8 @@
     width: 18px;
     height: 18px;
     background-size: 18px;
-    z-index: 10;
-    position: absolute;
-    top: 5%;
+    position: relative;
+    bottom: 73%;
     left: 89%;
 }
 

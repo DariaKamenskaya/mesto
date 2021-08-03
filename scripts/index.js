@@ -16,8 +16,7 @@ let nameInput = document.querySelector('.popup__input-text_type_name');
 let jobInput = document.querySelector('.popup__input-text_type_work');
 let placeName = document.querySelector('.popup__input-text_type_place-name');
 let placeImg = document.querySelector('.popup__input-text_type_place-img');
-// Находим template-элемент и сам элемент в html
-/* const elementTemplate = document.getElementById('element-template'); */
+// Находим контейнер в html для карточек
 const element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
 const addButton = document.querySelector('.profile__add-button');
@@ -33,57 +32,15 @@ function closePopup(pop) {
   pop.classList.remove('popup_is-opened');
 }
 
-
-// функция  открытия - закрытия попапа для кнопки edit
-/* function togglePopup() {
-    console.log('click', popup);
-    popup.classList.toggle('popup_is-opened');
-} */
-
-// функция  открытия - закрытия попапа для кнопки add
-/* function togglePopupAdd() {
-    console.log('click', popupAdd);
-    popupAdd.classList.toggle('popup_is-opened');
-} */
-
-// функция  открытия - закрытия попапа для картинки
-/* function togglePopupImg(e) {
-    console.log('click', popupImg);
-    popupImg.classList.toggle('popup_is-opened');
-    console.log(popupImg.className);
-    if (popupImg.className === 'popup popup_img popup_is-opened') {
-      console.log('yes');
-      initPopup(e);
-    }; 
-}
-
-function initPopup(e) {
-    let elm = e.target.closest('.element'); 
-    console.log(elm);
-    console.log(elm.querySelector('.element__title').textContent);
-    popupImg.querySelector('.popup__title').textContent = elm.querySelector('.element__title').textContent;
-    popupImg.querySelector('.popup__image').alt = elm.querySelector('.element__image').alt;
-    popupImg.querySelector('.popup__image').src = elm.querySelector('.element__image').src;
-} */
-
 // функция  окрашивания лайка
 function handleLikeIcon(evt) {
   evt.target.classList.toggle('element__heart-button-active');
-    /* like = e.target.closest('.element__heart-button');
-    console.log('click', like);
-    like.classList.toggle('element__heart-button-active'); */
 }
 
 // функция удаления карточки/элемента
 function handleDeleteCard(e) {
   e.target.closest('.element').remove();
 }
-
-/* function initEventListeners (elm) {
-    elm.querySelector('.element__remove-button').addEventListener('click', handleDeleteCard);
-    elm.querySelector('.element__heart-button').addEventListener('click', handleLikeIcon);
-    elm.querySelector('.element__image').addEventListener('click', togglePopupImg);
-} */
 
 // Обработчик «отправки» формы для попапа на кнопе Edit
 function formSubmitHandler (evt) {
@@ -121,10 +78,8 @@ function createCard (elm) {
   likeButton.addEventListener('click', handleLikeIcon);
   deleteButton.addEventListener('click', handleDeleteCard);
   cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
-  /* initEventListeners(newElement); */
   //   5. Вернуть DOM элемент.
   return (newElement); 
-  /*element.prepend(newElement); */
 } 
 
 function handlePreviewPicture(title, img) {
@@ -146,7 +101,6 @@ function renderCard(data, wrap) {
 
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
-  debugger;
   evt.preventDefault();
   let newElm = [];
   newElm.name=placeName.value;

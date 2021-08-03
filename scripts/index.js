@@ -1,13 +1,13 @@
 const popupButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close');
 const popup = document.querySelector('.popup');
-const popupAdd = document.querySelector('popup-add');
-const closeButtonAdd = document.querySelector('popup__close-add');
-const popupImg = document.querySelector('popup-img');
-const closeButtonImg = document.querySelector('popup__close_img');
+const popupAdd = document.querySelector('.popup-add');
+const closeButtonAdd = document.querySelector('.popup__close-add');
+const popupImg = document.querySelector('.popup_img');
+const closeButtonImg = document.querySelector('.popup__close_img');
 
 
-console.log(popupButton, closeButton, popup, popupAdd);
+console.log(popupButton, closeButton, popup, popupAdd, closeButtonAdd, popupImg, closeButtonImg);
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__input');
 let formElementAdd = document.querySelector('.popup__input-add');
@@ -23,17 +23,28 @@ const element = document.querySelector('.elements');
 const addButton = document.querySelector('.profile__add-button');
 
 
-// функция  открытия - закрытия попапа для кнопки edit
-function togglePopup() {
-    console.log('click', popup);
-    popup.classList.toggle('popup_is-opened');
+// функция открытия попапа
+function openPopup(pop) {
+  console.log(pop);
+  pop.classList.add('popup_is-opened');
 }
 
+function closePopup(pop) {
+  pop.classList.remove('popup_is-opened');
+}
+
+
+// функция  открытия - закрытия попапа для кнопки edit
+/* function togglePopup() {
+    console.log('click', popup);
+    popup.classList.toggle('popup_is-opened');
+} */
+
 // функция  открытия - закрытия попапа для кнопки add
-function togglePopupAdd() {
+/* function togglePopupAdd() {
     console.log('click', popupAdd);
     popupAdd.classList.toggle('popup_is-opened');
-}
+} */
 
 // функция  открытия - закрытия попапа для картинки
 function togglePopupImg(e) {
@@ -87,7 +98,8 @@ function formSubmitHandler (evt) {
     // Вставим новые значения с помощью textContent
     profileNameInput.textContent = valNameInput;
     profileJobInput.textContent =  valJobInput;
-    togglePopup();
+    // Закрываем попап
+    closePopup(popup);
 }
 
 // функция инициализации элементов/карточек
@@ -103,13 +115,18 @@ function initElement (elm) {
 } 
 
 
-popupButton.addEventListener('click', togglePopup);
-addButton.addEventListener('click',togglePopupAdd);
+/* popupButton.addEventListener('click', togglePopup); */
+popupButton.addEventListener('click', function() { openPopup(popup); });
+/*addButton.addEventListener('click',togglePopupAdd);*/
+addButton.addEventListener('click', function() { openPopup(popupAdd); });
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler); 
-closeButton.addEventListener('click', togglePopup);
-closeButtonAdd.addEventListener("click", togglePopupAdd);
-closeButtonImg.addEventListener("click", togglePopupImg);
+/* closeButton.addEventListener('click', togglePopup); */
+closeButton.addEventListener('click', function() { closePopup(popup); });
+/*closeButtonAdd.addEventListener("click", togglePopupAdd); */
+closeButtonAdd.addEventListener('click', function() { closePopup(popupAdd); });
+/* closeButtonImg.addEventListener("click", togglePopupImg); */
+closeButtonImg.addEventListener("click", function() { closePopup(popupImg); });
 
 // функция создания нового элемента/карточки
 formElementAdd.addEventListener('submit', (e) => {
@@ -118,10 +135,12 @@ formElementAdd.addEventListener('submit', (e) => {
     newElm.name=placeName.value;
     newElm.link=placeImg.value;
     initElement(newElm);
-    placeName.reset();
-    placeImg.reset();
-
-    togglePopupAdd();
+    formElementAdd.reset();
+    /*placeName.reset();
+    placeImg.reset();*/
+    // Закрываем попап
+    /* togglePopupAdd(); */
+    closePopup(popupAdd);
 
 }); 
 

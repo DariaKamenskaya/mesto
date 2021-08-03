@@ -76,7 +76,7 @@ function handleLikeIcon(evt) {
 
 // функция удаления карточки/элемента
 function handleDeleteCard(e) {
-    e.target.closest('.element').remove();
+  e.target.closest('.element').remove();
 }
 
 /* function initEventListeners (elm) {
@@ -87,44 +87,44 @@ function handleDeleteCard(e) {
 
 // Обработчик «отправки» формы для попапа на кнопе Edit
 function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
-    // значение полей jobInput и nameInput из свойства value
-    let valNameInput = nameInput.value;
-    let valJobInput = jobInput.value;
-    console.log(nameInput.value, jobInput.value);
-     // Выбериаем элементы, куда должны быть вставлены значения полей
-    let profileNameInput = document.querySelector('.profile__title');
-    let profileJobInput = document.querySelector('.profile__text');
-    console.log(profileNameInput, profileJobInput);
-    // Вставим новые значения с помощью textContent
-    profileNameInput.textContent = valNameInput;
-    profileJobInput.textContent =  valJobInput;
-    // Закрываем попап
-    closePopup(popup);
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
+  // значение полей jobInput и nameInput из свойства value
+  let valNameInput = nameInput.value;
+  let valJobInput = jobInput.value;
+  console.log(nameInput.value, jobInput.value);
+   // Выбериаем элементы, куда должны быть вставлены значения полей
+  let profileNameInput = document.querySelector('.profile__title');
+  let profileJobInput = document.querySelector('.profile__text');
+  console.log(profileNameInput, profileJobInput);
+  // Вставим новые значения с помощью textContent
+  profileNameInput.textContent = valNameInput;
+  profileJobInput.textContent =  valJobInput;
+  // Закрываем попап
+  closePopup(popup);
 }
 
 // функция создания элементов/карточек
 function createCard (elm) {
-    console.log(elm.name,elm.link);
-    //  1. Клонировать из шаблона элемент
-    const newElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
-    //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
-    const likeButton = newElement.querySelector('.element__heart-button'); //нашли лайк карточки
-    const deleteButton = newElement.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
-    const cardImage = newElement.querySelector('.element__image'); //нашли картинку карточки
-    //  3. Задать данные картинке
-    const cardTitle = newElement.querySelector('.element__title');
-    cardTitle.textContent = elm.name;
-    cardImage.alt = elm.name;
-    cardImage.src = elm.link;
-    //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
-    likeButton.addEventListener('click', handleLikeIcon);
-    deleteButton.addEventListener('click', handleDeleteCard);
-    cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
-    /* initEventListeners(newElement); */
-    //   5. Вернуть DOM элемент.
-    return (newElement); 
-    /*element.prepend(newElement); */
+  console.log(elm.name,elm.link);
+  //  1. Клонировать из шаблона элемент
+  const newElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
+  //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
+  const likeButton = newElement.querySelector('.element__heart-button'); //нашли лайк карточки
+  const deleteButton = newElement.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
+  const cardImage = newElement.querySelector('.element__image'); //нашли картинку карточки
+  //  3. Задать данные картинке
+  const cardTitle = newElement.querySelector('.element__title');
+  cardTitle.textContent = elm.name;
+  cardImage.alt = elm.name;
+  cardImage.src = elm.link;
+  //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
+  likeButton.addEventListener('click', handleLikeIcon);
+  deleteButton.addEventListener('click', handleDeleteCard);
+  cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
+  /* initEventListeners(newElement); */
+  //   5. Вернуть DOM элемент.
+  return (newElement); 
+  /*element.prepend(newElement); */
 } 
 
 function handlePreviewPicture(title, img) {
@@ -144,6 +144,20 @@ function renderCard(data, wrap) {
   renderCard(card, element)
  });
 
+// Обработчик «отправки» формы для попапа на кнопе Add
+function cardFormSubmitHandler(evt) {
+  debugger;
+  evt.preventDefault();
+  let newElm = [];
+  newElm.name=placeName.value;
+  newElm.link=placeImg.value;
+  // Создаем элемент и добавляем элемент в разметку
+  renderCard(newElm, element);
+  // Очищаем поля формы
+  formElementAdd.reset();
+  // Закрываем попап
+  closePopup(popupAdd);
+}
 
 // Попап на кнопке Edit
 popupButton.addEventListener('click', function() { openPopup(popup); });
@@ -151,24 +165,10 @@ formElement.addEventListener('submit', formSubmitHandler);
 closeButton.addEventListener('click', function() { closePopup(popup); });
 // Попап на кнопке Add
 addButton.addEventListener('click', function() { openPopup(popupAdd); });
+formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
 closeButtonAdd.addEventListener('click', function() { closePopup(popupAdd); });
 // Попап на картинке
 closeButtonImg.addEventListener("click", function() { closePopup(popupImg); });
 
 
-// функция создания нового элемента/карточки
-formElementAdd.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let newElm = [];
-    newElm.name=placeName.value;
-    newElm.link=placeImg.value;
-    // Создаем элемент
-    createCard(newElm);
-    // Добавляем элемент в разметку
-    renderCard(newElm, element);
-    // Очищаем поля формы
-    formElementAdd.reset();
-    // Закрываем попап
-    closePopup(popupAdd);
-}); 
 

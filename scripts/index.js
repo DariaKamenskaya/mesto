@@ -118,8 +118,8 @@ formElementAdd.addEventListener('submit', (e) => {
     newElm.name=placeName.value;
     newElm.link=placeImg.value;
     initElement(newElm);
-    placeName.value = '';
-    placeImg.value = '';
+    placeName.reset();
+    placeImg.reset();
 
     togglePopupAdd();
 

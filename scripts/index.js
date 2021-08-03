@@ -17,10 +17,10 @@ let jobInput = document.querySelector('.popup__input-text_type_work');
 let placeName = document.querySelector('.popup__input-text_type_place-name');
 let placeImg = document.querySelector('.popup__input-text_type_place-img');
 // Находим template-элемент и сам элемент в html
-const ElementTemplate = document.getElementById('element-template');
-const Element = document.querySelector('.elements');
+const elementTemplate = document.getElementById('element-template');
+const element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
-const AddButton = document.querySelector('.profile__add-button');
+const addButton = document.querySelector('.profile__add-button');
 
 
 const initialElement =  [
@@ -104,34 +104,34 @@ function initEventListeners (elm) {
 function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
     // значение полей jobInput и nameInput из свойства value
-    let ValNameInput = nameInput.value;
-    let ValJobInput = jobInput.value;
+    let valNameInput = nameInput.value;
+    let valJobInput = jobInput.value;
     console.log(nameInput.value, jobInput.value);
      // Выбериаем элементы, куда должны быть вставлены значения полей
     let profileNameInput = document.querySelector('.profile__title');
     let profileJobInput = document.querySelector('.profile__text');
     console.log(profileNameInput, profileJobInput);
     // Вставим новые значения с помощью textContent
-    profileNameInput.textContent = ValNameInput;
-    profileJobInput.textContent =  ValJobInput;
+    profileNameInput.textContent = valNameInput;
+    profileJobInput.textContent =  valJobInput;
     togglePopup();
 }
 
 // функция инициализации элементов/карточек
 function initElement (elm) {
     console.log(elm.name,elm.link);
-    const NewElement = ElementTemplate.content.firstElementChild.cloneNode(true);
-    NewElement.querySelector('.element__title').innerText = elm.name;
-    NewElement.querySelector('.element__image').alt = elm.name;
-    NewElement.querySelector('.element__image').src = elm.link;
-    Element.prepend(NewElement);
+    const newElement = elementTemplate.content.firstElementChild.cloneNode(true);
+    newElement.querySelector('.element__title').innerText = elm.name;
+    newElement.querySelector('.element__image').alt = elm.name;
+    newElement.querySelector('.element__image').src = elm.link;
+    element.prepend(newElement);
     
-    initEventListeners(NewElement);
+    initEventListeners(newElement);
 } 
 
 
 popupButton.addEventListener('click', togglePopup);
-AddButton.addEventListener('click',togglePopupAdd);
+addButton.addEventListener('click',togglePopupAdd);
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler); 
 closeButton.addEventListener('click', togglePopup);

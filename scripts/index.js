@@ -7,7 +7,6 @@ const popupImg = document.querySelector('.popup_img');
 const closeButtonImg = document.querySelector('.popup__close_img');
 
 
-console.log(popupButton, closeButton, popup, popupAdd, closeButtonAdd, popupImg, closeButtonImg);
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__input');
 let formElementAdd = document.querySelector('.popup__input-add');
@@ -24,10 +23,10 @@ const addButton = document.querySelector('.profile__add-button');
 
 // функция открытия попапа
 function openPopup(pop) {
-  console.log(pop);
   pop.classList.add('popup_is-opened');
 }
 
+// функция закрытия попапа
 function closePopup(pop) {
   pop.classList.remove('popup_is-opened');
 }
@@ -48,11 +47,9 @@ function formSubmitHandler (evt) {
   // значение полей jobInput и nameInput из свойства value
   let valNameInput = nameInput.value;
   let valJobInput = jobInput.value;
-  console.log(nameInput.value, jobInput.value);
    // Выбериаем элементы, куда должны быть вставлены значения полей
   let profileNameInput = document.querySelector('.profile__title');
   let profileJobInput = document.querySelector('.profile__text');
-  console.log(profileNameInput, profileJobInput);
   // Вставим новые значения с помощью textContent
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;
@@ -62,7 +59,6 @@ function formSubmitHandler (evt) {
 
 // функция создания элементов/карточек
 function createCard (elm) {
-  console.log(elm.name,elm.link);
   //  1. Клонировать из шаблона элемент
   const newElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
   //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
@@ -79,7 +75,7 @@ function createCard (elm) {
   deleteButton.addEventListener('click', handleDeleteCard);
   cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
   //   5. Вернуть DOM элемент.
-  return (newElement); 
+  return newElement; 
 } 
 
 function handlePreviewPicture(title, img) {

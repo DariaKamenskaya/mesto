@@ -47,7 +47,7 @@ function closePopup(pop) {
 } */
 
 // функция  открытия - закрытия попапа для картинки
-function togglePopupImg(e) {
+/* function togglePopupImg(e) {
     console.log('click', popupImg);
     popupImg.classList.toggle('popup_is-opened');
     console.log(popupImg.className);
@@ -64,7 +64,7 @@ function initPopup(e) {
     popupImg.querySelector('.popup__title').textContent = elm.querySelector('.element__title').textContent;
     popupImg.querySelector('.popup__image').alt = elm.querySelector('.element__image').alt;
     popupImg.querySelector('.popup__image').src = elm.querySelector('.element__image').src;
-}
+} */
 
 // функция  окрашивания лайка
 function handleLikeIcon(evt) {
@@ -79,13 +79,13 @@ function handleDeleteCard(e) {
     e.target.closest('.element').remove();
 }
 
-function initEventListeners (elm) {
+/* function initEventListeners (elm) {
     elm.querySelector('.element__remove-button').addEventListener('click', handleDeleteCard);
     elm.querySelector('.element__heart-button').addEventListener('click', handleLikeIcon);
     elm.querySelector('.element__image').addEventListener('click', togglePopupImg);
-}
+} */
 
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
+// Обработчик «отправки» формы для попапа на кнопе Edit
 function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
     // значение полей jobInput и nameInput из свойства value
@@ -103,31 +103,58 @@ function formSubmitHandler (evt) {
     closePopup(popup);
 }
 
-// функция инициализации элементов/карточек
-function initElement (elm) {
+// функция создания элементов/карточек
+function createCard (elm) {
     console.log(elm.name,elm.link);
+    //  1. Клонировать из шаблона элемент
     const newElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
-    newElement.querySelector('.element__title').textContent = elm.name;
-    newElement.querySelector('.element__image').alt = elm.name;
-    newElement.querySelector('.element__image').src = elm.link;
-    element.prepend(newElement);
-    
-    initEventListeners(newElement);
+    //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
+    const likeButton = newElement.querySelector('.element__heart-button'); //нашли лайк карточки
+    const deleteButton = newElement.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
+    const cardImage = newElement.querySelector('.element__image'); //нашли картинку карточки
+    //  3. Задать данные картинке
+    const cardTitle = newElement.querySelector('.element__title');
+    cardTitle.textContent = elm.name;
+    cardImage.alt = elm.name;
+    cardImage.src = elm.link;
+    //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
+    likeButton.addEventListener('click', handleLikeIcon);
+    deleteButton.addEventListener('click', handleDeleteCard);
+    cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
+    /* initEventListeners(newElement); */
+    //   5. Вернуть DOM элемент.
+    return (newElement); 
+    /*element.prepend(newElement); */
 } 
 
+function handlePreviewPicture(title, img) {
+  openPopup(popupImg);
+  popupImg.querySelector('.popup__title').textContent = title.textContent;
+  popupImg.querySelector('.popup__image').alt = img.alt;
+  popupImg.querySelector('.popup__image').src = img.src;
+}
 
-/* popupButton.addEventListener('click', togglePopup); */
+// функция добавления элемента/карточки в контейнер
+function renderCard(data, wrap) {
+  wrap.prepend(createCard(data));
+ }
+
+// Начальная инициализация карточек
+ initialElement.forEach((card) => {
+  renderCard(card, element)
+ });
+
+
+// Попап на кнопке Edit
 popupButton.addEventListener('click', function() { openPopup(popup); });
-/*addButton.addEventListener('click',togglePopupAdd);*/
-addButton.addEventListener('click', function() { openPopup(popupAdd); });
-// Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler); 
-/* closeButton.addEventListener('click', togglePopup); */
+formElement.addEventListener('submit', formSubmitHandler);
 closeButton.addEventListener('click', function() { closePopup(popup); });
-/*closeButtonAdd.addEventListener("click", togglePopupAdd); */
+// Попап на кнопке Add
+addButton.addEventListener('click', function() { openPopup(popupAdd); });
 closeButtonAdd.addEventListener('click', function() { closePopup(popupAdd); });
-/* closeButtonImg.addEventListener("click", togglePopupImg); */
+// Попап на картинке
 closeButtonImg.addEventListener("click", function() { closePopup(popupImg); });
+
 
 // функция создания нового элемента/карточки
 formElementAdd.addEventListener('submit', (e) => {
@@ -135,15 +162,13 @@ formElementAdd.addEventListener('submit', (e) => {
     let newElm = [];
     newElm.name=placeName.value;
     newElm.link=placeImg.value;
-    initElement(newElm);
+    // Создаем элемент
+    createCard(newElm);
+    // Добавляем элемент в разметку
+    renderCard(newElm, element);
+    // Очищаем поля формы
     formElementAdd.reset();
-    /*placeName.reset();
-    placeImg.reset();*/
     // Закрываем попап
-    /* togglePopupAdd(); */
     closePopup(popupAdd);
-
 }); 
 
-// Начальная инициализация карточек
-initialElement.forEach(initElement); 

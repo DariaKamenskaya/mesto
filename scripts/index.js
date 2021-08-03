@@ -1,16 +1,16 @@
 const popupButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close');
 const popup = document.querySelector('.popup');
-const popupAdd = document.getElementById('popup-add');
-const closeButtonAdd = document.getElementById('closeButtonAdd');
-const popupImg = document.getElementById('popup-img');
-const closeButtonImg = document.getElementById('closeButtonImg');
+const popupAdd = document.querySelector('popup-add');
+const closeButtonAdd = document.querySelector('popup__close-add');
+const popupImg = document.querySelector('popup-img');
+const closeButtonImg = document.querySelector('popup__close_img');
 
 
 console.log(popupButton, closeButton, popup, popupAdd);
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__input');
-let formElementAdd = document.getElementById('form-add');
+let formElementAdd = document.querySelector('.popup__input-add');
 // Находим поля формы в DOM
 let nameInput = document.querySelector('.popup__input-text_type_name');
 let jobInput = document.querySelector('.popup__input-text_type_work');

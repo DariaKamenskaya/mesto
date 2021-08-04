@@ -8,13 +8,13 @@ const closeButtonImg = document.querySelector('.popup__close_img');
 
 
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__input');
-let formElementAdd = document.querySelector('.popup__input-add');
+const formElement = document.querySelector('.popup__input');
+const formElementAdd = document.querySelector('.popup__input-add');
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__input-text_type_name');
-let jobInput = document.querySelector('.popup__input-text_type_work');
-let placeName = document.querySelector('.popup__input-text_type_place-name');
-let placeImg = document.querySelector('.popup__input-text_type_place-img');
+const nameInput = document.querySelector('.popup__input-text_type_name');
+const jobInput = document.querySelector('.popup__input-text_type_work');
+const placeName = document.querySelector('.popup__input-text_type_place-name');
+const placeImg = document.querySelector('.popup__input-text_type_place-img');
 // Находим контейнер в html для карточек
 const element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
@@ -45,11 +45,11 @@ function handleDeleteCard(e) {
 function formSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
   // значение полей jobInput и nameInput из свойства value
-  let valNameInput = nameInput.value;
-  let valJobInput = jobInput.value;
+  const valNameInput = nameInput.value;
+  const valJobInput = jobInput.value;
    // Выбериаем элементы, куда должны быть вставлены значения полей
-  let profileNameInput = document.querySelector('.profile__title');
-  let profileJobInput = document.querySelector('.profile__text');
+  const profileNameInput = document.querySelector('.profile__title');
+  const profileJobInput = document.querySelector('.profile__text');
   // Вставим новые значения с помощью textContent
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;
@@ -98,7 +98,7 @@ function renderCard(data, wrap) {
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  let newElm = [];
+  const newElm = [];
   newElm.name=placeName.value;
   newElm.link=placeImg.value;
   // Создаем элемент и добавляем элемент в разметку

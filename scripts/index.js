@@ -19,7 +19,9 @@ const placeImg = document.querySelector('.popup__input-text_type_place-img');
 const element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
 const addButton = document.querySelector('.profile__add-button');
-
+// Выбериаем элементы, куда должны быть вставлены значения полей
+const profileNameInput = document.querySelector('.profile__title');
+const profileJobInput = document.querySelector('.profile__text');
 
 // функция открытия попапа
 function openPopup(pop) {
@@ -47,9 +49,6 @@ function formSubmitHandler (evt) {
   // значение полей jobInput и nameInput из свойства value
   const valNameInput = nameInput.value;
   const valJobInput = jobInput.value;
-   // Выбериаем элементы, куда должны быть вставлены значения полей
-  const profileNameInput = document.querySelector('.profile__title');
-  const profileJobInput = document.querySelector('.profile__text');
   // Вставим новые значения с помощью textContent
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;

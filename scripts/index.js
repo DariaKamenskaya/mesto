@@ -98,9 +98,7 @@ function renderCard(data, wrap) {
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const newElm = [];
-  newElm.name=placeName.value;
-  newElm.link=placeImg.value;
+  const newElm = {name:placeName.value, link: placeImg.value };
   // Создаем элемент и добавляем элемент в разметку
   renderCard(newElm, element);
   // Очищаем поля формы
@@ -110,15 +108,15 @@ function cardFormSubmitHandler(evt) {
 }
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', function() { openPopup(popup); });
+popupButton.addEventListener('click', () => openPopup(popup));
 formElement.addEventListener('submit', formSubmitHandler);
-closeButton.addEventListener('click', function() { closePopup(popup); });
+closeButton.addEventListener('click', () => closePopup(popup));
 // Попап на кнопке Add
-addButton.addEventListener('click', function() { openPopup(popupAdd); });
+addButton.addEventListener('click', () => openPopup(popupAdd));
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
-closeButtonAdd.addEventListener('click', function() { closePopup(popupAdd); });
+closeButtonAdd.addEventListener('click', () => closePopup(popupAdd));
 // Попап на картинке
-closeButtonImg.addEventListener("click", function() { closePopup(popupImg); });
+closeButtonImg.addEventListener("click", () => closePopup(popupImg));
 
 
 

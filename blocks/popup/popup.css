@@ -10,7 +10,7 @@
     right: 0px;
     box-sizing: border-box;
     /*padding: 284px 84px 0px;*/
-    display: flex; 
+    /* display: flex; */
     opacity: 0;
     visibility: hidden;
     transition: opacity 1.5s, visibility 1.5s ;

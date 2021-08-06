@@ -10,11 +10,10 @@
     right: 0px;
     box-sizing: border-box;
     /*padding: 284px 84px 0px;*/
-    /*display: none; */
-    z-index: 10;
-    transition: opacity 1.5s ease;
+    display: flex; 
     opacity: 0;
     visibility: hidden;
+    transition: opacity 1.5s, visibility 1.5s ;
 }
 
 /*@media screen and (max-width: 400px) {

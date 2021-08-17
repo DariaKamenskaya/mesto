@@ -36,11 +36,11 @@
           <form class="popup__form" name="submit-user">
             <label class="form__field">
               <input type="text" id="name-input" class="popup__input popup__input_type_name" value="Жак Ив Кусто" placeholder="Имя" name="user-name" required minlength="2" maxlength="40">
-              <span id="name-input-error" class="popup__input-error" ></span>
+              <span id="name-input-error" class="popup__input-error"></span>
             </label>
             <label class="form__field">
               <input type="text" id="work-input" value="Исследователь океана" placeholder="О себе" class="popup__input popup__input_type_work" name='user-work' required minlength='2'  maxlength='200'>
-              <span id="work-input-error" class="popup__input-error" ></span>
+              <span id="work-input-error" class="popup__input-error"></span>
             </label>
             <button class="popup__submit-btn"  type="submit">
               Сохранить
@@ -53,8 +53,14 @@
           <button class="popup__close popup__close-add"  type="button"></button>
           <h3 class="popup__title">Новое место</h3>
           <form class="popup__form popup__input-add" name="submit-element">
-            <input type="text" placeholder="Название" class="popup__input popup__input_type_place-name" name='place-name'>
-            <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_place-img" name='place-img'>
+            <label class="form__field">
+              <input type="text" id="place-input"  placeholder="Название" class="popup__input popup__input_type_place-name" name='place-name' required minlength="2" maxlength="30">
+              <span id="place-input-error" class="popup__input-error"></span>
+            </label>
+            <label class="form__field">
+              <input type="url" id="url-input" placeholder="Ссылка на картинку" class="popup__input popup__input_type_place-img" name='place-img' required>
+              <span id="url-input-error" class="popup__input-error"></span>
+            </label>
             <button class="popup__submit-btn"  type="submit"> 
               Создать
             </button>

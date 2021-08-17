@@ -8,13 +8,13 @@ const closeButtonImg = document.querySelector('.popup__close_img');
 
 
 // Находим форму в DOM
-const formElement = document.querySelector('.popup__input');
+const formElement = document.querySelector('.popup__form');
 const formElementAdd = document.querySelector('.popup__input-add');
 // Находим поля формы в DOM
-const nameInput = document.querySelector('.popup__input-text_type_name');
-const jobInput = document.querySelector('.popup__input-text_type_work');
-const placeName = document.querySelector('.popup__input-text_type_place-name');
-const placeImg = document.querySelector('.popup__input-text_type_place-img');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_work');
+const placeName = document.querySelector('.popup__input_type_place-name');
+const placeImg = document.querySelector('.popup__input_type_place-img');
 // Находим контейнер в html для карточек
 const element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент

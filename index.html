@@ -35,12 +35,12 @@
           <h3 class="popup__title">Редактировать профиль</h3>
           <form class="popup__form" name="submit-user">
             <label class="form__field">
-              <input type="text" class="popup__input popup__input_type_name" value="Жак Ив Кусто" placeholder="Имя" name="user-name" required minlength="2" maxlength="40">
-              <span class="popup__input-error name-input-error" ></span>
+              <input type="text" id="name-input" class="popup__input popup__input_type_name" value="Жак Ив Кусто" placeholder="Имя" name="user-name" required minlength="2" maxlength="40">
+              <span id="name-input-error" class="popup__input-error" ></span>
             </label>
             <label class="form__field">
-              <input type="text" value="Исследователь океана" placeholder="О себе" class="popup__input popup__input_type_work" name='user-work' required minlength='2'  maxlength='200'>
-              <span class="popup__input-error work-input-error" ></span>
+              <input type="text" id="work-input" value="Исследователь океана" placeholder="О себе" class="popup__input popup__input_type_work" name='user-work' required minlength='2'  maxlength='200'>
+              <span id="work-input-error" class="popup__input-error" ></span>
             </label>
             <button class="popup__submit-btn"  type="submit">
               Сохранить
@@ -54,7 +54,7 @@
           <h3 class="popup__title">Новое место</h3>
           <form class="popup__form popup__input-add" name="submit-element">
             <input type="text" placeholder="Название" class="popup__input popup__input_type_place-name" name='place-name'>
-            <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_place-img" name='place-img'>
+            <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_place-img" name='place-img'>
             <button class="popup__submit-btn"  type="submit"> 
               Создать
             </button>

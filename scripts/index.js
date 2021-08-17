@@ -116,6 +116,7 @@ formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функц�
 closeButtonAdd.addEventListener('click', () => closePopup(popupAdd));
 // Попап на картинке
 closeButtonImg.addEventListener("click", () => closePopup(popupImg));
-
-
+// Закрытие попапа по клику на оверлай
+popup.addEventListener('click', () => closePopup(popup));
+popupAdd.addEventListener('click', () => closePopup(popupAdd));
 

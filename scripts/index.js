@@ -106,6 +106,12 @@ function cardFormSubmitHandler(evt) {
   closePopup(popupAdd);
 }
 
+function closePopupOverlay(evt) {
+  if (evt.target.classList.contains('popup_is-opened')) {
+    closePopup(evt.target);					
+  }
+}
+
 // Попап на кнопке Edit
 popupButton.addEventListener('click', () => openPopup(popup));
 formElement.addEventListener('submit', formSubmitHandler);
@@ -116,7 +122,15 @@ formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функц�
 closeButtonAdd.addEventListener('click', () => closePopup(popupAdd));
 // Попап на картинке
 closeButtonImg.addEventListener("click", () => closePopup(popupImg));
-// Закрытие попапа по клику на оверлай
-popup.addEventListener('click', () => closePopup(popup));
-popupAdd.addEventListener('click', () => closePopup(popupAdd));
-
+// Закрытие попапа по клику на оверлей
+popup.addEventListener('click', closePopupOverlay);
+popupAdd.addEventListener('click', closePopupOverlay);
+// Закрытие попапа нажатием на Esc
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {
+    popup.classList.remove('popup_is-opened');
+ } 
+  if (evt.key === 'Escape' && popupAdd.classList.contains('popup_is-opened')) {
+    popupAdd.classList.remove('popup_is-opened');
+} 
+});

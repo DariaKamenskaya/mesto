@@ -1,6 +1,5 @@
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    console.log(errorElement, errorMessage, inputElement);
     inputElement.classList.add('popup__input_type_error');
     errorElement.textContent = errorMessage;
     // errorElement.classList.add('popup__input-error_active');
@@ -8,7 +7,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   
   const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    console.log(errorElement);
     inputElement.classList.remove('popup__input_type_error');
     // errorElement.classList.remove('popup__input-error_active');
     errorElement.textContent = '';
@@ -32,7 +30,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   }; 
 
   const checkInputValidity = (formElement, inputElement) => {
-    console.log(inputElement.validity, inputElement.validationMessage);
     if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage);
     } else {
@@ -44,7 +41,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
     const buttonElement = formElement.querySelector('.popup__submit-btn');
     toggleButtonState(inputList, buttonElement);
-    console.log(inputList);
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
         checkInputValidity(formElement, inputElement);
@@ -55,7 +51,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   
   const enableValidation = () => {
     const formList = Array.from(document.querySelectorAll('.popup__form'));
-    console.log(formList);
     formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();

@@ -106,10 +106,27 @@ function cardFormSubmitHandler(evt) {
   closePopup(popupAdd);
 }
 
+// функция закрытия попапа по клику на оверлей
 function closePopupOverlay(evt) {
   if (evt.target.classList.contains('popup_is-opened')) {
     closePopup(evt.target);					
   }
+}
+
+// функция закрытия попапа нажатием на Esc
+function keyHandler(evt) {
+  // закрываем попап с данными пользователя
+  if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {
+    popup.classList.remove('popup_is-opened');
+ } 
+ // закрываем попап с добавлением карточки
+  if (evt.key === 'Escape' && popupAdd.classList.contains('popup_is-opened')) {
+    popupAdd.classList.remove('popup_is-opened');
+} 
+ // закрываем попап карточки
+ if (evt.key === 'Escape' && popupImg.classList.contains('popup_is-opened')) {
+  popupImg.classList.remove('popup_is-opened');
+} 
 }
 
 // Попап на кнопке Edit
@@ -125,12 +142,6 @@ closeButtonImg.addEventListener("click", () => closePopup(popupImg));
 // Закрытие попапа по клику на оверлей
 popup.addEventListener('click', closePopupOverlay);
 popupAdd.addEventListener('click', closePopupOverlay);
+popupImg.addEventListener('click', closePopupOverlay);
 // Закрытие попапа нажатием на Esc
-document.addEventListener('keydown', function(evt) {
-  if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {
-    popup.classList.remove('popup_is-opened');
- } 
-  if (evt.key === 'Escape' && popupAdd.classList.contains('popup_is-opened')) {
-    popupAdd.classList.remove('popup_is-opened');
-} 
-});
+document.addEventListener('keydown', keyHandler);

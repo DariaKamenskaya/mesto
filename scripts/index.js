@@ -90,7 +90,7 @@ function renderCard(data, wrap) {
  }
 
 // Начальная инициализация карточек
- initialElement.forEach((card) => {
+initialElements.forEach((card) => {
   renderCard(card, element)
  });
 
@@ -117,15 +117,15 @@ function closePopupOverlay(evt) {
 function keyHandler(evt) {
   // закрываем попап с данными пользователя
   if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {
-    popup.classList.remove('popup_is-opened');
+    closePopup(popup);
  } 
  // закрываем попап с добавлением карточки
   if (evt.key === 'Escape' && popupAdd.classList.contains('popup_is-opened')) {
-    popupAdd.classList.remove('popup_is-opened');
+    closePopup(popupAdd);
 } 
  // закрываем попап карточки
- if (evt.key === 'Escape' && popupImg.classList.contains('popup_is-opened')) {
-  popupImg.classList.remove('popup_is-opened');
+  if (evt.key === 'Escape' && popupImg.classList.contains('popup_is-opened')) {
+    closePopup(popupImg);
 } 
 }
 

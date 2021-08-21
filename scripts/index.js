@@ -26,11 +26,13 @@ const profileJobInput = document.querySelector('.profile__text');
 // функция открытия попапа
 function openPopup(pop) {
   pop.classList.add('popup_is-opened');
+  document.addEventListener('keydown', keyHandler);
 }
 
 // функция закрытия попапа
 function closePopup(pop) {
   pop.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', keyHandler);
 }
 
 // функция  окрашивания лайка
@@ -109,24 +111,18 @@ function cardFormSubmitHandler(evt) {
 // функция закрытия попапа по клику на оверлей
 function closePopupOverlay(evt) {
   if (evt.target.classList.contains('popup_is-opened')) {
-    closePopup(evt.target);					
+    closePopup(evt.target);
   }
 }
 
 // функция закрытия попапа нажатием на Esc
 function keyHandler(evt) {
-  // закрываем попап с данными пользователя
-  if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {
-    closePopup(popup);
- } 
- // закрываем попап с добавлением карточки
-  if (evt.key === 'Escape' && popupAdd.classList.contains('popup_is-opened')) {
-    closePopup(popupAdd);
-} 
- // закрываем попап карточки
-  if (evt.key === 'Escape' && popupImg.classList.contains('popup_is-opened')) {
-    closePopup(popupImg);
-} 
+  // ищем активный попап
+  const activePopup = document.querySelector('.popup_is-opened');
+  // закрываем активный попап
+  if (evt.key === 'Escape') {
+    closePopup(activePopup);
+ }
 }
 
 // Попап на кнопке Edit
@@ -143,5 +139,4 @@ closeButtonImg.addEventListener("click", () => closePopup(popupImg));
 popup.addEventListener('click', closePopupOverlay);
 popupAdd.addEventListener('click', closePopupOverlay);
 popupImg.addEventListener('click', closePopupOverlay);
-// Закрытие попапа нажатием на Esc
-document.addEventListener('keydown', keyHandler);
+

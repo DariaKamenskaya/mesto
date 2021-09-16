@@ -1,4 +1,4 @@
-import { popupImg } from "./constant.js";
+//import { popupImg } from "./constant.js";
 import { Popup } from "./Popup.js";
 
 export class Card {
@@ -44,14 +44,16 @@ export class Card {
 
     // функция удаления карточки/элемента
   _handleDeleteCard(e) {
-    e.target.closest(this._cardSelector).remove();
+    e.target.closest('.element').remove();
   }
 
   _handlePreviewPicture(title, img) {
-    openPopup(popupImg);
-    popupImg.querySelector('.popup__title').textContent = title.textContent;
-    popupImg.querySelector('.popup__image').alt = img.alt;
-    popupImg.querySelector('.popup__image').src = img.src;
+    const popupImg = new Popup('.popup_img');
+    popupImg._openPopup();
+    popupImg.cardName.textContent = title.textContent;
+    popupImg.cardImg.alt = img.alt;
+    popupImg.cardImg.src = img.src;
+    console.log(popupImg, popupImg.cardName, popupImg.cardImg);
     }
 
 

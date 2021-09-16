@@ -2,22 +2,31 @@
 
 export class Popup {
 
-// функция открытия попапа
-_openPopup() {
-    this.classList.add('popup_is-opened');
-  }
-  
-  // функция закрытия попапа
-_closePopup() {
-    this.classList.remove('popup_is-opened');
-  }
+   _openedClass = 'popup_opened';
 
-// функция закрытия открытого попапа (для клика по оверлею)
-_closePopupOverlay() {
-    if (this.target.classList.contains('popup_is-opened')) {
-      closePopup(this.target);
+  constructor(className) {
+    this.element = document.querySelector(className);
+    this.cardName = this.element.querySelector('.popup__title');
+    this.cardImg = this.element.querySelector('.popup__image');
+}
+
+
+  // функция открытия попапа
+  _openPopup() {
+      this.element.classList.add(this._openedClass);
     }
-  }
+    
+    // функция закрытия попапа
+  _closePopup() {
+      this.element.classList.remove(this._openedClass);
+    }
+  
+  // функция закрытия открытого попапа (для клика по оверлею)
+  _closePopupOverlay() {
+      if (this.target.classList.contains(_openedClass)) {
+        closePopup(this.target);
+      }
+    }
 
 
 }

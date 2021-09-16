@@ -5,13 +5,20 @@ import { Popup } from './Popup.js';
 import { Card } from '../scripts/Card.js';
 import { initialElement } from './initial-сards.js';
 
-const popupButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close');
-const popup = document.querySelector('.popup');
-const popupAdd = document.querySelector('.popup-add');
-const closeButtonAdd = document.querySelector('.popup__close-add');
-const popupImg = document.querySelector('.popup_img');
-const closeButtonImg = document.querySelector('.popup__close_img');
+// const popupButton = document.querySelector('.profile__edit-button');
+const popupButton = new Popup('.profile__edit-button');
+// const closeButton = document.querySelector('.popup__close');
+const closeButton = new Popup('.popup__close');
+// const popup = document.querySelector('.popup');
+const popup = new Popup('.popup');
+// const popupAdd = document.querySelector('.popup-add');
+const popupAdd = new Popup('.popup-add');
+// const closeButtonAdd = document.querySelector('.popup__close-add');
+const closeButtonAdd  = new Popup('.popup__close-add');
+// const popupImg = document.querySelector('.popup_img');
+const popupImg = new Popup('.popup_img');
+// const closeButtonImg = document.querySelector('.popup__close_img');
+const closeButtonImg = new Popup('.popup__close_img');
 
 
 // Находим форму в DOM
@@ -31,14 +38,14 @@ const profileNameInput = document.querySelector('.profile__title');
 const profileJobInput = document.querySelector('.profile__text');
 
 // функция открытия попапа
-function openPopup(pop) {
+/* function openPopup(pop) {
   pop.classList.add('popup_is-opened');
-}
+} */
 
 // функция закрытия попапа
-function closePopup(pop) {
+/* function closePopup(pop) {
   pop.classList.remove('popup_is-opened');
-}
+} */
 
 // функция  окрашивания лайка
 /* function handleLikeIcon(evt) {

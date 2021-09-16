@@ -1,3 +1,10 @@
+
+// импортируем класс Popup
+import { Popup } from './Popup.js';
+// импортируем класс Card
+import { Card } from '../scripts/Card.js';
+import { initialElement } from './initial-сards.js';
+
 const popupButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close');
 const popup = document.querySelector('.popup');
@@ -34,14 +41,14 @@ function closePopup(pop) {
 }
 
 // функция  окрашивания лайка
-function handleLikeIcon(evt) {
+/* function handleLikeIcon(evt) {
   evt.target.classList.toggle('element__heart-button-active');
-}
+}  */
 
 // функция удаления карточки/элемента
-function handleDeleteCard(e) {
-  e.target.closest('.element').remove();
-}
+/* function handleDeleteCard(e) {
+    e.target.closest('.element').remove();
+}  */
 
 // Обработчик «отправки» формы для попапа на кнопе Edit
 function formSubmitHandler (evt) {
@@ -57,7 +64,7 @@ function formSubmitHandler (evt) {
 }
 
 // функция создания элементов/карточек
-function createCard (elm) {
+/*function createCard (elm) {
   //  1. Клонировать из шаблона элемент
   const newElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
   //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
@@ -75,24 +82,25 @@ function createCard (elm) {
   cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
   //   5. Вернуть DOM элемент.
   return newElement; 
-} 
+}  */
 
-function handlePreviewPicture(title, img) {
+// функция открытия попапа по картинке
+/* function handlePreviewPicture(title, img) {
   openPopup(popupImg);
   popupImg.querySelector('.popup__title').textContent = title.textContent;
   popupImg.querySelector('.popup__image').alt = img.alt;
   popupImg.querySelector('.popup__image').src = img.src;
-}
+} */
 
 // функция добавления элемента/карточки в контейнер
-function renderCard(data, wrap) {
+/*function renderCard(data, wrap) {
   wrap.prepend(createCard(data));
- }
+ } */
 
 // Начальная инициализация карточек
- initialElement.forEach((card) => {
+/* initialElement.forEach((card) => {
   renderCard(card, element)
- });
+ });  */
 
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
@@ -106,11 +114,21 @@ function cardFormSubmitHandler(evt) {
   closePopup(popupAdd);
 }
 
-function closePopupOverlay(evt) {
+// функция закрытия открытого попапа (для клика по оверлею)
+/* function closePopupOverlay(evt) {
   if (evt.target.classList.contains('popup_is-opened')) {
     closePopup(evt.target);					
   }
-}
+} */
+
+// вызов функции генерации карточек
+initialElement.forEach((item) => {
+  // Создадим экземпляр карточки
+  const cardElm = new Card(item, '.element');
+  // Создаём карточку и возвращаем наружу и добавляем в DOM
+  cardElm.renderCard(element);
+});
+
 
 // Попап на кнопке Edit
 popupButton.addEventListener('click', () => openPopup(popup));

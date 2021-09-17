@@ -68,7 +68,8 @@ function formSubmitHandler (evt) {
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;
   // Закрываем попап
-  closePopup(popup);
+  popup._closePopup();
+  // closePopup(popup);
 }
 
 // функция создания элементов/карточек
@@ -113,17 +114,14 @@ function formSubmitHandler (evt) {
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  // const newElm = {name:placeName.value, link: placeImg.value };
   const item_new = {name:placeName.value, link: placeImg.value };
   const newElm = new Card(item_new, '.element');
   // Создаем элемент и добавляем элемент в разметку
   newElm.renderCard(element);
-  // renderCard(newElm, element);
   // Очищаем поля формы
   formElementAdd.reset();
   // Закрываем попап
   popupAdd._closePopup();
-  // closePopup(popupAdd);
 }
 
 // функция закрытия открытого попапа (для клика по оверлею)

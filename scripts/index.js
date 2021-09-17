@@ -7,6 +7,7 @@ import { Card } from '../scripts/Card.js';
 import { initialElement } from './initial-сards.js';
 // импортируем класс FormValidator (валидация попапа)
 import { FormValidator } from './FormValidator.js';
+import { config } from "./constant.js";
 
 
 

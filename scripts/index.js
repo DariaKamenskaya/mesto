@@ -152,11 +152,11 @@ closeButtonAdd.addEventListener('click', () => popupAdd._closePopup());
 // popup.addEventListener('click', () => popup._closePopupOverlay());
 // popupAdd.addEventListener('click', () => popupAdd.closePopupOverlay());
 // Закрытие попапа нажатием на Esc
-document.addEventListener('keydown', function(evt) {
+/* document.addEventListener('keydown', function(evt) {
   if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {
     popup.classList.remove('popup_is-opened');
  } 
   if (evt.key === 'Escape' && popupAdd.classList.contains('popup_is-opened')) {
     popupAdd.classList.remove('popup_is-opened');
 } 
-});
+}); */

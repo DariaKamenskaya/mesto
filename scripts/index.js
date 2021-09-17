@@ -2,9 +2,12 @@
 // импортируем класс Popup
 import { popupButton, addButton, closeButton, closeButtonAdd } from "./constant.js";
 import { Popup } from './Popup.js';
-// импортируем класс Card
+// импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../scripts/Card.js';
 import { initialElement } from './initial-сards.js';
+// импортируем класс FormValidator (валидация попапа)
+import { FormValidator } from './FormValidator.js';
+
 
 
 const popup = new Popup('.popup');
@@ -73,4 +76,11 @@ closeButton.addEventListener('click', () => popup._closePopup());
 addButton.addEventListener('click', () => popupAdd._openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
 closeButtonAdd.addEventListener('click', () => popupAdd._closePopup());
+
+// Валидация попапов
+const validAdd = new FormValidator(config, popupAdd);
+validAdd.enableValidation();
+
+const validEdit = new FormValidator(config, popup);
+validEdit.enableValidation();
 

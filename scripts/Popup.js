@@ -27,7 +27,6 @@ export class Popup {
   
   // функция закрытия открытого попапа (для клика по оверлею)
   _closePopupOverlay = (evt) => {
-    console.log(evt.target, this._openedClass);
       if (evt.target.classList.contains(this._openedClass)) {
         this._closePopup();
       }

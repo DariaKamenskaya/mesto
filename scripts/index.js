@@ -113,13 +113,17 @@ function formSubmitHandler (evt) {
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const newElm = {name:placeName.value, link: placeImg.value };
+  // const newElm = {name:placeName.value, link: placeImg.value };
+  const item_new = {name:placeName.value, link: placeImg.value };
+  const newElm = new Card(item_new, '.element');
   // Создаем элемент и добавляем элемент в разметку
-  renderCard(newElm, element);
+  newElm.renderCard(element);
+  // renderCard(newElm, element);
   // Очищаем поля формы
   formElementAdd.reset();
   // Закрываем попап
-  closePopup(popupAdd);
+  popupAdd._closePopup();
+  // closePopup(popupAdd);
 }
 
 // функция закрытия открытого попапа (для клика по оверлею)

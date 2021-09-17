@@ -1,10 +1,18 @@
-const popupButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close');
-const popup = document.querySelector('.popup');
-const popupAdd = document.querySelector('.popup-add');
-const closeButtonAdd = document.querySelector('.popup__close-add');
-const popupImg = document.querySelector('.popup_img');
-const closeButtonImg = document.querySelector('.popup__close_img');
+
+// импортируем класс Popup
+import { popupButton, addButton, closeButton, closeButtonAdd } from "./constant.js";
+import { Popup } from './Popup.js';
+// импортируем класс Card (создание карточек и методы для их обработки)
+import { Card } from '../scripts/Card.js';
+import { initialElement } from './initial-сards.js';
+// импортируем класс FormValidator (валидация попапа)
+import { FormValidator } from './FormValidator.js';
+import { config } from "./constant.js";
+
+
+
+const popup = new Popup('.popup');
+const popupAdd = new Popup('.popup-add');
 
 
 // Находим форму в DOM
@@ -17,33 +25,11 @@ const placeName = document.querySelector('.popup__input_type_place-name');
 const placeImg = document.querySelector('.popup__input_type_place-img');
 // Находим контейнер в html для карточек
 const element = document.querySelector('.elements');
-// Находим кнопку для вызова создания template-элемент
-const addButton = document.querySelector('.profile__add-button');
 // Выбериаем элементы, куда должны быть вставлены значения полей
 const profileNameInput = document.querySelector('.profile__title');
 const profileJobInput = document.querySelector('.profile__text');
 
-// функция открытия попапа
-function openPopup(pop) {
-  pop.classList.add('popup_is-opened');
-  document.addEventListener('keydown', keyHandler);
-}
 
-// функция закрытия попапа
-function closePopup(pop) {
-  pop.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', keyHandler);
-}
-
-// функция  окрашивания лайка
-function handleLikeIcon(evt) {
-  evt.target.classList.toggle('element__heart-button-active');
-}
-
-// функция удаления карточки/элемента
-function handleDeleteCard(e) {
-  e.target.closest('.element').remove();
-}
 
 // Обработчик «отправки» формы для попапа на кнопе Edit
 function formSubmitHandler (evt) {
@@ -55,65 +41,34 @@ function formSubmitHandler (evt) {
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;
   // Закрываем попап
-  closePopup(popup);
+  popup._closePopup();
 }
 
-// функция создания элементов/карточек
-function createCard (elm) {
-  //  1. Клонировать из шаблона элемент
-  const newElement = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
-  //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
-  const likeButton = newElement.querySelector('.element__heart-button'); //нашли лайк карточки
-  const deleteButton = newElement.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
-  const cardImage = newElement.querySelector('.element__image'); //нашли картинку карточки
-  //  3. Задать данные картинке
-  const cardTitle = newElement.querySelector('.element__title');
-  cardTitle.textContent = elm.name;
-  cardImage.alt = elm.name;
-  cardImage.src = elm.link;
-  //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
-  likeButton.addEventListener('click', handleLikeIcon);
-  deleteButton.addEventListener('click', handleDeleteCard);
-  cardImage.addEventListener('click', () => handlePreviewPicture(cardTitle, cardImage));
-  //   5. Вернуть DOM элемент.
-  return newElement; 
-} 
 
-function handlePreviewPicture(title, img) {
-  openPopup(popupImg);
-  popupImg.querySelector('.popup__title').textContent = title.textContent;
-  popupImg.querySelector('.popup__image').alt = img.alt;
-  popupImg.querySelector('.popup__image').src = img.src;
-}
 
-// функция добавления элемента/карточки в контейнер
-function renderCard(data, wrap) {
-  wrap.prepend(createCard(data));
- }
-
-// Начальная инициализация карточек
-initialElements.forEach((card) => {
-  renderCard(card, element)
- });
 
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const newElm = {name:placeName.value, link: placeImg.value };
+  const item_new = {name:placeName.value, link: placeImg.value };
+  const newElm = new Card(item_new, '.element');
   // Создаем элемент и добавляем элемент в разметку
-  renderCard(newElm, element);
+  newElm.renderCard(element);
   // Очищаем поля формы
   formElementAdd.reset();
   // Закрываем попап
-  closePopup(popupAdd);
+  popupAdd._closePopup();
 }
 
-// функция закрытия попапа по клику на оверлей
-function closePopupOverlay(evt) {
-  if (evt.target.classList.contains('popup_is-opened')) {
-    closePopup(evt.target);
-  }
-}
+
+// вызов функции генерации карточек
+initialElement.forEach((item) => {
+  // Создадим экземпляр карточки
+  const cardElm = new Card(item, '.element');
+  // Создаём карточку и возвращаем наружу и добавляем в DOM
+  cardElm.renderCard(element);
+});
+
 
 // функция закрытия попапа нажатием на Esc
 function keyHandler(evt) {
@@ -126,17 +81,19 @@ function keyHandler(evt) {
 }
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', () => openPopup(popup));
+popupButton.addEventListener('click', () => popup._openPopup());
 formElement.addEventListener('submit', formSubmitHandler);
-closeButton.addEventListener('click', () => closePopup(popup));
+closeButton.addEventListener('click', () => popup._closePopup());
 // Попап на кнопке Add
-addButton.addEventListener('click', () => openPopup(popupAdd));
+addButton.addEventListener('click', () => popupAdd._openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
-closeButtonAdd.addEventListener('click', () => closePopup(popupAdd));
-// Попап на картинке
-closeButtonImg.addEventListener("click", () => closePopup(popupImg));
-// Закрытие попапа по клику на оверлей
-popup.addEventListener('click', closePopupOverlay);
-popupAdd.addEventListener('click', closePopupOverlay);
-popupImg.addEventListener('click', closePopupOverlay);
+closeButtonAdd.addEventListener('click', () => popupAdd._closePopup());
+
+// Валидация попапов
+const validAdd = new FormValidator(config, popupAdd);
+validAdd.enableValidation();
+
+const validEdit = new FormValidator(config, popup);
+validEdit.enableValidation();
+
 

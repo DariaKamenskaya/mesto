@@ -1,5 +1,4 @@
 
-
 export const initialElement =  [
     {
       name: 'Архыз',

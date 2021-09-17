@@ -46,7 +46,6 @@ function formSubmitHandler (evt) {
 
 
 
-
 // Обработчик «отправки» формы для попапа на кнопе Add
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -70,16 +69,6 @@ initialElement.forEach((item) => {
 });
 
 
-// функция закрытия попапа нажатием на Esc
-function keyHandler(evt) {
-  // ищем активный попап
-  const activePopup = document.querySelector('.popup_is-opened');
-  // закрываем активный попап
-  if (evt.key === 'Escape') {
-    closePopup(activePopup);
- }
-}
-
 // Попап на кнопке Edit
 popupButton.addEventListener('click', () => popup._openPopup());
 formElement.addEventListener('submit', formSubmitHandler);
@@ -95,5 +84,4 @@ validAdd.enableValidation();
 
 const validEdit = new FormValidator(config, popup);
 validEdit.enableValidation();
-
 

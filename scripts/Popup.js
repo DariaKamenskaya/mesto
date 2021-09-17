@@ -2,7 +2,7 @@
 
 export class Popup {
 
-   _openedClass = 'popup_opened';
+   _openedClass = 'popup_is-opened';
 
   constructor(className) {
     this.element = document.querySelector(className);
@@ -23,7 +23,7 @@ export class Popup {
   
   // функция закрытия открытого попапа (для клика по оверлею)
   _closePopupOverlay() {
-      if (this.target.classList.contains(_openedClass)) {
+      if (this.target.classList.contains(this._openedClass)) {
         closePopup(this.target);
       }
     }

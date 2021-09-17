@@ -49,10 +49,10 @@ export class Card {
 
   _handlePreviewPicture(title, img) {
     const popupImg = new Popup('.popup_img');
-    popupImg._openPopup();
     popupImg.cardName.textContent = title.textContent;
     popupImg.cardImg.alt = img.alt;
     popupImg.cardImg.src = img.src;
+    popupImg._openPopup();
     console.log(popupImg, popupImg.cardName, popupImg.cardImg);
     }
 

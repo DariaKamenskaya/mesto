@@ -14,6 +14,8 @@ export class Popup {
   // функция открытия попапа
   _openPopup() {
       this.element.classList.add(this._openedClass);
+  // навешываем слушатели закрытия
+      this.element.addEventListener("click", () => this._closePopupOverlay());
     }
     
     // функция закрытия попапа
@@ -22,9 +24,9 @@ export class Popup {
     }
   
   // функция закрытия открытого попапа (для клика по оверлею)
-  _closePopupOverlay() {
-      if (this.target.classList.contains(this._openedClass)) {
-        closePopup(this.target);
+  _closePopupOverlay(evt) {
+      if (this.element.classList.contains(this._openedClass)) {
+        this._closePopup();
       }
     }
 

@@ -1,4 +1,4 @@
-//import { popupImg } from "./constant.js";
+import { closeButtonImg } from "./constant.js";
 import { Popup } from "./Popup.js";
 
 export class Card {
@@ -17,7 +17,6 @@ export class Card {
 
   // функция создания элементов/карточек
   _createCard() {
-    debugger;
     //  1. Клонировать из шаблона элемент
     const newElement = document.querySelector('#element-template').content.querySelector(this._cardSelector).cloneNode(true);
     //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
@@ -53,7 +52,8 @@ export class Card {
     popupImg.cardImg.alt = img.alt;
     popupImg.cardImg.src = img.src;
     popupImg._openPopup();
-    console.log(popupImg, popupImg.cardName, popupImg.cardImg);
+    // закрытие попап на картинке по кнопке крестик
+    closeButtonImg.addEventListener("click", () => popupImg._closePopup());
     }
 
 

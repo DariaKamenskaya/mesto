@@ -1,24 +1,25 @@
 
 // импортируем класс Popup
+import { popupButton, addButton, closeButton, closeButtonAdd } from "./constant.js";
 import { Popup } from './Popup.js';
 // импортируем класс Card
 import { Card } from '../scripts/Card.js';
 import { initialElement } from './initial-сards.js';
 
 // const popupButton = document.querySelector('.profile__edit-button');
-const popupButton = new Popup('.profile__edit-button');
+// const popupButton = new Popup('.profile__edit-button');
 // const closeButton = document.querySelector('.popup__close');
-const closeButton = new Popup('.popup__close');
+// const closeButton = new Popup('.popup__close');
 // const popup = document.querySelector('.popup');
 const popup = new Popup('.popup');
 // const popupAdd = document.querySelector('.popup-add');
 const popupAdd = new Popup('.popup-add');
 // const closeButtonAdd = document.querySelector('.popup__close-add');
-const closeButtonAdd  = new Popup('.popup__close-add');
+// const closeButtonAdd  = new Popup('.popup__close-add');
 // const popupImg = document.querySelector('.popup_img');
 const popupImg = new Popup('.popup_img');
 // const closeButtonImg = document.querySelector('.popup__close_img');
-const closeButtonImg = new Popup('.popup__close_img');
+// const closeButtonImg = new Popup('.popup__close_img');
 
 
 // Находим форму в DOM
@@ -32,7 +33,7 @@ const placeImg = document.querySelector('.popup__input_type_place-img');
 // Находим контейнер в html для карточек
 const element = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
-const addButton = document.querySelector('.profile__add-button');
+// const addButton = document.querySelector('.profile__add-button');
 // Выбериаем элементы, куда должны быть вставлены значения полей
 const profileNameInput = document.querySelector('.profile__title');
 const profileJobInput = document.querySelector('.profile__text');
@@ -138,18 +139,18 @@ initialElement.forEach((item) => {
 
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', () => openPopup(popup));
+popupButton.addEventListener('click', () => popup._openPopup());
 formElement.addEventListener('submit', formSubmitHandler);
-closeButton.addEventListener('click', () => closePopup(popup));
+closeButton.addEventListener('click', () => popup._closePopup());
 // Попап на кнопке Add
-addButton.addEventListener('click', () => openPopup(popupAdd));
+addButton.addEventListener('click', () => popupAdd._openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
-closeButtonAdd.addEventListener('click', () => closePopup(popupAdd));
+closeButtonAdd.addEventListener('click', () => popupAdd._closePopup());
 // Попап на картинке
-closeButtonImg.addEventListener("click", () => closePopup(popupImg));
+// closeButtonImg.addEventListener("click", () => closePopup(popupImg));
 // Закрытие попапа по клику на оверлей
-popup.addEventListener('click', closePopupOverlay);
-popupAdd.addEventListener('click', closePopupOverlay);
+// popup.addEventListener('click', () => popup._closePopupOverlay());
+// popupAdd.addEventListener('click', () => popupAdd.closePopupOverlay());
 // Закрытие попапа нажатием на Esc
 document.addEventListener('keydown', function(evt) {
   if (evt.key === 'Escape' && popup.classList.contains('popup_is-opened')) {

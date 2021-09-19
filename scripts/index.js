@@ -57,6 +57,9 @@ function cardFormSubmitHandler(evt) {
   newElm.renderCard(cardsContainer);
   // Очищаем поля формы
   formElementAdd.reset();
+  // Деактивируем кнопку сабмита
+  formElementAdd.classList.add(config.inactiveButtonClass);
+  formElementAdd.setAttribute("disabled", "disabled");
   // Закрываем попап
   popupAdd.closePopup();
 }

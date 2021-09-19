@@ -10,6 +10,8 @@ export class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
 
     this._targetFormElm = targetFormElm;
+    this._inputList = Array.from(this._targetFormElm.element.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._targetFormElm.element.querySelector(this._submitButtonSelector);
   }
   
 
@@ -56,8 +58,6 @@ export class FormValidator {
     this._targetFormElm.element.addEventListener("submit", (evt) => {
         evt.preventDefault();
     });
-    this._inputList = Array.from(this._targetFormElm.element.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._targetFormElm.element.querySelector(this._submitButtonSelector);
     this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {

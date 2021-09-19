@@ -16,7 +16,8 @@ const popupAdd = new Popup('.popup-add');
 
 
 // Находим форму в DOM
-const formElement = document.querySelector('.popup__form');
+const formProfileElement = document.querySelector('.popup__form_users');
+// const formElement = document.querySelector('.popup__form_users');
 const formElementAdd = document.querySelector('.popup__input-add');
 // Находим поля формы в DOM
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -71,7 +72,7 @@ initialElement.forEach((item) => {
 
 // Попап на кнопке Edit
 popupButton.addEventListener('click', () => popup.openPopup());
-formElement.addEventListener('submit', submitProfileForm);
+formProfileElement.addEventListener('submit', submitProfileForm);
 closeButton.addEventListener('click', () => popup.closePopup());
 // Попап на кнопке Add
 addButton.addEventListener('click', () => popupAdd.openPopup());

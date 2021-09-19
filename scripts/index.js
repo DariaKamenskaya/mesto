@@ -24,7 +24,7 @@ const jobInput = document.querySelector('.popup__input_type_work');
 const placeName = document.querySelector('.popup__input_type_place-name');
 const placeImg = document.querySelector('.popup__input_type_place-img');
 // Находим контейнер в html для карточек
-const element = document.querySelector('.elements');
+const cardsContainer = document.querySelector('.elements');
 // Выбериаем элементы, куда должны быть вставлены значения полей
 const profileNameInput = document.querySelector('.profile__title');
 const profileJobInput = document.querySelector('.profile__text');
@@ -52,7 +52,7 @@ function cardFormSubmitHandler(evt) {
   const item_new = {name:placeName.value, link: placeImg.value };
   const newElm = new Card(item_new, '.element');
   // Создаем элемент и добавляем элемент в разметку
-  newElm.renderCard(element);
+  newElm.renderCard(cardsContainer);
   // Очищаем поля формы
   formElementAdd.reset();
   // Закрываем попап
@@ -65,7 +65,7 @@ initialElement.forEach((item) => {
   // Создадим экземпляр карточки
   const cardElm = new Card(item, '.element');
   // Создаём карточку и возвращаем наружу и добавляем в DOM
-  cardElm.renderCard(element);
+  cardElm.renderCard(cardsContainer);
 });
 
 

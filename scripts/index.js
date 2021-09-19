@@ -81,11 +81,11 @@ popupButton.addEventListener('click', () => {
   popupProfile.openPopup();
 });
 formProfileElement.addEventListener('submit', submitProfileForm);
-closeButton.addEventListener('click', () => popupProfile.closePopup());
+popupProfile.setEventListeners();
 // Попап на кнопке Add
 addButton.addEventListener('click', () => popupAdd.openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
-closeButtonAdd.addEventListener('click', () => popupAdd.closePopup());
+popupAdd.setEventListeners();
 
 // Валидация попапов
 const validAdd = new FormValidator(config, popupAdd);

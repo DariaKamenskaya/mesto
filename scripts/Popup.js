@@ -42,5 +42,11 @@ export class Popup {
       }
   }
 
+  // функция навешивания слушателей
+  setEventListeners() {
+    const closeBtn = this.element.querySelector('.popup__close');
+    closeBtn.addEventListener('click', () => this.closePopup());
+  }
+
 
 }

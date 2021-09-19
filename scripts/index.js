@@ -11,7 +11,8 @@ import { config } from "./constant.js";
 
 
 
-const popup = new Popup('.popup');
+// const popup = new Popup('.popup');
+const popupProfile = new Popup('.popup-userProfile');
 const popupAdd = new Popup('.popup-add');
 
 
@@ -42,7 +43,7 @@ function submitProfileForm (evt) {
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;
   // Закрываем попап
-  popup.closePopup();
+  popupProfile.closePopup();
 }
 
 
@@ -71,9 +72,9 @@ initialElement.forEach((item) => {
 
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', () => popup.openPopup());
+popupButton.addEventListener('click', () => popupProfile.openPopup());
 formProfileElement.addEventListener('submit', submitProfileForm);
-closeButton.addEventListener('click', () => popup.closePopup());
+closeButton.addEventListener('click', () => popupProfile.closePopup());
 // Попап на кнопке Add
 addButton.addEventListener('click', () => popupAdd.openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
@@ -83,6 +84,6 @@ closeButtonAdd.addEventListener('click', () => popupAdd.closePopup());
 const validAdd = new FormValidator(config, popupAdd);
 validAdd.enableValidation();
 
-const validEdit = new FormValidator(config, popup);
+const validEdit = new FormValidator(config, popupProfile);
 validEdit.enableValidation();
 

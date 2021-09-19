@@ -23,6 +23,9 @@ export class Popup {
     // функция закрытия попапа
   closePopup() {
       this.element.classList.remove(this._openedClass);
+      // удаляем слушатели закрытия
+      this.element.removeEventListener("click", this.closePopupOverlay);
+      document.removeEventListener('keydown', this._handleEscapeClick);
     }
   
   // функция закрытия открытого попапа (для клика по оверлею)

@@ -51,9 +51,9 @@ export class Card {
     popupImg.cardName.textContent = title.textContent;
     popupImg.cardImg.alt = img.alt;
     popupImg.cardImg.src = img.src;
-    popupImg._openPopup();
+    popupImg.openPopup();
     // закрытие попап на картинке по кнопке крестик
-    closeButtonImg.addEventListener("click", () => popupImg._closePopup());
+    closeButtonImg.addEventListener("click", () => popupImg.closePopup());
     }
 
 

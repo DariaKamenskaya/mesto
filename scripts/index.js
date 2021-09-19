@@ -41,7 +41,7 @@ function formSubmitHandler (evt) {
   profileNameInput.textContent = valNameInput;
   profileJobInput.textContent =  valJobInput;
   // Закрываем попап
-  popup._closePopup();
+  popup.closePopup();
 }
 
 
@@ -56,7 +56,7 @@ function cardFormSubmitHandler(evt) {
   // Очищаем поля формы
   formElementAdd.reset();
   // Закрываем попап
-  popupAdd._closePopup();
+  popupAdd.closePopup();
 }
 
 
@@ -70,13 +70,13 @@ initialElement.forEach((item) => {
 
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', () => popup._openPopup());
+popupButton.addEventListener('click', () => popup.openPopup());
 formElement.addEventListener('submit', formSubmitHandler);
-closeButton.addEventListener('click', () => popup._closePopup());
+closeButton.addEventListener('click', () => popup.closePopup());
 // Попап на кнопке Add
-addButton.addEventListener('click', () => popupAdd._openPopup());
+addButton.addEventListener('click', () => popupAdd.openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
-closeButtonAdd.addEventListener('click', () => popupAdd._closePopup());
+closeButtonAdd.addEventListener('click', () => popupAdd.closePopup());
 
 // Валидация попапов
 const validAdd = new FormValidator(config, popupAdd);

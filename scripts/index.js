@@ -32,7 +32,7 @@ const profileJobInput = document.querySelector('.profile__text');
 
 
 // Обработчик «отправки» формы для попапа на кнопе Edit
-function formSubmitHandler (evt) {
+function submitProfileForm (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
   // значение полей jobInput и nameInput из свойства value
   const valNameInput = nameInput.value;
@@ -71,7 +71,7 @@ initialElement.forEach((item) => {
 
 // Попап на кнопке Edit
 popupButton.addEventListener('click', () => popup.openPopup());
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', submitProfileForm);
 closeButton.addEventListener('click', () => popup.closePopup());
 // Попап на кнопке Add
 addButton.addEventListener('click', () => popupAdd.openPopup());

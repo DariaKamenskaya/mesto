@@ -42,8 +42,8 @@ export class Card {
   }
 
     // функция удаления карточки/элемента
-  _handleDeleteCard(e) {
-    e.target.closest('.element').remove();
+  _handleDeleteCard() {
+    this.closest('.element').remove();
   }
 
   _handlePreviewPicture(title, img) {

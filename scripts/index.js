@@ -75,7 +75,11 @@ initialElement.forEach((item) => {
 
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', () => popupProfile.openPopup());
+popupButton.addEventListener('click', () => {
+  nameInput.value = profileNameInput.textContent;
+  jobInput.value = profileJobInput.textContent;
+  popupProfile.openPopup();
+});
 formProfileElement.addEventListener('submit', submitProfileForm);
 closeButton.addEventListener('click', () => popupProfile.closePopup());
 // Попап на кнопке Add

@@ -15,7 +15,7 @@ export class Popup {
   openPopup() {
       this.element.classList.add(this._openedClass);
      // навешываем слушатели закрытия
-      this.element.addEventListener("click", this.closePopupOverlay);
+      this.element.addEventListener("click", this._closePopupOverlay);
       // Закрытие попапа нажатием на Esc
       document.addEventListener('keydown', this._handleEscapeClick);
     }
@@ -24,7 +24,7 @@ export class Popup {
   closePopup() {
       this.element.classList.remove(this._openedClass);
       // удаляем слушатели закрытия
-      this.element.removeEventListener("click", this.closePopupOverlay);
+      this.element.removeEventListener("click", this._closePopupOverlay);
       document.removeEventListener('keydown', this._handleEscapeClick);
     }
   

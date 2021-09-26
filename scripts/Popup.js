@@ -17,7 +17,7 @@ export class Popup {
      // навешываем слушатели закрытия
       this.element.addEventListener("click", this._closePopupOverlay);
       // Закрытие попапа нажатием на Esc
-      document.addEventListener('keydown', this._handleEscapeClick);
+      document.addEventListener('keydown', this._handleEscClose);
     }
     
     // функция закрытия попапа
@@ -25,7 +25,7 @@ export class Popup {
       this.element.classList.remove(this._openedClass);
       // удаляем слушатели закрытия
       this.element.removeEventListener("click", this._closePopupOverlay);
-      document.removeEventListener('keydown', this._handleEscapeClick);
+      document.removeEventListener('keydown', this._handleEscClose);
     }
   
   // функция закрытия открытого попапа (для клика по оверлею)
@@ -36,7 +36,7 @@ export class Popup {
     }
 
   // функция закрытия по esc
-  _handleEscapeClick = (evt) => {
+  _handleEscClose = (evt) => {
       if (evt.key === 'Escape' && this.element.classList.contains(this._openedClass)) {
           this.closePopup();
       }

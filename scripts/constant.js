@@ -7,6 +7,8 @@ export const closeButtonImg = document.querySelector('.popup__close_img');
 // Находим кнопку для вызова создания template-элемент
 export const addButton = document.querySelector('.profile__add-button');
 
+export const classCardsContainer = '.elements';
+
 // объект для валидации
 export const config = {
   formSelector: ".popup__form",

@@ -1,10 +1,11 @@
 
 // импортируем класс Popup
-import { popupButton, addButton, closeButton, closeButtonAdd } from "./constant.js";
+import { popupButton, addButton, closeButton, closeButtonAdd, classCardsContainer } from "./constant.js";
 import { Popup } from './Popup.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../scripts/Card.js';
 import { initialElement } from './initial-сards.js';
+import { Section } from './Section.js';
 // импортируем класс FormValidator (валидация попапа)
 import { FormValidator } from './FormValidator.js';
 import { config } from "./constant.js";
@@ -65,13 +66,22 @@ function cardFormSubmitHandler(evt) {
 }
 
 
-// вызов функции генерации карточек
-initialElement.forEach((item) => {
-  // Создадим экземпляр карточки
-  const cardElm = new Card(item, '.element');
-  // Создаём карточку и возвращаем наружу и добавляем в DOM
-  cardElm.renderCard(cardsContainer);
-});
+// вызов генерации карточек
+const cardList = new Section({
+  items: initialElement,
+  renderer: (item) => {
+    // Создадим экземпляр карточки
+    const cardElm = new Card(item, '.element');
+    // Создаём карточку и возвращаем наружу
+    const postElement = cardElm.createCard();
+    // добавляем карточку в DOM
+    cardList.addItem(postElement);
+  }
+}, classCardsContainer);
+// вызов отрисовки всех карточек на странице 
+cardList.rendererItem();
+
+
 
 
 // Попап на кнопке Edit

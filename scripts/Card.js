@@ -12,11 +12,11 @@ export class Card {
 
     // функция создания и добавления элемента/карточки в контейнер
   renderCard(wrap) {
-    wrap.prepend(this._createCard());
+    wrap.prepend(this.createCard());
   }
 
   // функция создания элементов/карточек
-  _createCard() {
+  createCard() {
     //  1. Клонировать из шаблона элемент
     const newElement = document.querySelector('#element-template').content.querySelector(this._cardSelector).cloneNode(true);
     //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку

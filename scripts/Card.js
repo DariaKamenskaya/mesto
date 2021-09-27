@@ -3,10 +3,11 @@ import { Popup } from "./Popup.js";
 
 export class Card {
 
-  constructor(data, cardSelector) {
+  constructor({data, handleCardClick}, cardSelector) {
     this.name = data.name;
     this.link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
     }
   
 
@@ -31,7 +32,8 @@ export class Card {
     //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
     likeButton.addEventListener('click', this._handleLikeIcon);
     deleteButton.addEventListener('click', this._handleDeleteCard);
-    cardImage.addEventListener('click', () => this._handlePreviewPicture(cardTitle, cardImage));
+    cardImage.addEventListener('click', this._handleCardClick.bind(this));
+    // cardImage.addEventListener('click', () => this._handlePreviewPicture(cardTitle, cardImage));
     //   5. Вернуть DOM элемент.
     return newElement; 
   }

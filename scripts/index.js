@@ -1,7 +1,14 @@
 
 // импортируем класс Popup
-import { popupButton, addButton, closeButton, closeButtonAdd, classCardsContainer } from "./constant.js";
+import { popupButton,
+         addButton,
+         closeButton,
+         closeButtonAdd,
+         classCardsContainer,
+         popupEditProfileSelector,
+         popupAddSelector } from "./constant.js";
 import { Popup } from './Popup.js';
+import { PopupWithForm } from "./PopupWithForm.js";
 // импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../scripts/Card.js';
 import { initialElement } from './initial-сards.js';
@@ -85,17 +92,52 @@ cardList.rendererItem();
 
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', () => {
+popupButton.addEventListener('click', OpenPopupEditProfile);
+
+// обработчик открытия попапа редактирования профиля
+function OpenPopupEditProfile() {
+  const popup = new PopupWithForm({
+    handleSubmitForm: (item) => {
+      userInfo.setUserInfo(item);
+      popup.closePopup();
+    }
+  }, popupEditProfileSelector);
+
+  popup.setInputValues(userInfo.getUserInfo());
+  popup.openPopup();
+}
+
+/*popupButton.addEventListener('click', () => {
   nameInput.value = profileNameInput.textContent;
   jobInput.value = profileJobInput.textContent;
   popupProfile.openPopup();
 });
 formProfileElement.addEventListener('submit', submitProfileForm);
-popupProfile.setEventListeners();
+popupProfile.setEventListeners();*/
+
 // Попап на кнопке Add
-addButton.addEventListener('click', () => popupAdd.openPopup());
+addButton.addEventListener('click', OpenPopupAddCard);
+
+// обработчик открытия попапа для добавления карточки
+function OpenPopupAddCard() {
+  const popup = new PopupWithForm({
+    handleSubmitForm: (item) => {
+    // Создадим экземпляр карточки
+    const cardElm = new Card(item, '.element');
+    // Создаём карточку и возвращаем наружу
+    const postElement = cardElm.createCard();
+    // добавляем карточку в DOM
+    cardList.addItem(postElement);
+    popup.closePopup();
+    }
+  }, popupAddSelector);
+
+  popup.openPopup();
+}
+
+/* addButton.addEventListener('click', () => popupAdd.openPopup());
 formElementAdd.addEventListener('submit', cardFormSubmitHandler); // функция создания нового элемента/карточки
-popupAdd.setEventListeners();
+popupAdd.setEventListeners(); */
 
 // Валидация попапов
 const validAdd = new FormValidator(config, popupAdd);

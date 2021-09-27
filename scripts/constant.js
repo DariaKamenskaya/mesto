@@ -8,6 +8,8 @@ export const closeButtonImg = document.querySelector('.popup__close_img');
 export const addButton = document.querySelector('.profile__add-button');
 
 export const classCardsContainer = '.elements';
+export const popupEditProfileSelector = '.popup-userProfile';
+export const popupAddSelector = '.popup-add';
 
 // объект для валидации
 export const config = {

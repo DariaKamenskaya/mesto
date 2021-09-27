@@ -10,8 +10,8 @@ export const addButton = document.querySelector('.profile__add-button');
 export const classCardsContainer = '.elements';
 export const popupEditProfileSelector = '.popup-userProfile';
 export const popupAddSelector = '.popup-add';
-export const userNameSelector = '.popup__input_type_name';
-export const userWorkSelector = '.popup__input_type_work';
+export const userNameSelector = '.profile__title';
+export const userWorkSelector = '.profile__text';
 export const popupPhotoSelector = '.popup_img';
 
 // объект для валидации

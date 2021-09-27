@@ -17,7 +17,6 @@ export class PopupWithImage extends Popup{
     this._placeImg.alt = this._nameImg;
     this._placeName.textContent = this._nameImg;
     super.openPopup();
-    console.log(this);
   }
 
 

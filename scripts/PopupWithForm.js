@@ -23,6 +23,15 @@ export class PopupWithForm extends Popup{
         return this._formValues;
     }
 
+ // метод, который переносит данные в поля формы 
+    setInputValues(data) {
+        this._getInputValues();
+        Object.assign(this._formValues, data);
+        this._inputList.forEach(input => {
+          input.value = this._formValues[input.name];
+        });
+      }
+
     _submitForm(evt) {
         // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
         evt.preventDefault();

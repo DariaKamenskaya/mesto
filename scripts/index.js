@@ -57,7 +57,7 @@ function submitProfileForm (evt) {
 
 
 // Обработчик «отправки» формы для попапа на кнопе Add
-function cardFormSubmitHandler(evt) {
+/* function cardFormSubmitHandler(evt) {
   evt.preventDefault();
   const item_new = {name:placeName.value, link: placeImg.value };
   const newElm = new Card(item_new, '.element');
@@ -70,7 +70,7 @@ function cardFormSubmitHandler(evt) {
   formElementAdd.setAttribute("disabled", "disabled");
   // Закрываем попап
   popupAdd.closePopup();
-}
+} */
 
 
 // вызов генерации карточек

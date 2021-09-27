@@ -15,6 +15,7 @@ export class Popup {
   // функция открытия попапа
   openPopup() {
       this.element.classList.add(this._openedClass);
+      console.log(this);
       // навешиваем слушатели
       this.setEventListeners();
     }

@@ -9,11 +9,11 @@
   <body class="body">
     <div class="page">
       <header class="header">
-        <a href="#" class="header__link"><img src="./images/logo.svg" alt="Логотип" class="header__logo"></a>
+        <a href="#" class="header__link"><img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo"></a>
       </header>
       <main>
         <section class="profile">
-          <img src="./images/Avatar.jpg" alt="Жак Ив Кусто" class="profile__avatar">
+          <img src="<%=require('./images/Avatar.jpg')%>" alt="Жак Ив Кусто" class="profile__avatar">
           <div class="profile__info">
             <div class="profile__title-block">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -70,14 +70,14 @@
       <section class="popup popup_img">
         <div class="popup__content popup__content_img" >
           <button class="popup__close popup__close_img" type="button"></button>
-          <img src="./images/element_Karachaevsk.jpg" alt="Карачаево-Черкессия" class="popup__image">
+          <img src="<%=require('./images/element_Karachaevsk.jpg')%>" alt="Карачаево-Черкессия" class="popup__image">
           <h3 class="popup__title popup__title_img">Новое место</h3>
         </div>
       </section>
     </div>
     <template id="element-template">
       <article class="element">
-        <img src="./images/element_Karachaevsk.jpg" alt="Карачаево-Черкессия" class="element__image">
+        <img src="<%=require('./images/element_Karachaevsk.jpg')%>" alt="Карачаево-Черкессия" class="element__image">
         <button class="element__remove-button"  type="button"></button>
         <div class="element__title-block">
           <p class="element__title">Карачаево-Черкессия</p>
@@ -85,6 +85,6 @@
         </div>
       </article>
     </template>
-  <script type="module" src="./scripts/index.js" defer></script>
+  <script type="module" src="./src/index.js" defer></script>
   </body>
 </html>

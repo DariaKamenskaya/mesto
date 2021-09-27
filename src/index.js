@@ -7,18 +7,19 @@ import { popupButton,
          popupAddSelector,
          popupPhotoSelector,
          userNameSelector,
-         userWorkSelector} from "./constant.js";
-import { Popup } from './Popup.js';
-import { PopupWithForm } from "./PopupWithForm.js";
-import {PopupWithImage} from './PopupWithImage.js';
+         userWorkSelector} from "./scripts/constant.js";
+import { Popup } from './scripts/Popup.js';
+import { PopupWithForm } from "./scripts/PopupWithForm.js";
+import {PopupWithImage} from './scripts/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
-import { Card } from '../scripts/Card.js';
-import { initialElement } from './initial-сards.js';
-import { Section } from './Section.js';
-import { UserInfo } from './UserInfo.js';
+import { Card } from './scripts/Card.js';
+import { initialElement } from './scripts/initial-сards.js';
+import { Section } from './scripts/Section.js';
+import { UserInfo } from './scripts/UserInfo.js';
 // импортируем класс FormValidator (валидация попапа)
-import { FormValidator } from './FormValidator.js';
-import { config } from './constant.js';
+import { FormValidator } from './scripts/FormValidator.js';
+import { config } from './scripts/constant.js';
+import './pages/index.css'; // добавьте импорт главного файла стилей 
 
 
 

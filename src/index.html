@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+    <!--link rel="stylesheet" href="./pages/index.css"-->
     <title>Mesto</title>
   </head>
   <body class="body">
@@ -42,7 +42,7 @@
               <input type="text" id="work-input" value="Исследователь океана" placeholder="О себе" class="popup__input popup__input_type_work" name='work' required minlength='2'  maxlength='200'>
               <span id="work-input-error" class="popup__input-error"></span>
             </label>
-            <button class="popup__submit-btn"  type="submit">
+            <button class="popup__submit-btn popup__submit-btn_edit"  type="submit">
               Сохранить
             </button>
           </form>
@@ -61,7 +61,7 @@
               <input type="url" id="url-input" placeholder="Ссылка на картинку" class="popup__input popup__input_type_place-img" name='link' required>
               <span id="url-input-error" class="popup__input-error"></span>
             </label>
-            <button class="popup__submit-btn"  type="submit"> 
+            <button class="popup__submit-btn popup__submit-btn_add"  type="submit"> 
               Создать
             </button>
           </form>
@@ -85,6 +85,6 @@
         </div>
       </article>
     </template>
-  <script type="module" src="./src/index.js" defer></script>
+  <!--script type="module" src="./src/index.js" defer></script-->
   </body>
 </html>

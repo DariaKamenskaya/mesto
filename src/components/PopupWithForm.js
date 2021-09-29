@@ -1,5 +1,5 @@
 import { Popup } from "./Popup.js";
-import { config } from "./constant.js";
+//import { config } from "./constant.js";
 
 // класс для попапа с формой
 export class PopupWithForm extends Popup{
@@ -53,13 +53,10 @@ export class PopupWithForm extends Popup{
       }
     
       // функция закрытия попапа
-      close() {
-        super.close();
+      closePopup() {
+        super.closePopup();
         // Очищаем поля формы
         this._formElement.reset();
-        // Деактивируем кнопку сабмита
-        this._formElement.classList.add(config.inactiveButtonClass);
-        this._formElement.setAttribute("disabled", "disabled");
       }
 
 }

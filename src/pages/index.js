@@ -1,31 +1,30 @@
-
 // импортируем класс Popup
 import { popupButton,
          addButton,
          classCardsContainer,
          popupEditProfileSelector,
+         popupEditProfile,
+         buttonSubmitFormEdit,
          popupAddSelector,
+         popupAdd,
+         buttonSubmitPopupAdd,
          popupPhotoSelector,
          userNameSelector,
-         userWorkSelector} from "./scripts/constant.js";
-import { Popup } from './scripts/Popup.js';
-import { PopupWithForm } from "./scripts/PopupWithForm.js";
-import {PopupWithImage} from './scripts/PopupWithImage.js';
+         userWorkSelector} from "../components/constant.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
-import { Card } from './scripts/Card.js';
-import { initialElement } from './scripts/initial-сards.js';
-import { Section } from './scripts/Section.js';
-import { UserInfo } from './scripts/UserInfo.js';
+import { Card } from '../components/Card.js';
+import { initialElement } from '../components/initial-сards.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
 // импортируем класс FormValidator (валидация попапа)
-import { FormValidator } from './scripts/FormValidator.js';
-import { config } from './scripts/constant.js';
-import './pages/index.css'; // добавьте импорт главного файла стилей 
+import { config,FormValidator } from '../components/FormValidator.js';
+// импорт утилит
+import { buttonOnActive, buttonOnDisabled } from "../components/utils.js";
+// для сборки под вебпаком импорт стилей
+import './index.css'; // добавьте импорт главного файла стилей 
 
-
-
-
-const popupProfile = new Popup('.popup-userProfile');
-const popupAdd = new Popup('.popup-add');
 
 
 
@@ -33,10 +32,8 @@ const popupAdd = new Popup('.popup-add');
 
 // обработчик клика по карточке
 function handleCardClick(userData) {
-  const popup = new PopupWithImage({
-    data: userData
-  }, popupPhotoSelector);
-  popup.openPopup();
+  const popup = new PopupWithImage( popupPhotoSelector);
+  popup.openPopup(userData);
 }
 
 
@@ -74,6 +71,7 @@ function OpenPopupEditProfile() {
   }, popupEditProfileSelector);
 
   popup.setInputValues(userInfo.getUserInfo());
+  buttonOnActive(buttonSubmitFormEdit);
   popup.openPopup();
 }
 
@@ -81,6 +79,7 @@ function OpenPopupEditProfile() {
 
 // Попап на кнопке Add
 addButton.addEventListener('click', OpenPopupAddCard);
+
 
 // обработчик открытия попапа для добавления карточки
 function OpenPopupAddCard() {
@@ -99,6 +98,7 @@ function OpenPopupAddCard() {
     }
   }, popupAddSelector);
 
+  buttonOnDisabled(buttonSubmitFormEdit);
   popup.openPopup();
 }
 
@@ -108,6 +108,6 @@ function OpenPopupAddCard() {
 const validAdd = new FormValidator(config, popupAdd);
 validAdd.enableValidation();
 
-const validEdit = new FormValidator(config, popupProfile);
+const validEdit = new FormValidator(config, popupEditProfile);
 validEdit.enableValidation();
 

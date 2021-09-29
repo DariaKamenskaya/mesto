@@ -8,6 +8,7 @@ export class Card {
     this.link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._closeButtonImg = document.querySelector('.popup__close_img');
     }
   
 
@@ -48,7 +49,7 @@ export class Card {
     this.closest('.element').remove();
   }
 
-  _handlePreviewPicture(title, img) {
+  /*_handlePreviewPicture(title, img) {
     const popupImg = new Popup('.popup_img');
     popupImg.cardName.textContent = title.textContent;
     popupImg.cardImg.alt = img.alt;
@@ -56,7 +57,7 @@ export class Card {
     popupImg.openPopup();
     // закрытие попап на картинке по кнопке крестик
     closeButtonImg.addEventListener("click", () => popupImg.closePopup());
-    }
+    } */
 
 
 

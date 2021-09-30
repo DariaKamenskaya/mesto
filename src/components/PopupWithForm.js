@@ -11,11 +11,12 @@ export class PopupWithForm extends Popup{
         this._formElement = this._element.querySelector('.popup__form');
         // фиксируем вызов функции сабмита формы
         this._submitFormCallback = this._submitForm.bind(this);
+        // ищем все поля формы
+        this._inputList = this._formElement.querySelectorAll('.popup__input');
     }
 
     // метод, который собирает данные всех полей формы
     _getInputValues(){
-        this._inputList = this._formElement.querySelectorAll('.popup__input');
         this._formValues = {};
         this._inputList.forEach(input => {
           this._formValues[input.name] = input.value;

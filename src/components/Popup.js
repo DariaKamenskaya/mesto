@@ -7,8 +7,7 @@ export class Popup {
   constructor(className) {
     this._element = document.querySelector(className);
     this.closeBtn = this._element.querySelector('.popup__close');
-    this.cardName = this._element.querySelector('.popup__title');
-    this.cardImg = this._element.querySelector('.popup__image');
+    this._handleCloseCallback = this.closePopup.bind(this);
   }
 
 
@@ -44,7 +43,7 @@ export class Popup {
   setEventListeners() {
     // const closeBtn = this.element.querySelector('.popup__close');
     // закрытие по кнопке крестик
-    this.closeBtn.addEventListener('click', () => this.closePopup());
+    this.closeBtn.addEventListener('click', this._handleCloseCallback);
     // закрытие по клику на оверлей
     this._element.addEventListener("click", this._closePopupOverlay);
     // Закрытие попапа нажатием на Esc
@@ -55,7 +54,7 @@ export class Popup {
   removeEventListeners() {
     //const closeBtn = this.element.querySelector('.popup__close');
     // удаление слушателя закрытие по кнопке крестик
-    this.closeBtn.removeEventListener('click', () => this.closePopup());
+    this.closeBtn.removeEventListener('click', this._handleCloseCallback);
     // удаление слушателя закрытие по клику на оверлей
     this._element.removeEventListener("click", this._closePopupOverlay);
     // удаление слушателя закрытие попапа нажатием на Esc

@@ -8,7 +8,7 @@ export class PopupWithForm extends Popup{
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
         // ищем саму форму с данными данного попапа
-        this._formElement = this.element.querySelector('.popup__form');
+        this._formElement = this._element.querySelector('.popup__form');
         // фиксируем вызов функции сабмита формы
         this._submitFormCallback = this._submitForm.bind(this);
     }

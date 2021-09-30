@@ -5,8 +5,8 @@ export class PopupWithImage extends Popup{
 
   constructor( popupSelector) {
     super(popupSelector);
-    this._placeImg = this.element.querySelector('.popup__image');
-    this._placeName = this.element.querySelector('.popup__title_img');
+    this._placeImg = this._element.querySelector('.popup__image');
+    this._placeName = this._element.querySelector('.popup__title_img');
   }
 
 // метод открытия попапа по клику на картинку карточки

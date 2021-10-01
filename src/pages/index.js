@@ -10,7 +10,8 @@ import { popupButton,
          buttonSubmitPopupAdd,
          popupPhotoSelector,
          userNameSelector,
-         userWorkSelector} from "../components/constant.js";
+         userWorkSelector,
+         config} from "../components/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
@@ -19,7 +20,7 @@ import { initialElement } from '../components/initial-сards.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 // импортируем класс FormValidator (валидация попапа)
-import { config,FormValidator } from '../components/FormValidator.js';
+import { FormValidator } from '../components/FormValidator.js';
 // импорт утилит
 import { buttonOnActive, buttonOnDisabled } from "../components/utils.js";
 // для сборки под вебпаком импорт стилей

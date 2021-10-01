@@ -20,3 +20,12 @@ export const popupAdd = document.querySelector('.popup-add');
 
 export const buttonSubmitFormEdit = document.querySelector('.popup__submit-btn_edit');
 export const buttonSubmitPopupAdd = document.querySelector('.popup__submit-btn_add');
+
+// объект для валидации
+export const config = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__submit-btn",
+    inactiveButtonClass: "popup__submit-btn_inactive",
+    inputErrorClass: "popup__input_type_error"
+  };

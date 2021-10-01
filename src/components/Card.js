@@ -1,6 +1,3 @@
-import { closeButtonImg } from "./constant.js";
-import { Popup } from "./Popup.js";
-
 export class Card {
 
   constructor({data, handleCardClick}, cardSelector) {
@@ -8,35 +5,32 @@ export class Card {
     this.link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._closeButtonImg = document.querySelector('.popup__close_img');
+    this._element = this._getElement();
+    this._likeButton = this._element.querySelector('.element__heart-button'); //нашли лайк карточки
+    this._deleteButton = this._element.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
+    this._cardImage = this._element.querySelector('.element__image'); //нашли картинку карточки
+    this._cardTitle = this._element.querySelector('.element__title'); // нашли поле карточки для задания имени
     }
   
 
-    // функция создания и добавления элемента/карточки в контейнер
-  renderCard(wrap) {
-    wrap.prepend(this.createCard());
-  }
+  // функция клонирования элемента/карточки 
+   _getElement() {
+    const element = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
+    return element;
+  } 
 
   // функция создания элементов/карточек
   createCard() {
-    //  1. Клонировать из шаблона элемент
-    const newElement = document.querySelector('#element-template').content.querySelector(this._cardSelector).cloneNode(true);
-    //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку
-    const likeButton = newElement.querySelector('.element__heart-button'); //нашли лайк карточки
-    const deleteButton = newElement.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
-    const cardImage = newElement.querySelector('.element__image'); //нашли картинку карточки
+    //  1. Клонировать из шаблона элемент - в конструкторе класса
+    //  2. Найти в элементе и записать в переменные кнопку лайка,удаления и картинку  - в конструкторе класса
     //  3. Задать данные картинке
-    const cardTitle = newElement.querySelector('.element__title');
-    cardTitle.textContent = this.name;
-    cardImage.alt = this.name;
-    cardImage.src = this.link;
+    this._cardTitle.textContent = this.name;
+    this._cardImage.alt = this.name;
+    this._cardImage.src = this.link;
     //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
-    likeButton.addEventListener('click', this._handleLikeIcon);
-    deleteButton.addEventListener('click', this._handleDeleteCard);
-    cardImage.addEventListener('click', this._handleCardClick.bind(this));
-    // cardImage.addEventListener('click', () => this._handlePreviewPicture(cardTitle, cardImage));
+    this._setEventListeners();
     //   5. Вернуть DOM элемент.
-    return newElement; 
+    return this._element; 
   }
 
     // функция  окрашивания лайка
@@ -49,15 +43,12 @@ export class Card {
     this.closest('.element').remove();
   }
 
-  /*_handlePreviewPicture(title, img) {
-    const popupImg = new Popup('.popup_img');
-    popupImg.cardName.textContent = title.textContent;
-    popupImg.cardImg.alt = img.alt;
-    popupImg.cardImg.src = img.src;
-    popupImg.openPopup();
-    // закрытие попап на картинке по кнопке крестик
-    closeButtonImg.addEventListener("click", () => popupImg.closePopup());
-    } */
+  // функция навешивания слушателей повесить на кнопки и картинку слушатели
+  _setEventListeners() {
+    this._likeButton.addEventListener('click', this._handleLikeIcon); // поставить лайк
+    this._deleteButton.addEventListener('click', this._handleDeleteCard); // удалить карточку
+    this._cardImage.addEventListener('click', this._handleCardClick.bind(this)); // открыть попап
+  }
 
 
 

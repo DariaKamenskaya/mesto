@@ -45,7 +45,7 @@ const cardList = new Section({
     const cardElm = new Card({
       data: item,
       handleCardClick: () => handleCardClick(item)
-    }, '.element');
+    }, '#element-template');
     // Создаём карточку и возвращаем наружу
     const postElement = cardElm.createCard();
     // добавляем карточку в DOM
@@ -89,7 +89,7 @@ function OpenPopupAddCard() {
     const cardElm = new Card({
       data: item,
       handleCardClick: () => handleCardClick(item)
-    }, '.element');
+    }, '#element-template');
     // Создаём карточку и возвращаем наружу
     const postElement = cardElm.createCard();
     // добавляем карточку в DOM

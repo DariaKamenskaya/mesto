@@ -68,6 +68,14 @@ export class FormValidator {
     this._setEventListeners();
   }
 
-
+  // метод для очистки ошибок и управления кнопкой
+  resetValidation() {
+  //  управляем кнопкой 
+    this._toggleButtonState(); 
+  // очищаем ошибки в полях
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
 
 }

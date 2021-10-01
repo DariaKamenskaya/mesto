@@ -21,20 +21,49 @@ import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 // импортируем класс FormValidator (валидация попапа)
 import { FormValidator } from '../components/FormValidator.js';
-// импорт утилит
-import { buttonOnActive, buttonOnDisabled } from "../components/utils.js";
 // для сборки под вебпаком импорт стилей
 import './index.css'; // добавьте импорт главного файла стилей 
 
 
 
+// Валидация попапов
+const validAdd = new FormValidator(config, popupAdd);
+validAdd.enableValidation();
 
+const validEdit = new FormValidator(config, popupEditProfile);
+validEdit.enableValidation();
+
+// создаем попап картинки по клику
+const popupImg = new PopupWithImage( popupPhotoSelector);
+
+// создаем попап редактирования данных пользователя
+const popupEdit = new PopupWithForm({
+  handleSubmitForm: (item) => {
+    userInfo.setUserInfo(item);
+    popup.closePopup();
+  }
+}, popupEditProfileSelector);
+
+// создаем попап для добавления новой карточки
+const popupAddNew = new PopupWithForm({
+  handleSubmitForm: (item) => {
+  // Создадим экземпляр карточки
+  const cardElm = new Card({
+    data: item,
+    handleCardClick: () => handleCardClick(item)
+  }, '#element-template');
+  // Создаём карточку и возвращаем наружу
+  const postElement = cardElm.createCard();
+  // добавляем карточку в DOM
+  cardList.addItem(postElement);
+  popupAddNew.closePopup();
+  }
+}, popupAddSelector);
 
 
 // обработчик клика по карточке
 function handleCardClick(userData) {
-  const popup = new PopupWithImage( popupPhotoSelector);
-  popup.openPopup(userData);
+  popupImg.openPopup(userData);
 }
 
 
@@ -60,55 +89,30 @@ cardList.rendererItem();
 const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', OpenPopupEditProfile);
+popupButton.addEventListener('click', openPopupEditProfile);
 
 // обработчик открытия попапа редактирования профиля
-function OpenPopupEditProfile() {
-  const popup = new PopupWithForm({
-    handleSubmitForm: (item) => {
-      userInfo.setUserInfo(item);
-      popup.closePopup();
-    }
-  }, popupEditProfileSelector);
-
-  popup.setInputValues(userInfo.getUserInfo());
+function openPopupEditProfile() {
+  popupEdit.setInputValues(userInfo.getUserInfo());
+  validEdit.resetValidation();
   //buttonOnActive(buttonSubmitFormEdit);
-  popup.openPopup();
+  popupEdit.openPopup();
 }
 
 
 
 // Попап на кнопке Add
-addButton.addEventListener('click', OpenPopupAddCard);
+addButton.addEventListener('click', openPopupAddCard);
 
 
 // обработчик открытия попапа для добавления карточки
-function OpenPopupAddCard() {
-  const popup = new PopupWithForm({
-    handleSubmitForm: (item) => {
-    // Создадим экземпляр карточки
-    const cardElm = new Card({
-      data: item,
-      handleCardClick: () => handleCardClick(item)
-    }, '#element-template');
-    // Создаём карточку и возвращаем наружу
-    const postElement = cardElm.createCard();
-    // добавляем карточку в DOM
-    cardList.addItem(postElement);
-    popup.closePopup();
-    }
-  }, popupAddSelector);
-
+function openPopupAddCard() {
+  validAdd.resetValidation();
   //buttonOnDisabled(buttonSubmitFormEdit);
-  popup.openPopup();
+  popupAddNew.openPopup();
 }
 
 
 
-// Валидация попапов
-const validAdd = new FormValidator(config, popupAdd);
-validAdd.enableValidation();
 
-const validEdit = new FormValidator(config, popupEditProfile);
-validEdit.enableValidation();
 

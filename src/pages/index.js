@@ -72,7 +72,7 @@ function OpenPopupEditProfile() {
   }, popupEditProfileSelector);
 
   popup.setInputValues(userInfo.getUserInfo());
-  buttonOnActive(buttonSubmitFormEdit);
+  //buttonOnActive(buttonSubmitFormEdit);
   popup.openPopup();
 }
 
@@ -99,7 +99,7 @@ function OpenPopupAddCard() {
     }
   }, popupAddSelector);
 
-  buttonOnDisabled(buttonSubmitFormEdit);
+  //buttonOnDisabled(buttonSubmitFormEdit);
   popup.openPopup();
 }
 

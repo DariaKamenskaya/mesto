@@ -11,7 +11,7 @@ import { popupButton,
          popupPhotoSelector,
          userNameSelector,
          userWorkSelector,
-         config} from "../components/constant.js";
+         config} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)

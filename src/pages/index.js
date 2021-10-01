@@ -48,12 +48,7 @@ const popupEdit = new PopupWithForm({
 const popupAddNew = new PopupWithForm({
   handleSubmitForm: (item) => {
   // Создадим экземпляр карточки
-  const cardElm = new Card({
-    data: item,
-    handleCardClick: () => handleCardClick(item)
-  }, '#element-template');
-  // Создаём карточку и возвращаем наружу
-  const postElement = cardElm.createCard();
+  const postElement = newCard(item);
   // добавляем карточку в DOM
   cardList.addItem(postElement);
   popupAddNew.closePopup();
@@ -67,17 +62,25 @@ function handleCardClick(userData) {
 }
 
 
+// функция создания карточек
+function newCard(item) {
+  // Создадим экземпляр карточки
+  const cardElm = new Card({
+   data: item,
+   handleCardClick: () => handleCardClick(item)
+ }, '#element-template');
+ // Создаём карточку и возвращаем наружу
+ return cardElm.createCard();
+}
+
+
+
 // вызов генерации карточек
 const cardList = new Section({
   items: initialElement,
   renderer: (item) => {
-    // Создадим экземпляр карточки
-    const cardElm = new Card({
-      data: item,
-      handleCardClick: () => handleCardClick(item)
-    }, '#element-template');
-    // Создаём карточку и возвращаем наружу
-    const postElement = cardElm.createCard();
+    // cоздаём карточку
+    const postElement = newCard(item);
     // добавляем карточку в DOM
     cardList.addItem(postElement);
   }

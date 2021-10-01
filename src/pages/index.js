@@ -40,7 +40,7 @@ const popupImg = new PopupWithImage( popupPhotoSelector);
 const popupEdit = new PopupWithForm({
   handleSubmitForm: (item) => {
     userInfo.setUserInfo(item);
-    popup.closePopup();
+    popupEdit.closePopup();
   }
 }, popupEditProfileSelector);
 

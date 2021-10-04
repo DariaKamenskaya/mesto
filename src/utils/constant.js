@@ -29,3 +29,6 @@ export const config = {
     inactiveButtonClass: "popup__submit-btn_inactive",
     inputErrorClass: "popup__input_type_error"
   };
+
+export const baseUrl = 'https://mesto.nomoreparties.co/v1/cohort-28';
+export const baseToken = 'c9a5b46a-18cc-468c-aca5-c21309b709fb';

@@ -11,7 +11,9 @@ import { popupButton,
          popupPhotoSelector,
          userNameSelector,
          userWorkSelector,
-         config} from "../utils/constant.js";
+         config,
+         baseUrl,
+         baseToken} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
@@ -21,6 +23,8 @@ import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 // импортируем класс FormValidator (валидация попапа)
 import { FormValidator } from '../components/FormValidator.js';
+// импортируем класс для работы с сервером
+import { API } from '../components/Api.js';
 // для сборки под вебпаком импорт стилей
 import './index.css'; // добавьте импорт главного файла стилей 
 
@@ -73,20 +77,43 @@ function newCard(item) {
  return cardElm.createCard();
 }
 
+// API для получение начальных данных карточек
+const apiInitialCards = new API(baseUrl,baseToken);
+console.log(apiInitialCards);
 
+apiInitialCards.getInitialCards()
+  .then(initialElm => {
+    // вызов генерации карточек
+    console.log(initialElm);
+    const cardList = new Section({
+      items: initialElm,
+      renderer: (item) => {
+        // cоздаём карточку
+        const postElement = newCard(item);
+        // добавляем карточку в DOM
+        cardList.addItem(postElement);
+      }
+    }, classCardsContainer);
+    // вызов отрисовки всех карточек на странице 
+    cardList.rendererItem();
+  })
+  .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+    return [];
+  }); 
 
 // вызов генерации карточек
-const cardList = new Section({
-  items: initialElement,
-  renderer: (item) => {
-    // cоздаём карточку
-    const postElement = newCard(item);
-    // добавляем карточку в DOM
-    cardList.addItem(postElement);
-  }
-}, classCardsContainer);
-// вызов отрисовки всех карточек на странице 
-cardList.rendererItem();
+//const cardList = new Section({
+//  items: initialElement,
+//  renderer: (item) => {
+//    // cоздаём карточку
+//    const postElement = newCard(item);
+//    // добавляем карточку в DOM
+//    cardList.addItem(postElement);
+//  }
+//}, classCardsContainer);
+//// вызов отрисовки всех карточек на странице 
+//cardList.rendererItem();
 
 
 const userInfo = new UserInfo({ userNameSelector, userWorkSelector });

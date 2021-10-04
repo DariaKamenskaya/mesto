@@ -13,7 +13,8 @@ import { popupButton,
          userWorkSelector,
          config,
          baseUrl,
-         baseToken} from "../utils/constant.js";
+         baseToken,
+         profileAvatar} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
@@ -77,11 +78,12 @@ function newCard(item) {
  return cardElm.createCard();
 }
 
-// API для получение начальных данных карточек
-const apiInitialCards = new API(baseUrl,baseToken);
-console.log(apiInitialCards);
+// API для получение данных
+const apiData = new API(baseUrl,baseToken);
+console.log(apiData);
 
-apiInitialCards.getInitialCards()
+// создание начальных карточек
+apiData.getInitialCards()
   .then(initialElm => {
     // вызов генерации карточек
     console.log(initialElm);
@@ -102,21 +104,25 @@ apiInitialCards.getInitialCards()
     return [];
   }); 
 
-// вызов генерации карточек
-//const cardList = new Section({
-//  items: initialElement,
-//  renderer: (item) => {
-//    // cоздаём карточку
-//    const postElement = newCard(item);
-//    // добавляем карточку в DOM
-//    cardList.addItem(postElement);
-//  }
-//}, classCardsContainer);
-//// вызов отрисовки всех карточек на странице 
-//cardList.rendererItem();
+  const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
+
+// начальные данные пользователя
+  apiData.getUserData()
+  .then(userData => {
+    // вызов генерации карточек
+    console.log(userData);
+    // добавление имени пользователя и работы
+    userInfo.setUserInfo(userData);
+    // добавление картинки пользователя
+    profileAvatar.src = userData.avatar;
+    profileAvatar.alt = userData.name; 
+  })
+  .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+    return [];
+  }); 
 
 
-const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
 
 // Попап на кнопке Edit
 popupButton.addEventListener('click', openPopupEditProfile);

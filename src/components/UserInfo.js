@@ -11,7 +11,7 @@ export class UserInfo {
   getUserInfo() {
     this._userInfo = {};
     this._userInfo.name = this._userNameElm.textContent;
-    this._userInfo.work = this._userWorkElm.textContent;
+    this._userInfo.about = this._userWorkElm.textContent;
   
     return this._userInfo;
     }
@@ -19,7 +19,7 @@ export class UserInfo {
 //метод принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(data) {
     this._userNameElm.textContent = data.name;
-    this._userWorkElm.textContent = data.work;
+    this._userWorkElm.textContent = data.about;  //data.work
   }
 
 

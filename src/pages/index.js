@@ -46,6 +46,13 @@ const popupEdit = new PopupWithForm({
   handleSubmitForm: (item) => {
     userInfo.setUserInfo(item);
     popupEdit.closePopup();
+    // передаем данные на сервер
+    apiData.patchUserData(item)
+    .then()
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    }); 
   }
 }, popupEditProfileSelector);
 
@@ -80,7 +87,6 @@ function newCard(item) {
 
 // API для получение данных
 const apiData = new API(baseUrl,baseToken);
-console.log(apiData);
 
 // создание начальных карточек
 apiData.getInitialCards()
@@ -109,8 +115,6 @@ apiData.getInitialCards()
 // начальные данные пользователя
   apiData.getUserData()
   .then(userData => {
-    // вызов генерации карточек
-    console.log(userData);
     // добавление имени пользователя и работы
     userInfo.setUserInfo(userData);
     // добавление картинки пользователя
@@ -131,7 +135,6 @@ popupButton.addEventListener('click', openPopupEditProfile);
 function openPopupEditProfile() {
   popupEdit.setInputValues(userInfo.getUserInfo());
   validEdit.resetValidation();
-  //buttonOnActive(buttonSubmitFormEdit);
   popupEdit.openPopup();
 }
 
@@ -144,7 +147,6 @@ addButton.addEventListener('click', openPopupAddCard);
 // обработчик открытия попапа для добавления карточки
 function openPopupAddCard() {
   validAdd.resetValidation();
-  //buttonOnDisabled(buttonSubmitFormEdit);
   popupAddNew.openPopup();
 }
 

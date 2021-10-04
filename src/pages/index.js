@@ -18,7 +18,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../components/Card.js';
-import { initialElement } from '../utils/initial-сards.js';
+// import { initialElement } from '../utils/initial-сards.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 // импортируем класс FormValidator (валидация попапа)

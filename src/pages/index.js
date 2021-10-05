@@ -15,9 +15,11 @@ import { popupButton,
          baseUrl,
          baseToken,
          profileAvatar,
-         CardsContainer} from "../utils/constant.js";
+         CardsContainer,
+         popupDeleteSelector} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
+import { Popup } from "../components/Popup.js";
 // импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../components/Card.js';
 // import { initialElement } from '../utils/initial-сards.js';
@@ -41,6 +43,9 @@ validEdit.enableValidation();
 
 // создаем попап картинки по клику
 const popupImg = new PopupWithImage( popupPhotoSelector);
+
+// создаем попап удаления карточки
+const popupDelete = new Popup( popupDeleteSelector);
 
 // создаем попап редактирования данных пользователя
 const popupEdit = new PopupWithForm({
@@ -83,14 +88,19 @@ function handleCardClick(userData) {
   popupImg.openPopup(userData);
 }
 
+// обработчик открытия попапа для удаления карточки
+function handleDeleteClick() {
+  popupDelete.openPopup();
+}
 
 // функция создания карточек
 function newCard(item) {
   // Создадим экземпляр карточки
   const cardElm = new Card({
    data: item,
-   handleCardClick: () => handleCardClick(item)
- }, '#element-template');
+   handleCardClick: () => handleCardClick(item),
+   handleDeleteClick: () => handleDeleteClick()
+   }, '#element-template');
  // Создаём карточку и возвращаем наружу
  return cardElm.createCard();
 }

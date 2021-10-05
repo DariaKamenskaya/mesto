@@ -12,6 +12,7 @@ export const addButton = document.querySelector('.profile__add-button');
 export const classCardsContainer = '.elements';
 export const popupEditProfileSelector = '.popup-userProfile';
 export const popupAddSelector = '.popup-add';
+export const popupDeleteSelector = '.popup_delete';
 export const userNameSelector = '.profile__title';
 export const userWorkSelector = '.profile__text';
 export const popupPhotoSelector = '.popup_img';

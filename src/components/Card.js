@@ -1,11 +1,12 @@
 export class Card {
 
-  constructor({data, handleCardClick}, cardSelector) {
+  constructor({data, handleCardClick, handleDeleteClick}, cardSelector) {
     this.name = data.name;
     this.link = data.link;
     this._likes = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
     this._element = this._getElement();
     this._likeButton = this._element.querySelector('.element__heart-button'); //нашли лайк карточки
     this._deleteButton = this._element.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
@@ -56,7 +57,7 @@ export class Card {
   // функция навешивания слушателей повесить на кнопки и картинку слушатели
   _setEventListeners() {
     this._likeButton.addEventListener('click', this._handleLikeIcon.bind(this)); // поставить лайк
-    this._deleteButton.addEventListener('click', this._handleDeleteCard); // удалить карточку
+    this._deleteButton.addEventListener('click', this._handleDeleteClick.bind(this)); // удалить карточку
     this._cardImage.addEventListener('click', this._handleCardClick.bind(this)); // открыть попап
   }
 

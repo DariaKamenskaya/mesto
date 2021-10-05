@@ -3,6 +3,7 @@ export class Card {
   constructor({data, handleCardClick}, cardSelector) {
     this.name = data.name;
     this.link = data.link;
+    this._likes = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._element = this._getElement();
@@ -10,6 +11,7 @@ export class Card {
     this._deleteButton = this._element.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
     this._cardImage = this._element.querySelector('.element__image'); //нашли картинку карточки
     this._cardTitle = this._element.querySelector('.element__title'); // нашли поле карточки для задания имени
+    this._cardLikes = this._element.querySelector('.element__likes-number'); // нашли поле карточки для задания имени
     }
   
 
@@ -27,6 +29,7 @@ export class Card {
     this._cardTitle.textContent = this.name;
     this._cardImage.alt = this.name;
     this._cardImage.src = this.link;
+    this._cardLikes.textContent = this._likes.length;
     //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
     this._setEventListeners();
     //   5. Вернуть DOM элемент.
@@ -36,6 +39,13 @@ export class Card {
     // функция  окрашивания лайка
   _handleLikeIcon(evt) {
     evt.target.classList.toggle('element__heart-button-active');
+    if (evt.target.classList.contains('element__heart-button-active')) {
+      // добавляем лайк
+    } else {
+      // убираем лайк
+    }
+    console.log(this._cardLikes);
+    this._cardLikes.textContent = this._likes.length;
   }
 
     // функция удаления карточки/элемента
@@ -45,7 +55,7 @@ export class Card {
 
   // функция навешивания слушателей повесить на кнопки и картинку слушатели
   _setEventListeners() {
-    this._likeButton.addEventListener('click', this._handleLikeIcon); // поставить лайк
+    this._likeButton.addEventListener('click', this._handleLikeIcon.bind(this)); // поставить лайк
     this._deleteButton.addEventListener('click', this._handleDeleteCard); // удалить карточку
     this._cardImage.addEventListener('click', this._handleCardClick.bind(this)); // открыть попап
   }

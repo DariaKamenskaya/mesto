@@ -76,7 +76,7 @@ const popupEdit = new PopupWithForm({
         return [];
       });
     // Создадим экземпляр карточки
-      const postElement = newCard(item);
+      const postElement = newCard(item, userInfo.getUserInfo());
     // добавляем карточку в DOM
       CardsContainer.prepend(postElement);
       popupAddNew.closePopup();
@@ -94,12 +94,13 @@ function handleDeleteClick() {
 }
 
 // функция создания карточек
-function newCard(item) {
+function newCard(item, userInfoData) {
   // Создадим экземпляр карточки
   const cardElm = new Card({
    data: item,
    handleCardClick: () => handleCardClick(item),
-   handleDeleteClick: () => handleDeleteClick()
+   handleDeleteClick: () => handleDeleteClick(),
+   userData: userInfoData
    }, '#element-template');
  // Создаём карточку и возвращаем наружу
  return cardElm.createCard();
@@ -117,7 +118,7 @@ apiData.getInitialCards()
       items: initialElm,
       renderer: (item) => {
         // cоздаём карточку
-        const postElement = newCard(item);
+        const postElement = newCard(item, userInfo.getUserInfo());
         // добавляем карточку в DOM
         cardList.addItem(postElement);
       }

@@ -9,9 +9,9 @@
     width: 18px;
     height: 18px;
     background-size: 18px;
-    position: relative;
-    bottom: 73%;
-    left: 89%;
+    position: absolute;
+    bottom: 87%;
+    left: 83%;
 }
 
 .element__remove-button:hover {

@@ -1,9 +1,11 @@
 export class Card {
 
-  constructor({data, handleCardClick, handleDeleteClick}, cardSelector) {
+  constructor({data, handleCardClick, handleDeleteClick, userData}, cardSelector) {
     this.name = data.name;
     this.link = data.link;
     this._likes = data.likes;
+    this._userCardName= data.owner.name;
+    this._userName = userData.name;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -31,6 +33,11 @@ export class Card {
     this._cardImage.alt = this.name;
     this._cardImage.src = this.link;
     this._cardLikes.textContent = this._likes.length;
+    // проверка создана ли карточка нами
+    if (this._userCardName != this._userName) {
+      // удаляем кнопку с корзинкой
+      this._deleteButton.remove();
+    }
     //  4. Повесить на кнопки и картинку слушатели , где внутри есть функции обработчики.В обработчик картинки прокинуть данные карточки
     this._setEventListeners();
     //   5. Вернуть DOM элемент.

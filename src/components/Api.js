@@ -71,4 +71,29 @@ export class API {
     });  
   }
 
+  postCard(data) {
+    return fetch(this.url +'/cards', {
+      method: 'POST',
+      headers: {
+        authorization: this.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+        return [];
+    });  
+  }
+
 }

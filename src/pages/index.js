@@ -14,7 +14,8 @@ import { popupButton,
          config,
          baseUrl,
          baseToken,
-         profileAvatar} from "../utils/constant.js";
+         profileAvatar,
+         CardsContainer} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 // импортируем класс Card (создание карточек и методы для их обработки)
@@ -56,17 +57,26 @@ const popupEdit = new PopupWithForm({
   }
 }, popupEditProfileSelector);
 
-// создаем попап для добавления новой карточки
-const popupAddNew = new PopupWithForm({
-  handleSubmitForm: (item) => {
-  // Создадим экземпляр карточки
-  const postElement = newCard(item);
-  // добавляем карточку в DOM
-  cardList.addItem(postElement);
-  popupAddNew.closePopup();
-  }
-}, popupAddSelector);
 
+// создаем попап для добавления новой карточки
+  const popupAddNew = new PopupWithForm({
+    handleSubmitForm: (item) => {
+      // передаем данные на сервер
+      apiData.postCard(item)
+      .then(res => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+        return [];
+      });
+    // Создадим экземпляр карточки
+      const postElement = newCard(item);
+    // добавляем карточку в DOM
+      CardsContainer.prepend(postElement);
+      popupAddNew.closePopup();
+    }
+  }, popupAddSelector);
 
 // обработчик клика по карточке
 function handleCardClick(userData) {
@@ -109,6 +119,8 @@ apiData.getInitialCards()
     console.log(err); // "Что-то пошло не так: ..."
     return [];
   }); 
+
+
 
   const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
 

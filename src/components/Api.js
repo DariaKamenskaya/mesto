@@ -46,6 +46,7 @@ export class API {
     }); 
     }
 
+    // сохранение на сервере отредактированных данных пользователя
   patchUserData(data) {
     return fetch(this.url +'/users/me', {
       method: 'PATCH',
@@ -71,6 +72,7 @@ export class API {
     });  
   }
 
+    // добавление на сервере новой карточки
   postCard(data) {
     return fetch(this.url +'/cards', {
       method: 'POST',
@@ -95,5 +97,26 @@ export class API {
         return [];
     });  
   }
+
+  // метод удаления карточек
+    deleteCard(idCard) {
+      return fetch(this.url +'/cards/' + idCard, {
+        method: 'DELETE',
+        headers: {
+          authorization: this.token
+        }
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+        return [];
+      }); 
+      }
 
 }

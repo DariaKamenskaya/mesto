@@ -19,7 +19,7 @@ import { popupButton,
          popupDeleteSelector} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
-import { Popup } from "../components/Popup.js";
+import { PopupDelete } from "../components/PopupDelete.js";
 // импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../components/Card.js';
 // import { initialElement } from '../utils/initial-сards.js';
@@ -45,7 +45,17 @@ validEdit.enableValidation();
 const popupImg = new PopupWithImage( popupPhotoSelector);
 
 // создаем попап удаления карточки
-const popupDelete = new Popup( popupDeleteSelector);
+const popupDelete = new PopupDelete( {
+  handleSubmitForm: (Card) => {
+    // удаляем карточку на сервере
+    apiData.deleteCard(Card)
+    .then()
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    }); 
+  }
+} ,popupDeleteSelector);
 
 // создаем попап редактирования данных пользователя
 const popupEdit = new PopupWithForm({
@@ -69,17 +79,17 @@ const popupEdit = new PopupWithForm({
       // передаем данные на сервер
       apiData.postCard(item)
       .then(res => {
-        console.log(res);
+      // Создадим экземпляр карточки
+      console.log(res);
+      const postElement = newCard(res, userInfo.getUserInfo());
+    // добавляем карточку в DOM
+      CardsContainer.prepend(postElement);
+      popupAddNew.closePopup();
       })
       .catch((err) => {
         console.log(err); // "Что-то пошло не так: ..."
         return [];
       });
-    // Создадим экземпляр карточки
-      const postElement = newCard(item, userInfo.getUserInfo());
-    // добавляем карточку в DOM
-      CardsContainer.prepend(postElement);
-      popupAddNew.closePopup();
     }
   }, popupAddSelector);
 
@@ -89,8 +99,14 @@ function handleCardClick(userData) {
 }
 
 // обработчик открытия попапа для удаления карточки
-function handleDeleteClick() {
-  popupDelete.openPopup();
+function handleDeleteClick(item) {
+  console.log(item);
+  popupDelete.openPopup(item._id);
+}
+
+// обработчик удаления карточки
+function handleDeleteCard(idCard) {
+  apiData.deleteCard(idCard);
 }
 
 // функция создания карточек
@@ -99,7 +115,8 @@ function newCard(item, userInfoData) {
   const cardElm = new Card({
    data: item,
    handleCardClick: () => handleCardClick(item),
-   handleDeleteClick: () => handleDeleteClick(),
+   handleDeleteClick: () => handleDeleteClick(item),
+   handleDeleteCard: () => handleDeleteCard(item._id),
    userData: userInfoData
    }, '#element-template');
  // Создаём карточку и возвращаем наружу

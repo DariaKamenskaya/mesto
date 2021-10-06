@@ -16,7 +16,8 @@ import { popupButton,
          baseToken,
          profileAvatar,
          CardsContainer,
-         popupDeleteSelector} from "../utils/constant.js";
+         popupDeleteSelector,
+         cardSelector} from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import { PopupDelete } from "../components/PopupDelete.js";
@@ -46,9 +47,9 @@ const popupImg = new PopupWithImage( popupPhotoSelector);
 
 // создаем попап удаления карточки
 const popupDelete = new PopupDelete( {
-  handleSubmitForm: (Card) => {
+  handleSubmitForm: (card) => {
     // удаляем карточку на сервере
-    apiData.deleteCard(Card)
+    apiData.deleteCard(card)
     .then()
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
@@ -99,9 +100,9 @@ function handleCardClick(userData) {
 }
 
 // обработчик открытия попапа для удаления карточки
-function handleDeleteClick(item) {
-  console.log(item);
-  popupDelete.openPopup(item._id);
+function handleDeleteClick(item,event) {
+  const card = event.target.closest('.element');
+  popupDelete.openPopup(item._id, card);
 }
 
 // обработчик удаления карточки
@@ -115,8 +116,8 @@ function newCard(item, userInfoData) {
   const cardElm = new Card({
    data: item,
    handleCardClick: () => handleCardClick(item),
-   handleDeleteClick: () => handleDeleteClick(item),
-   handleDeleteCard: () => handleDeleteCard(item._id),
+   handleDeleteClick: () => handleDeleteClick(item,event),
+   //handleDeleteCard: () => handleDeleteCard(item._id),
    userData: userInfoData
    }, '#element-template');
  // Создаём карточку и возвращаем наружу

@@ -10,6 +10,7 @@ export const CardsContainer = document.querySelector('.elements');
 export const addButton = document.querySelector('.profile__add-button');
 
 export const classCardsContainer = '.elements';
+export const cardSelector = '.element';
 export const popupEditProfileSelector = '.popup-userProfile';
 export const popupAddSelector = '.popup-add';
 export const popupDeleteSelector = '.popup_delete';

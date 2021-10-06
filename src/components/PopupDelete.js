@@ -13,10 +13,12 @@ export class PopupDelete extends Popup{
     }
 
     // функция открытия попапа
-    openPopup(idCard) {
+    openPopup(idCard,card) {
       super.openPopup();
       // запоминаем карточку
       this._cardID = idCard;
+      this._card = card;
+      
     }
 
     _submitForm(evt) {
@@ -27,15 +29,13 @@ export class PopupDelete extends Popup{
         // закрываем попап
         this.closePopup();
         // удаляем карточку/элемент
-        console.log(this);
-        // evt.closest('.element').remove();
+        this._card.remove();
       }
     
       // функция навешивания слушателей
       setEventListeners() {
         super.setEventListeners();
         // обработчик сабмита формы
-        console.log(this._formElement);
         this._formElement.addEventListener('click', this._submitFormCallback);
       }
     

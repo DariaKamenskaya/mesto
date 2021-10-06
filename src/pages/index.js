@@ -105,9 +105,64 @@ function handleDeleteClick(item,event) {
   popupDelete.openPopup(item._id, card);
 }
 
-// обработчик удаления карточки
-function handleDeleteCard(idCard) {
-  apiData.deleteCard(idCard);
+// обработчик добавления лайка карточки
+function handlePutLike(item) {
+  if (evt.target.classList.contains('element__heart-button-active')) {
+    // добавляем лайк
+    //this._handlePutLike(this._cardID)
+    //.then((res) => {
+      console.log(this._handlePutLike(this._cardID));
+      //this._cardLikes.textContent = this._handlePutLike(this._cardID).likes.length;
+    //})
+    //.catch((err) => {
+    //  console.log(err); // "Что-то пошло не так: ..."
+    //  return [];
+    //});
+  } else {
+    // убираем лайк
+    this._handleDeleteLike(this._cardID);
+  }
+  apiData.putLikeCard(item._id)
+  .then((res) => {
+    console.log(item._id);
+    apiData.getCard(item._id)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+        return [];
+      });
+  })
+  .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+    return [];
+  });
+}
+
+// обработчик удаления лайка карточки
+function handleDeleteLike(item) {
+  apiData.deleteLikeCard(item._id)
+  .then((res) => {
+    console.log(item._id);
+    apiData.getCard(item._id)
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    });
+  })
+  .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+    return [];
+  });
 }
 
 // функция создания карточек
@@ -117,7 +172,29 @@ function newCard(item, userInfoData) {
    data: item,
    handleCardClick: () => handleCardClick(item),
    handleDeleteClick: () => handleDeleteClick(item,event),
-   //handleDeleteCard: () => handleDeleteCard(item._id),
+   handleLike: (likeButton, item) => {
+    if (likeButton.classList.contains('element__heart-button-active')) {
+      apiData.deleteLikeCard(item)
+        .then((res) => {
+          cardElm.handleLikeIcon(res.likes);
+        })
+        .catch((err) => {
+          console.log(err);
+
+          return [];
+        });
+    } else {
+      apiData.putLikeCard(item)
+        .then((res) => {
+          cardElm.handleLikeIcon(res.likes);
+        })
+        .catch((err) => {
+          console.log(err);
+
+          return [];
+        });
+    }
+  },
    userData: userInfoData
    }, '#element-template');
  // Создаём карточку и возвращаем наружу
@@ -131,7 +208,6 @@ const apiData = new API(baseUrl,baseToken);
 apiData.getInitialCards()
   .then(initialElm => {
     // вызов генерации карточек
-    console.log(initialElm);
     const cardList = new Section({
       items: initialElm,
       renderer: (item) => {

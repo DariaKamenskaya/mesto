@@ -1,14 +1,16 @@
 export class Card {
 
-  constructor({data, handleCardClick, handleDeleteClick, userData}, cardSelector) {
+  constructor({data, handleCardClick, handleDeleteClick, handleLike, userData}, cardSelector) {
     this.name = data.name;
     this.link = data.link;
     this._likes = data.likes;
+    this._cardID = data._id;
     this._userCardName= data.owner.name;
     this._userName = userData.name;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLike = handleLike;
     //this._handleDeleteCard = handleDeleteCard;
     this._element = this._getElement();
     this._likeButton = this._element.querySelector('.element__heart-button'); //нашли лайк карточки
@@ -16,6 +18,8 @@ export class Card {
     this._cardImage = this._element.querySelector('.element__image'); //нашли картинку карточки
     this._cardTitle = this._element.querySelector('.element__title'); // нашли поле карточки для задания имени
     this._cardLikes = this._element.querySelector('.element__likes-number'); // нашли поле карточки для задания имени
+    this.handleLikeIcon = this.handleLikeIcon.bind(this);
+    this._toggleLike = this._toggleLike.bind(this);
     }
   
 
@@ -46,15 +50,13 @@ export class Card {
   }
 
     // функция  окрашивания лайка
-  _handleLikeIcon(evt) {
-    evt.target.classList.toggle('element__heart-button-active');
-    if (evt.target.classList.contains('element__heart-button-active')) {
-      // добавляем лайк
-    } else {
-      // убираем лайк
-    }
-    console.log(this._cardLikes);
-    this._cardLikes.textContent = this._likes.length;
+  handleLikeIcon(likes) {
+    this._likeButton.classList.toggle('element__heart-button-active');
+    this._cardLikes.textContent = likes.length;
+  }
+
+  _toggleLike(evt) {
+    this._handleLike(evt.target, this._cardID);
   }
 
   // функция удаления карточки/элемента
@@ -64,7 +66,7 @@ export class Card {
 
   // функция навешивания слушателей повесить на кнопки и картинку слушатели
   _setEventListeners() {
-    this._likeButton.addEventListener('click', this._handleLikeIcon.bind(this)); // поставить лайк
+    this._likeButton.addEventListener('click', this._toggleLike.bind(this)); // поставить лайк
     this._deleteButton.addEventListener('click', this._handleDeleteClick.bind(this)); // удалить карточку
     this._cardImage.addEventListener('click', this._handleCardClick.bind(this)); // открыть попап
   }

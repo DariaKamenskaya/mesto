@@ -99,24 +99,87 @@ export class API {
   }
 
   // метод удаления карточек
-    deleteCard(idCard) {
-      return fetch(this.url +'/cards/' + idCard, {
-        method: 'DELETE',
-        headers: {
-          authorization: this.token
-        }
-      })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-      }); 
+  deleteCard(idCard) {
+    return fetch(this.url +'/cards/' + idCard, {
+      method: 'DELETE',
+      headers: {
+        authorization: this.token
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    }); 
+  }
+
+  // ставим лайк карточке
+  putLikeCard(idCard){
+    return fetch(this.url +'/cards/likes/' + idCard, {
+      method: 'PUT',
+      headers: {
+        authorization: this.token
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+    }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    }); 
+  }
+
+  // ставим лайк карточке
+  deleteLikeCard(idCard){
+    return fetch(this.url +'/cards/likes/' + idCard, {
+      method: 'DELETE',
+      headers: {
+        authorization: this.token
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+    }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    }); 
+  }
+
+
+    // метод получения данных карточки
+    getCard(idCard) {
+        return fetch(this.url +'/cards/' + idCard, {
+          headers: {
+            authorization: this.token
+          }
+        })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+          return Promise.reject(`Что-то пошло не так: ${res.status}`);
+        })
+        .catch((err) => {
+          console.log(err); // "Что-то пошло не так: ..."
+          return [];
+        }); 
       }
 
 }

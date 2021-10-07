@@ -13,7 +13,11 @@
       </header>
       <main>
         <section class="profile">
-          <img src="<%=require('./images/Avatar.jpg')%>" alt="Жак Ив Кусто" class="profile__avatar">
+          <div class="profile__avatar-conteiner">
+            <div class="profile__avatar-overlay"></div>
+            <img src="<%=require('./images/Avatar.jpg')%>" alt="Жак Ив Кусто" class="profile__avatar">
+            <button class="profile__avatar-button"></button>
+          </div>
           <div class="profile__info">
             <div class="profile__title-block">
               <h1 class="profile__title">Жак-Ив Кусто</h1>

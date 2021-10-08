@@ -1,10 +1,10 @@
 .profile__avatar-button {
     position: absolute;
-    width: 100%;
+    /*width: 100%;*/
     top: 30px;
     left: 45px;
     opacity: 0;
-    transition: opacity .35s ease;
+    /*transition: opacity .35s ease;*/
     align-self: center;
     background-image: url(../../../images/edit-profile-button.png);
     background-position: center;

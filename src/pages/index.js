@@ -85,14 +85,18 @@ const popupEdit = new PopupWithForm({
 // создаем попап для добавления новой карточки
   const popupAddNew = new PopupWithForm({
     handleSubmitForm: (item) => {
+      // собщение о загрузке
+      renderLoading(buttonSubmitPopupAdd, 'Сохранение...')
       // передаем данные на сервер
       apiData.postCard(item)
       .then(res => {
       // Создадим экземпляр карточки
       console.log(res);
       const postElement = newCard(res, userInfo.getUserInfo());
-    // добавляем карточку в DOM
+      // добавляем карточку в DOM
       CardsContainer.prepend(postElement);
+      // собщение о загрузке
+      renderLoading(buttonSubmitPopupAdd, 'Сохранение')
       popupAddNew.closePopup();
       })
       .catch((err) => {

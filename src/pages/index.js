@@ -107,8 +107,9 @@ const popupEdit = new PopupWithForm({
     handleSubmitForm: (item) => {
       // передаем данные на сервер
       apiData.patchAvatar(item)
-      .then(res => {
-      popupChangeAvatar.closePopup();
+      .then((res) => {
+        profileAvatar.src = item.link;
+        popupChangeAvatar.closePopup();
       })
       .catch((err) => {
         console.log(err); // "Что-то пошло не так: ..."

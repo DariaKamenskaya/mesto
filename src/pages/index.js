@@ -69,8 +69,9 @@ const popupDelete = new PopupDelete( {
 // создаем попап редактирования данных пользователя
 const popupEdit = new PopupWithForm({
   handleSubmitForm: (item) => {
+    // собщение о загрузке
+    renderLoading(buttonSubmitFormEdit, 'Сохранение...')
     userInfo.setUserInfo(item);
-    popupEdit.closePopup();
     // передаем данные на сервер
     apiData.patchUserData(item)
     .then()
@@ -78,6 +79,9 @@ const popupEdit = new PopupWithForm({
       console.log(err); // "Что-то пошло не так: ..."
       return [];
     }); 
+    // собщение о загрузке// очень быстрый процесс, может здесь стоит убрать изменение текста кнопки
+    renderLoading(buttonSubmitFormEdit, 'Сохранение')
+    popupEdit.closePopup();
   }
 }, popupEditProfileSelector);
 
@@ -138,65 +142,6 @@ function handleDeleteClick(item,event) {
   popupDelete.openPopup(item._id, card);
 }
 
-// обработчик добавления лайка карточки
-function handlePutLike(item) {
-  if (evt.target.classList.contains('element__heart-button-active')) {
-    // добавляем лайк
-    //this._handlePutLike(this._cardID)
-    //.then((res) => {
-      console.log(this._handlePutLike(this._cardID));
-      //this._cardLikes.textContent = this._handlePutLike(this._cardID).likes.length;
-    //})
-    //.catch((err) => {
-    //  console.log(err); // "Что-то пошло не так: ..."
-    //  return [];
-    //});
-  } else {
-    // убираем лайк
-    this._handleDeleteLike(this._cardID);
-  }
-  apiData.putLikeCard(item._id)
-  .then((res) => {
-    console.log(item._id);
-    apiData.getCard(item._id)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-      });
-  })
-  .catch((err) => {
-    console.log(err); // "Что-то пошло не так: ..."
-    return [];
-  });
-}
-
-// обработчик удаления лайка карточки
-function handleDeleteLike(item) {
-  apiData.deleteLikeCard(item._id)
-  .then((res) => {
-    console.log(item._id);
-    apiData.getCard(item._id)
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-      return [];
-    });
-  })
-  .catch((err) => {
-    console.log(err); // "Что-то пошло не так: ..."
-    return [];
-  });
-}
 
 // функция создания карточек
 function newCard(item, userInfoData) {
@@ -213,7 +158,6 @@ function newCard(item, userInfoData) {
         })
         .catch((err) => {
           console.log(err);
-
           return [];
         });
     } else {
@@ -223,7 +167,6 @@ function newCard(item, userInfoData) {
         })
         .catch((err) => {
           console.log(err);
-
           return [];
         });
     }

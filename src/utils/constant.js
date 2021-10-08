@@ -27,6 +27,7 @@ export const popupAvatarChange = document.querySelector('.popup-avatar');
 
 export const buttonSubmitFormEdit = document.querySelector('.popup__submit-btn_edit');
 export const buttonSubmitPopupAdd = document.querySelector('.popup__submit-btn_add');
+export const buttonSubmitPopupAvatar = document.querySelector('.popup__submit-btn_avatar');
 
 // объект для валидации
 export const config = {

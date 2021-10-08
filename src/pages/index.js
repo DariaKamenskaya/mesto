@@ -21,7 +21,8 @@ import { popupButton,
          popupAvatarSelector,
          profileAvatarButton,
          popupAvatarChange,
-         config_avatar } from "../utils/constant.js";
+         config_avatar,
+         buttonSubmitPopupAvatar } from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import { PopupDelete } from "../components/PopupDelete.js";
@@ -105,10 +106,13 @@ const popupEdit = new PopupWithForm({
   // создаем попап для редактирования профиля
   const popupChangeAvatar = new PopupWithForm({
     handleSubmitForm: (item) => {
+      // собщение о загрузке
+      renderLoading(buttonSubmitPopupAvatar, 'Сохранение...')
       // передаем данные на сервер
       apiData.patchAvatar(item)
       .then((res) => {
         profileAvatar.src = item.link;
+        renderLoading(buttonSubmitPopupAvatar, 'Сохранение')
         popupChangeAvatar.closePopup();
       })
       .catch((err) => {
@@ -302,7 +306,10 @@ function openPopupAvatarChange() {
   popupChangeAvatar.openPopup();
 }
 
-
+// функция для уведомления пользователя о процессе загрузки
+function renderLoading(result, text) {
+  result.textContent = text;
+}
 
 
 

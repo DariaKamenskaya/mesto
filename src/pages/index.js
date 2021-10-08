@@ -17,7 +17,11 @@ import { popupButton,
          profileAvatar,
          CardsContainer,
          popupDeleteSelector,
-         cardSelector} from "../utils/constant.js";
+         cardSelector,
+         popupAvatarSelector,
+         profileAvatarButton,
+         popupAvatarChange,
+         config_avatar } from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import { PopupDelete } from "../components/PopupDelete.js";
@@ -41,6 +45,9 @@ validAdd.enableValidation();
 
 const validEdit = new FormValidator(config, popupEditProfile);
 validEdit.enableValidation();
+
+const validAvatarChange = new FormValidator(config_avatar, popupAvatarChange);
+validAvatarChange.enableValidation();
 
 // создаем попап картинки по клику
 const popupImg = new PopupWithImage( popupPhotoSelector);
@@ -93,6 +100,23 @@ const popupEdit = new PopupWithForm({
       });
     }
   }, popupAddSelector);
+
+
+  // создаем попап для редактирования профиля
+  const popupChangeAvatar = new PopupWithForm({
+    handleSubmitForm: (item) => {
+      // передаем данные на сервер
+      apiData.patchAvatar(item)
+      .then(res => {
+      popupChangeAvatar.closePopup();
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+        return [];
+      });
+    }
+  }, popupAvatarSelector);
+
 
 // обработчик клика по карточке
 function handleCardClick(userData) {
@@ -265,6 +289,16 @@ addButton.addEventListener('click', openPopupAddCard);
 function openPopupAddCard() {
   validAdd.resetValidation();
   popupAddNew.openPopup();
+}
+
+
+// Попап на смену картинки
+profileAvatarButton.addEventListener('click', openPopupAvatarChange);
+
+// обработчик открытия попапа для добавления карточки
+function openPopupAvatarChange() {
+  validAvatarChange.resetValidation();
+  popupChangeAvatar.openPopup();
 }
 
 

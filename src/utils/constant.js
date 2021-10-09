@@ -12,7 +12,7 @@ export const addButton = document.querySelector('.profile__add-button');
 
 export const classCardsContainer = '.elements';
 export const cardSelector = '.element';
-export const popupEditProfileSelector = '.popup-userProfile';
+export const popupEditProfileSelector = '.popup-user';
 export const popupAddSelector = '.popup-add';
 export const popupDeleteSelector = '.popup_delete';
 export const popupAvatarSelector = '.popup-avatar';
@@ -20,7 +20,7 @@ export const userNameSelector = '.profile__title';
 export const userWorkSelector = '.profile__text';
 export const popupPhotoSelector = '.popup_img';
 
-export const popupEditProfile = document.querySelector('.popup-userProfile');
+export const popupEditProfile = document.querySelector('.popup-user');
 export const popupAdd = document.querySelector('.popup-add');
 export const popupAvatarChange = document.querySelector('.popup-avatar');
 

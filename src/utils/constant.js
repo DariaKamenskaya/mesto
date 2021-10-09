@@ -6,11 +6,11 @@ export const closeButtonAdd = document.querySelector('.popup__close-add');
 export const closeButtonImg = document.querySelector('.popup__close_img');
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const profileAvatarButton = document.querySelector('.profile__avatar-button');
-export const CardsContainer = document.querySelector('.elements');
+export const cardsContainer = document.querySelector('.elements');
 // Находим кнопку для вызова создания template-элемент
 export const addButton = document.querySelector('.profile__add-button');
 
-export const classCardsContainer = '.elements';
+export const selectorCardsContainer = '.elements';
 export const cardSelector = '.element';
 export const popupEditProfileSelector = '.popup-user';
 export const popupAddSelector = '.popup-add';
@@ -30,7 +30,7 @@ export const buttonSubmitPopupAdd = document.querySelector('.popup__submit-btn_a
 export const buttonSubmitPopupAvatar = document.querySelector('.popup__submit-btn_avatar');
 
 // объект для валидации
-export const config = {
+export const validationConfig = {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__submit-btn",
@@ -39,7 +39,7 @@ export const config = {
   };
 
 // объект для валидации попап для смены картинки пользователя
-export const config_avatar = {
+export const avatarValidationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit-btn",

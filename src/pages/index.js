@@ -1,7 +1,7 @@
 // импортируем класс Popup
 import { popupButton,
          addButton,
-         classCardsContainer,
+         selectorCardsContainer,
          popupEditProfileSelector,
          popupEditProfile,
          buttonSubmitFormEdit,
@@ -11,17 +11,17 @@ import { popupButton,
          popupPhotoSelector,
          userNameSelector,
          userWorkSelector,
-         config,
+         validationConfig,
          baseUrl,
          baseToken,
          profileAvatar,
-         CardsContainer,
+         cardsContainer,
          popupDeleteSelector,
          cardSelector,
          popupAvatarSelector,
          profileAvatarButton,
          popupAvatarChange,
-         config_avatar,
+         avatarValidationConfig,
          buttonSubmitPopupAvatar } from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
@@ -41,13 +41,13 @@ import './index.css'; // добавьте импорт главного файл
 
 
 // Валидация попапов
-const validAdd = new FormValidator(config, popupAdd);
+const validAdd = new FormValidator(validationConfig, popupAdd);
 validAdd.enableValidation();
 
-const validEdit = new FormValidator(config, popupEditProfile);
+const validEdit = new FormValidator(validationConfig, popupEditProfile);
 validEdit.enableValidation();
 
-const validAvatarChange = new FormValidator(config_avatar, popupAvatarChange);
+const validAvatarChange = new FormValidator(avatarValidationConfig, popupAvatarChange);
 validAvatarChange.enableValidation();
 
 // создаем попап картинки по клику
@@ -98,7 +98,7 @@ const popupEdit = new PopupWithForm({
       console.log(res);
       const postElement = newCard(res, userInfo.getUserInfo());
       // добавляем карточку в DOM
-      CardsContainer.prepend(postElement);
+      cardsContainer.prepend(postElement);
       // собщение о загрузке
       renderLoading(buttonSubmitPopupAdd, 'Сохранение')
       popupAddNew.closePopup();
@@ -192,7 +192,7 @@ apiData.getInitialCards()
         // добавляем карточку в DOM
         cardList.addItem(postElement);
       }
-    }, classCardsContainer);
+    }, selectorCardsContainer);
     // вызов отрисовки всех карточек на странице 
     cardList.rendererItem();
   })

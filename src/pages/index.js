@@ -1,5 +1,5 @@
 // импортируем класс Popup
-import { popupButton,
+import { popupEditProfileButton,
          addButton,
          selectorCardsContainer,
          popupEditProfileSelector,
@@ -222,7 +222,7 @@ apiData.getInitialCards()
 
 
 // Попап на кнопке Edit
-popupButton.addEventListener('click', openPopupEditProfile);
+popupEditProfileButton.addEventListener('click', openPopupEditProfile);
 
 // обработчик открытия попапа редактирования профиля
 function openPopupEditProfile() {

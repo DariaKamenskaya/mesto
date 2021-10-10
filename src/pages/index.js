@@ -58,6 +58,18 @@ const userInfo = new UserInfo({ userNameSelector, userWorkSelector, userImageSel
 // API для получение данных
 const apiData = new API(baseUrl,baseToken);
 
+// контейнер карточек
+const cardList = new Section({
+  items: [],
+  renderer: (item) => {
+      // cоздаём карточку
+      const postElement = newCard(item, userInfo.getUserInfo());
+      // добавляем карточку в DOM
+      cardList.addItem(postElement);
+  }
+}, selectorCardsContainer);
+
+
 // создаем попап картинки по клику
 const popupImg = new PopupWithImage( popupPhotoSelector);
 
@@ -108,7 +120,7 @@ const popupAddNew = new PopupWithForm({
       // Создадим экземпляр карточки
       const cardElement = newCard(res, userInfo.getUserInfo());
       // добавляем карточку в DOM
-      cardsContainer.prepend(cardElement);
+      cardList.addItem(cardElement);
       popupAddNew.closePopup();
     })
     .catch((err) => {
@@ -192,16 +204,7 @@ function newCard(item, userInfoData) {
  return cardElm.createCard();
 }
 
-// вызов генерации карточек
-const cardList = new Section({
-  items: [],
-  renderer: (item) => {
-      // cоздаём карточку
-      const postElement = newCard(item, userInfo.getUserInfo());
-      // добавляем карточку в DOM
-      cardList.addItem(postElement);
-  }
-}, selectorCardsContainer);
+
 
 
 // создание начальных карточек

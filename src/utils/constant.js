@@ -1,7 +1,7 @@
 
 // PopUp constant
 export const popupEditProfileButton = document.querySelector('.profile__edit-button');
-export const closeButton = document.querySelector('.popup__close');
+export const closeButton = document.querySelector('.popup__close-user');
 export const closeButtonAdd = document.querySelector('.popup__close-add');
 export const closeButtonImg = document.querySelector('.popup__close_img');
 export const profileAvatar = document.querySelector('.profile__avatar');

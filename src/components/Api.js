@@ -2,15 +2,15 @@
 export class API {
 
   constructor(url,token) {
-    this.url = url;
-    this.token = token;
+    this._url = url;
+    this._token = token;
   }
 
   // метод инициализации карточек
   getInitialCards() {
-    return fetch(this.url +'/cards', {
+    return fetch(`${this._url}/cards`, {
       headers: {
-        authorization: this.token
+        authorization: this._token
       }
     })
     .then((res) => {
@@ -19,18 +19,14 @@ export class API {
       }
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-    }); 
+    });
   }
 
     // метод инициализации данных пользователя
   getUserData() {
-    return fetch(this.url +'/users/me', {
+    return fetch(`${this._url}/users/me`, {
       headers: {
-        authorization: this.token
+        authorization: this._token
       }
     })
     .then((res) => {
@@ -39,25 +35,18 @@ export class API {
       }
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-      return [];
-    }); 
+    });
     }
 
     // сохранение на сервере отредактированных данных пользователя
-  patchUserData(data) {
-    return fetch(this.url +'/users/me', {
+    setUserData({name, about}) {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: this.token,
+        authorization: this._token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about
-      })
+      body: JSON.stringify({name, about})
     })
     .then((res) => {
       if (res.ok) {
@@ -65,19 +54,15 @@ export class API {
       }
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-      .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-    });  
+    }); 
   }
 
     // добавление на сервере новой карточки
   postCard(data) {
-    return fetch(this.url +'/cards', {
+    return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: {
-        authorization: this.token,
+        authorization: this._token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -91,19 +76,15 @@ export class API {
       }
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-      .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-    });  
+    }); 
   }
 
   // метод удаления карточек
   deleteCard(idCard) {
-    return fetch(this.url +'/cards/' + idCard, {
+    return fetch(`${this._url}/cards/${idCard}`, {
       method: 'DELETE',
       headers: {
-        authorization: this.token
+        authorization: this._token
       }
     })
     .then((res) => {
@@ -112,19 +93,15 @@ export class API {
       }
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-      return [];
-    }); 
+    });
   }
 
   // ставим лайк карточке
-  putLikeCard(idCard){
-    return fetch(this.url +'/cards/likes/' + idCard, {
-      method: 'PUT',
+  changeLikeCardStatus(idCard,like){
+    return fetch(`${this._url}/cards/likes/${idCard}`, {
+      method: like ? 'PUT' : 'DELETE',
       headers: {
-        authorization: this.token
+        authorization: this._token
       }
     })
     .then((res) => {
@@ -133,78 +110,44 @@ export class API {
     }
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-      return [];
-    }); 
+    });
   }
 
-  // ставим лайк карточке
-  deleteLikeCard(idCard){
-    return fetch(this.url +'/cards/likes/' + idCard, {
-      method: 'DELETE',
-      headers: {
-        authorization: this.token
-      }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
+  // метод получения данных карточки
+  getCard(idCard) {
+      return fetch(`${this._url}/cards/${idCard}`, {
+        headers: {
+          authorization: this._token
+        }
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      });
     }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-      return [];
-    }); 
-  }
 
-
-    // метод получения данных карточки
-    getCard(idCard) {
-        return fetch(this.url +'/cards/' + idCard, {
-          headers: {
-            authorization: this.token
-          }
+  // метод для обновления аватара пользователя
+  patchAvatar(data) {
+      return fetch(`${this._url}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          avatar: data.link
         })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-        // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-          return Promise.reject(`Что-то пошло не так: ${res.status}`);
-        })
-        .catch((err) => {
-          console.log(err); // "Что-то пошло не так: ..."
-          return [];
-        }); 
-      }
-
-    // метод для обновления аватара пользователя
-    patchAvatar(data) {
-        return fetch(this.url +'/users/me/avatar ', {
-          method: 'PATCH',
-          headers: {
-            authorization: this.token,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            avatar: data.link
-          })
-        })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-        // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-          return Promise.reject(`Что-то пошло не так: ${res.status}`);
-        })
-        .catch((err) => {
-          console.log(err); // "Что-то пошло не так: ..."
-          return [];
-        }); 
-      }
+      })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      });
+    }
 
 }

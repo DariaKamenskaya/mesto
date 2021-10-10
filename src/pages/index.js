@@ -37,7 +37,8 @@ import { FormValidator } from '../components/FormValidator.js';
 import { API } from '../components/Api.js';
 // для сборки под вебпаком импорт стилей
 import './index.css'; // добавьте импорт главного файла стилей 
-
+// переменная для хранения id пользователя
+let userId
 
 
 // Валидация попапов
@@ -77,11 +78,10 @@ const popupEdit = new PopupWithForm({
   handleSubmitForm: (item) => {
     // собщение о загрузке
     renderLoading(buttonSubmitFormEdit, 'Сохранение...')
-    
     // передаем данные на сервер
-    apiData.patchUserData(item)
+    apiData.setUserData(item)
     .then((res) => {
-      userInfo.setUserInfo(item);
+      userInfo.setUserInfo(res);
       popupEdit.closePopup();
     })
     .catch((err) => {
@@ -130,7 +130,7 @@ const popupChangeAvatar = new PopupWithForm({
     // передаем данные на сервер
     apiData.patchAvatar(item)
     .then((res) => {
-      profileAvatar.src = item.link;
+      profileAvatar.src = res.avatar;
       popupChangeAvatar.closePopup();
     })
     .catch((err) => {
@@ -151,9 +151,9 @@ function handleCardClick(userData) {
 }
 
 // обработчик открытия попапа для удаления карточки
-function handleDeleteClick(item,event) {
+function handleDeleteClick(event) {
   const card = event.target.closest('.element');
-  popupDelete.openPopup(item._id, card);
+  popupDelete.openPopup(userId, card);
 }
 
 
@@ -163,10 +163,10 @@ function newCard(item, userInfoData) {
   const cardElm = new Card({
    data: item,
    handleCardClick: () => handleCardClick(item),
-   handleDeleteClick: () => handleDeleteClick(item,event),
+   handleDeleteClick: () => handleDeleteClick(event),
    handleLike: (likeButton, item) => {
     if (likeButton.classList.contains('element__heart-button-active')) {
-      apiData.deleteLikeCard(item)
+      apiData.changeLikeCardStatus(item, false)
         .then((res) => {
           cardElm.handleLikeIcon(res.likes);
         })
@@ -175,7 +175,7 @@ function newCard(item, userInfoData) {
           return [];
         });
     } else {
-      apiData.putLikeCard(item)
+      apiData.changeLikeCardStatus(item, true)
         .then((res) => {
           cardElm.handleLikeIcon(res.likes);
         })
@@ -225,7 +225,8 @@ apiData.getInitialCards()
     userInfo.setUserInfo(userData);
     // добавление картинки пользователя
     profileAvatar.src = userData.avatar;
-    profileAvatar.alt = userData.name; 
+    profileAvatar.alt = userData.name;
+    userId = userData._id;
   })
   .catch((err) => {
     console.log(err); // "Что-то пошло не так: ..."

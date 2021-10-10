@@ -191,23 +191,23 @@ function newCard(item, userInfoData) {
  return cardElm.createCard();
 }
 
+// вызов генерации карточек
+const cardList = new Section({
+  items: [],
+  renderer: (item) => {
+      // cоздаём карточку
+      const postElement = newCard(item, userInfo.getUserInfo());
+      // добавляем карточку в DOM
+      cardList.addItem(postElement);
+  }
+}, selectorCardsContainer);
 
 
 // создание начальных карточек
 apiData.getInitialCards()
   .then(initialElm => {
-    // вызов генерации карточек
-    const cardList = new Section({
-      items: initialElm,
-      renderer: (item) => {
-        // cоздаём карточку
-        const postElement = newCard(item, userInfo.getUserInfo());
-        // добавляем карточку в DOM
-        cardList.addItem(postElement);
-      }
-    }, selectorCardsContainer);
     // вызов отрисовки всех карточек на странице 
-    cardList.rendererItem();
+    cardList.renderItems(initialElm);
   })
   .catch((err) => {
     console.log(err); // "Что-то пошло не так: ..."

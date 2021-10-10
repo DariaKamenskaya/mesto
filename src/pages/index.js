@@ -50,6 +50,12 @@ validEdit.enableValidation();
 const validAvatarChange = new FormValidator(avatarValidationConfig, popupAvatarChange);
 validAvatarChange.enableValidation();
 
+//данные пользователя
+const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
+
+// API для получение данных
+const apiData = new API(baseUrl,baseToken);
+
 // создаем попап картинки по клику
 const popupImg = new PopupWithImage( popupPhotoSelector);
 
@@ -71,64 +77,72 @@ const popupEdit = new PopupWithForm({
   handleSubmitForm: (item) => {
     // собщение о загрузке
     renderLoading(buttonSubmitFormEdit, 'Сохранение...')
-    userInfo.setUserInfo(item);
+    
     // передаем данные на сервер
     apiData.patchUserData(item)
-    .then()
+    .then((res) => {
+      userInfo.setUserInfo(item);
+      popupEdit.closePopup();
+    })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
       return [];
-    }); 
-    // собщение о загрузке// очень быстрый процесс, может здесь стоит убрать изменение текста кнопки
-    renderLoading(buttonSubmitFormEdit, 'Сохранение')
-    popupEdit.closePopup();
+    }) 
+    .finally(() => {
+      // собщение о загрузке// очень быстрый процесс, может здесь стоит убрать изменение текста кнопки
+      renderLoading(buttonSubmitFormEdit, 'Сохранение')
+    });
   }
 }, popupEditProfileSelector);
 
 
 // создаем попап для добавления новой карточки
-  const popupAddNew = new PopupWithForm({
-    handleSubmitForm: (item) => {
-      // собщение о загрузке
-      renderLoading(buttonSubmitPopupAdd, 'Сохранение...')
-      // передаем данные на сервер
-      apiData.postCard(item)
-      .then(res => {
+const popupAddNew = new PopupWithForm({
+  handleSubmitForm: (item) => {
+    // собщение о загрузке
+    renderLoading(buttonSubmitPopupAdd, 'Создание...')
+    // передаем данные на сервер
+    apiData.postCard(item)
+    .then(res => {
       // Создадим экземпляр карточки
-      console.log(res);
-      const postElement = newCard(res, userInfo.getUserInfo());
+      const cardElement = newCard(res, userInfo.getUserInfo());
       // добавляем карточку в DOM
-      cardsContainer.prepend(postElement);
-      // собщение о загрузке
-      renderLoading(buttonSubmitPopupAdd, 'Сохранение')
+      cardsContainer.prepend(cardElement);
       popupAddNew.closePopup();
-      })
-      .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-      });
-    }
-  }, popupAddSelector);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    })
+    .finally(() => {
+      // собщение об окончании загрузки
+      renderLoading(buttonSubmitPopupAdd, 'Создать')
+    });
+  }
+}, popupAddSelector);
 
 
   // создаем попап для редактирования профиля
-  const popupChangeAvatar = new PopupWithForm({
-    handleSubmitForm: (item) => {
-      // собщение о загрузке
-      renderLoading(buttonSubmitPopupAvatar, 'Сохранение...')
-      // передаем данные на сервер
-      apiData.patchAvatar(item)
-      .then((res) => {
-        profileAvatar.src = item.link;
-        renderLoading(buttonSubmitPopupAvatar, 'Сохранение')
-        popupChangeAvatar.closePopup();
-      })
-      .catch((err) => {
-        console.log(err); // "Что-то пошло не так: ..."
-        return [];
-      });
-    }
-  }, popupAvatarSelector);
+const popupChangeAvatar = new PopupWithForm({
+  handleSubmitForm: (item) => {
+    // собщение о загрузке
+    renderLoading(buttonSubmitPopupAvatar, 'Сохранение...')
+    // передаем данные на сервер
+    apiData.patchAvatar(item)
+    .then((res) => {
+      profileAvatar.src = item.link;
+      popupChangeAvatar.closePopup();
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+      return [];
+    })
+    .finally(() => {
+      // собщение об окончании загрузки
+      renderLoading(buttonSubmitPopupAvatar, 'Сохранить')
+    });
+  }
+}, popupAvatarSelector);
 
 
 // обработчик клика по карточке
@@ -177,8 +191,7 @@ function newCard(item, userInfoData) {
  return cardElm.createCard();
 }
 
-// API для получение данных
-const apiData = new API(baseUrl,baseToken);
+
 
 // создание начальных карточек
 apiData.getInitialCards()
@@ -203,7 +216,7 @@ apiData.getInitialCards()
 
 
 
-  const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
+
 
 // начальные данные пользователя
   apiData.getUserData()
@@ -254,8 +267,8 @@ function openPopupAvatarChange() {
 }
 
 // функция для уведомления пользователя о процессе загрузки
-function renderLoading(result, text) {
-  result.textContent = text;
+function renderLoading(button, text) {
+  button.textContent = text;
 }
 
 

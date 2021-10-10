@@ -11,6 +11,7 @@ import { popupEditProfileButton,
          popupPhotoSelector,
          userNameSelector,
          userWorkSelector,
+         userImageSelector,
          validationConfig,
          baseUrl,
          baseToken,
@@ -52,7 +53,7 @@ const validAvatarChange = new FormValidator(avatarValidationConfig, popupAvatarC
 validAvatarChange.enableValidation();
 
 //данные пользователя
-const userInfo = new UserInfo({ userNameSelector, userWorkSelector });
+const userInfo = new UserInfo({ userNameSelector, userWorkSelector, userImageSelector });
 
 // API для получение данных
 const apiData = new API(baseUrl,baseToken);
@@ -224,8 +225,8 @@ apiData.getInitialCards()
     // добавление имени пользователя и работы
     userInfo.setUserInfo(userData);
     // добавление картинки пользователя
-    profileAvatar.src = userData.avatar;
-    profileAvatar.alt = userData.name;
+    //profileAvatar.src = userData.avatar;
+    //profileAvatar.alt = userData.name;
     userId = userData._id;
   })
   .catch((err) => {

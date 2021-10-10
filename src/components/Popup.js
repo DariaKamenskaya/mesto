@@ -35,7 +35,9 @@ export class Popup {
   // функция закрытия по esc
   _handleEscClose = (evt) => {
     //if (evt.key === 'Escape' && this._element.classList.contains(this._openedClass)) {
-    this.closePopup();
+    if (evt.key === 'Escape') {
+      this.closePopup();
+    } 
   }
 
   // функция навешивания слушателей

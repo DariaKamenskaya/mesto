@@ -99,7 +99,7 @@ export class API {
   // ставим лайк карточке
   changeLikeCardStatus(idCard,like){
     return fetch(`${this._url}/cards/likes/${idCard}`, {
-      method: like ? 'PUT' : 'DELETE',
+      method: like ? 'DELETE' : 'PUT',
       headers: {
         authorization: this._token
       }

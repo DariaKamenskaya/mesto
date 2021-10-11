@@ -177,11 +177,20 @@ function newCard(item, userInfoData) {
    data: item,
    handleCardClick: () => handleCardClick(item),
    handleDeleteClick: () => handleDeleteClick(event),
-   handleLike: (likeButton, item) => {
-    if (likeButton.classList.contains('element__heart-button-active')) {
+   handleLikeClick: () => {
+    const likeStatus = cardElm.isLiked();
+    apiData.changeLikeCardStatus(item._id, likeStatus)
+        .then((res) => {
+          cardElm.setLikesInfo(res.likes,likeStatus);
+        })
+        .catch((err) => {
+          console.log(err);
+          return [];
+        });
+   /* if (likeButton.classList.contains('element__heart-button-active')) {
       apiData.changeLikeCardStatus(item, false)
         .then((res) => {
-          cardElm.handleLikeIcon(res.likes);
+          cardElm.setLikesInfo(res.likes);
         })
         .catch((err) => {
           console.log(err);
@@ -190,13 +199,13 @@ function newCard(item, userInfoData) {
     } else {
       apiData.changeLikeCardStatus(item, true)
         .then((res) => {
-          cardElm.handleLikeIcon(res.likes);
+          cardElm.setLikesInfo(res.likes);
         })
         .catch((err) => {
           console.log(err);
           return [];
-        });
-    }
+        }); 
+    } */
   },
    userData: userInfoData
    }, '#element-template');

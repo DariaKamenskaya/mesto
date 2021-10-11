@@ -6,6 +6,7 @@ export class UserInfo {
     this._userNameElm = document.querySelector(userNameSelector);
     this._userWorkElm = document.querySelector(userWorkSelector);
     this._userImgElm = document.querySelector(userImageSelector);
+    this._userID = 0;
   }
 
 // метод возвращает объект с данными пользователя
@@ -14,6 +15,7 @@ export class UserInfo {
     this._userInfo.name = this._userNameElm.textContent;
     this._userInfo.about = this._userWorkElm.textContent;
     this._userInfo.avatar = this._userImgElm.src;
+    this._userInfo.id = this._userID
   
     return this._userInfo;
     }
@@ -24,6 +26,7 @@ export class UserInfo {
     this._userWorkElm.textContent = data.about;  //data.work
     this._userImgElm.src = data.avatar;
     this._userImgElm.alt = data.name;
+    this._userID = data._id;
   }
 
 

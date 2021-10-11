@@ -74,17 +74,7 @@ const cardList = new Section({
 const popupImg = new PopupWithImage( popupPhotoSelector);
 
 // создаем попап удаления карточки
-const popupDelete = new PopupWithConfirmation( {
-  handleSubmitForm: (card) => {
-    // удаляем карточку на сервере
-    apiData.deleteCard(card)
-    .then()
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-      return [];
-    }); 
-  }
-} ,popupDeleteSelector);
+const popupDelete = new PopupWithConfirmation(popupDeleteSelector);
 
 // создаем попап редактирования данных пользователя
 const popupEdit = new PopupWithForm({
@@ -163,11 +153,27 @@ function handleCardClick(userData) {
   popupImg.openPopup(userData);
 }
 
-// обработчик открытия попапа для удаления карточки
-function handleDeleteClick(event) {
-  const card = event.target.closest('.element');
-  popupDelete.openPopup(userId, card);
+// обработчик клика по карточке
+function handleSubmitDeleteCard(item,cardElm) {
+  //console.log('aaaa!');
+  apiData.deleteCard(item._id)
+  .then(() => {
+    console.log(cardElm);
+    cardElm.removeCard();
+    popupDelete.closePopup();
+  })
+  .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+    return [];
+  });
 }
+
+// обработчик открытия попапа для удаления карточки
+/*function handleDeleteClick(event,item) {
+  const card = event.target.closest('.element');
+  popupDelete.setSubmitAction(handleSubmitDeleteCard);
+  popupDelete.openPopup(userId, card);
+}*/
 
 
 // функция создания карточек
@@ -176,36 +182,32 @@ function newCard(item, userInfoData) {
   const cardElm = new Card({
    data: item,
    handleCardClick: () => handleCardClick(item),
-   handleDeleteClick: () => handleDeleteClick(event),
+   handleDeleteClick: () =>  {
+    //debugger;
+    popupDelete.setSubmitAction(handleSubmitDeleteCard(item,cardElm));
+    popupDelete.openPopup();
+   },
    handleLikeClick: () => {
     const likeStatus = cardElm.isLiked();
     apiData.changeLikeCardStatus(item._id, likeStatus)
-        .then((res) => {
-          cardElm.setLikesInfo(res.likes,likeStatus);
-        })
-        .catch((err) => {
-          console.log(err);
-          return [];
-        });
-   /* if (likeButton.classList.contains('element__heart-button-active')) {
-      apiData.changeLikeCardStatus(item, false)
-        .then((res) => {
-          cardElm.setLikesInfo(res.likes);
-        })
-        .catch((err) => {
-          console.log(err);
-          return [];
-        });
-    } else {
-      apiData.changeLikeCardStatus(item, true)
-        .then((res) => {
-          cardElm.setLikesInfo(res.likes);
-        })
-        .catch((err) => {
-          console.log(err);
-          return [];
-        }); 
-    } */
+    .then((res) => {
+      cardElm.setLikesInfo(res.likes,likeStatus);
+    })
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
+  },
+  handleSubmitDeleteCard: () => {
+    apiData.deleteCard(item._id)
+    .then(() => {
+    cardElm.removeCard();
+    popupDelete.closePopup();
+    })
+    .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+    return [];
+    });
   },
    userData: userInfoData
    }, '#element-template');

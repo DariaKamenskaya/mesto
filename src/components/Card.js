@@ -2,7 +2,7 @@
 
 export class Card {
 
-  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick, userData}, cardSelector) {
+  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick, handleDeleteCard, userData}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -15,7 +15,7 @@ export class Card {
     this._handleCardClick = handleCardClick.bind(this);
     this._handleDeleteClick = handleDeleteClick.bind(this);
     this._handleLikeClick = handleLikeClick.bind(this);
-    //this._handleDeleteCard = handleDeleteCard;
+    this._handleDeleteCard = handleDeleteCard;
     //this._element = this._getElement();
     this._element = {}; //document.querySelector('.element'); //нашли лайк карточки
     this._likeButton = {}; //this._element.querySelector('.element__heart-button'); //нашли лайк карточки
@@ -51,7 +51,7 @@ export class Card {
     const statusLikeNewCard = this.isLiked();
     this.setLikesInfo(this._likes,!statusLikeNewCard);
     // проверка создана ли карточка нами
-    if (this._userCardName != this._userName) {
+    if (this._ownerId != this._currentUserId) {
       // удаляем кнопку с корзинкой
       this._deleteButton.remove();
     }
@@ -64,10 +64,10 @@ export class Card {
 
   // функция  проверки того, что в массиве лайков есть лайк, айди которого совпадает с айди текущего пользователя 
   isLiked() {
-    console.log(this._currentUserId, this._likes);
+    //console.log(this._currentUserId, this._likes);
     let status = false;
     for (let i = 0; i < this._likes.length; i++) { // выведет 0, затем 1, затем 2
-      console.log(i, this._currentUserId, this._likes[i]._id);
+      //console.log(i, this._currentUserId, this._likes[i]._id);
       if (this._currentUserId === this._likes[i]._id) {
         status = true;
         break;
@@ -92,7 +92,7 @@ export class Card {
     }
     //this._likeButton.classList.toggle('element__heart-button-active');
     this._cardLikesElement.textContent = likes.length;
-    //this._likes = likes.length;
+    this._likes = likes;
   }
 
   _toggleLike(evt) {

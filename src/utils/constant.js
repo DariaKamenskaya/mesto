@@ -18,6 +18,7 @@ export const popupDeleteSelector = '.popup_delete';
 export const popupAvatarSelector = '.popup-avatar';
 export const userNameSelector = '.profile__title';
 export const userWorkSelector = '.profile__text';
+export const userImageSelector = '.profile__avatar';
 export const popupPhotoSelector = '.popup_img';
 
 export const popupEditProfile = document.querySelector('.popup-user');

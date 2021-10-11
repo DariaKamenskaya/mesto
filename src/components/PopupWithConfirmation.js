@@ -1,7 +1,7 @@
 import { Popup } from "./Popup.js";
 
 // класс для попапа удаления карточки
-export class PopupDelete extends Popup{
+export class PopupWithConfirmation extends Popup{
 
     constructor({handleSubmitForm}, popupSelector) {
         super(popupSelector);

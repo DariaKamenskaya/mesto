@@ -26,7 +26,7 @@ import { popupEditProfileButton,
          buttonSubmitPopupAvatar } from "../utils/constant.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import {PopupWithImage} from '../components/PopupWithImage.js';
-import { PopupDelete } from "../components/PopupDelete.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 // импортируем класс Card (создание карточек и методы для их обработки)
 import { Card } from '../components/Card.js';
 // import { initialElement } from '../utils/initial-сards.js';
@@ -74,7 +74,7 @@ const cardList = new Section({
 const popupImg = new PopupWithImage( popupPhotoSelector);
 
 // создаем попап удаления карточки
-const popupDelete = new PopupDelete( {
+const popupDelete = new PopupWithConfirmation( {
   handleSubmitForm: (card) => {
     // удаляем карточку на сервере
     apiData.deleteCard(card)

@@ -9,7 +9,7 @@ export class Card {
     this._cardID = data._id;
     this._ownerId= data.owner._id;
     //this._userCardName= data.owner.name;
-    this._currentUserId = userData.id;
+    this._currentUserId = userData;
     //this._userName = userData.name;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick.bind(this);

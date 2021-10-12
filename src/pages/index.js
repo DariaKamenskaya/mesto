@@ -63,7 +63,7 @@ const cardList = new Section({
   items: [],
   renderer: (item) => {
       // cоздаём карточку
-      const postElement = newCard(item, userInfo.getUserInfo());
+      const postElement = newCard(item, userId);
       // добавляем карточку в DOM
       cardList.addItem(postElement);
   }
@@ -108,7 +108,7 @@ const popupAddNew = new PopupWithForm({
     apiData.postCard(item)
     .then(res => {
       // Создадим экземпляр карточки
-      const cardElement = newCard(res, userInfo.getUserInfo());
+      const cardElement = newCard(res, userId);
       // добавляем карточку в DOM
       cardList.addItem(cardElement);
       popupAddNew.closePopup();
@@ -169,7 +169,7 @@ function handleSubmitDeleteCard(item, cardElm) {
 
 
 // функция создания карточек
-function newCard(item, userInfoData) {
+function newCard(item, userId) {
   // Создадим экземпляр карточки
   const cardElm = new Card({
    data: item,
@@ -189,7 +189,7 @@ function newCard(item, userInfoData) {
       return [];
     });
   },
-   userData: userInfoData
+   userData: userId
    }, '#element-template');
  // Создаём карточку и возвращаем наружу
  return cardElm.createCard();

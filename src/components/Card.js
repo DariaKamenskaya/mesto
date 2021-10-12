@@ -2,7 +2,7 @@
 
 export class Card {
 
-  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick, handleDeleteCard, userData}, cardSelector) {
+  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick,  userData}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -15,8 +15,6 @@ export class Card {
     this._handleCardClick = handleCardClick.bind(this);
     this._handleDeleteClick = handleDeleteClick.bind(this);
     this._handleLikeClick = handleLikeClick.bind(this);
-    this._handleDeleteCard = handleDeleteCard.bind(this);
-    console.log(this._handleDeleteCard);
     //this._element = this._getElement();
     this._element = {}; //document.querySelector('.element'); //нашли лайк карточки
     this._likeButton = {}; //this._element.querySelector('.element__heart-button'); //нашли лайк карточки
@@ -103,13 +101,11 @@ export class Card {
   // функция удаления карточки/элемента
   removeCard() {
     //this.closest('.element').remove();
+    this._element.remove();
     this._element = null;
   }
 
-  handleSubmitDeleteCard() {
-    console.log(this._handleDeleteCard);
-    this._handleDeleteCard(this._cardID, this._element);
-  }
+
 
   // функция навешивания слушателей повесить на кнопки и картинку слушатели
   _setEventListeners() {

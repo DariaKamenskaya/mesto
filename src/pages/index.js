@@ -154,9 +154,8 @@ function handleCardClick(userData) {
 }
 
 // обработчик клика по карточке
-/*function handleSubmitDeleteCard(item,cardElm) {
+function handleSubmitDeleteCard(item, cardElm) {
   //console.log('aaaa!');
-  console.log(item._id,cardElm);
   apiData.deleteCard(item._id)
   .then(() => {
     cardElm.removeCard();
@@ -166,14 +165,7 @@ function handleCardClick(userData) {
     console.log(err); // "Что-то пошло не так: ..."
     return [];
   });
-} */
-
-// обработчик открытия попапа для удаления карточки
-/*function handleDeleteClick(event,item) {
-  const card = event.target.closest('.element');
-  popupDelete.setSubmitAction(handleSubmitDeleteCard);
-  popupDelete.openPopup(userId, card);
-}*/
+} 
 
 
 // функция создания карточек
@@ -184,8 +176,8 @@ function newCard(item, userInfoData) {
    handleCardClick: () => handleCardClick(item),
    handleDeleteClick: () =>  {
     //debugger;
-    console.log(cardElm, cardElm.handleSubmitDeleteCard)
-    popupDelete.setSubmitAction(cardElm.handleSubmitDeleteCard);
+    //console.log(cardElm, cardElm.handleSubmitDeleteCard)
+    popupDelete.setSubmitAction(function () {handleSubmitDeleteCard(item, cardElm)});
     popupDelete.openPopup();
    },
    handleLikeClick: () => {
@@ -197,17 +189,6 @@ function newCard(item, userInfoData) {
     .catch((err) => {
       console.log(err);
       return [];
-    });
-  },
-  handleDeleteCard: (id,card) => {
-    apiData.deleteCard(id)
-    .then(() => {
-    card.removeCard();
-    popupDelete.closePopup();
-    })
-    .catch((err) => {
-    console.log(err); // "Что-то пошло не так: ..."
-    return [];
     });
   },
    userData: userInfoData

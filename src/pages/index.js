@@ -175,8 +175,6 @@ function newCard(item, userInfoData) {
    data: item,
    handleCardClick: () => handleCardClick(item),
    handleDeleteClick: () =>  {
-    //debugger;
-    //console.log(cardElm, cardElm.handleSubmitDeleteCard)
     popupDelete.setSubmitAction(function () {handleSubmitDeleteCard(item, cardElm)});
     popupDelete.openPopup();
    },

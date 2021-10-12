@@ -154,11 +154,11 @@ function handleCardClick(userData) {
 }
 
 // обработчик клика по карточке
-function handleSubmitDeleteCard(item,cardElm) {
+/*function handleSubmitDeleteCard(item,cardElm) {
   //console.log('aaaa!');
+  console.log(item._id,cardElm);
   apiData.deleteCard(item._id)
   .then(() => {
-    console.log(cardElm);
     cardElm.removeCard();
     popupDelete.closePopup();
   })
@@ -166,7 +166,7 @@ function handleSubmitDeleteCard(item,cardElm) {
     console.log(err); // "Что-то пошло не так: ..."
     return [];
   });
-}
+} */
 
 // обработчик открытия попапа для удаления карточки
 /*function handleDeleteClick(event,item) {
@@ -184,7 +184,8 @@ function newCard(item, userInfoData) {
    handleCardClick: () => handleCardClick(item),
    handleDeleteClick: () =>  {
     //debugger;
-    popupDelete.setSubmitAction(handleSubmitDeleteCard(item,cardElm));
+    console.log(cardElm, cardElm.handleSubmitDeleteCard)
+    popupDelete.setSubmitAction(cardElm.handleSubmitDeleteCard);
     popupDelete.openPopup();
    },
    handleLikeClick: () => {
@@ -198,10 +199,10 @@ function newCard(item, userInfoData) {
       return [];
     });
   },
-  handleSubmitDeleteCard: () => {
-    apiData.deleteCard(item._id)
+  handleDeleteCard: (id,card) => {
+    apiData.deleteCard(id)
     .then(() => {
-    cardElm.removeCard();
+    card.removeCard();
     popupDelete.closePopup();
     })
     .catch((err) => {

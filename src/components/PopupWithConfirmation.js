@@ -23,8 +23,8 @@ export class PopupWithConfirmation extends Popup{
 
     // метод, получающий на вход функцию и записывающий ее в переменную класса
     setSubmitAction(handleSubmitForm) {
-      console.log('setSubmitAction');
-      this._handleSubmitForm = handleSubmitForm;
+      console.log('setSubmitAction', handleSubmitForm);
+      return this._handleSubmitForm = handleSubmitForm;
     }
 
 
@@ -32,6 +32,7 @@ export class PopupWithConfirmation extends Popup{
         // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
         evt.preventDefault();
         // функция сабмита
+        console.log(this._handleSubmitForm);
         this._handleSubmitForm();
         // закрываем попап
         //this.closePopup();

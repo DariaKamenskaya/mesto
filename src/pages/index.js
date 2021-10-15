@@ -63,7 +63,7 @@ const cardList = new Section({
   items: [],
   renderer: (item) => {
       // cоздаём карточку
-      const postElement = newCard(item, userId);
+      const postElement = createCard(item, userId);
       // добавляем карточку в DOM
       cardList.addItem(postElement);
   }
@@ -93,7 +93,7 @@ const popupEdit = new PopupWithForm({
     }) 
     .finally(() => {
       // собщение о загрузке// очень быстрый процесс, может здесь стоит убрать изменение текста кнопки
-      renderLoading(buttonSubmitFormEdit, 'Сохранение')
+      renderLoading(buttonSubmitFormEdit, 'Сохранить')
     });
   }
 }, popupEditProfileSelector);
@@ -108,7 +108,7 @@ const popupAddNew = new PopupWithForm({
     apiData.postCard(item)
     .then(res => {
       // Создадим экземпляр карточки
-      const cardElement = newCard(res, userId);
+      const cardElement = createCard(res, userId);
       // добавляем карточку в DOM
       cardList.addItem(cardElement);
       popupAddNew.closePopup();
@@ -169,7 +169,7 @@ function handleSubmitDeleteCard(item, cardElm) {
 
 
 // функция создания карточек
-function newCard(item, userId) {
+function createCard(item, userId) {
   // Создадим экземпляр карточки
   const cardElm = new Card({
    data: item,
@@ -192,7 +192,7 @@ function newCard(item, userId) {
    userData: userId
    }, '#element-template');
  // Создаём карточку и возвращаем наружу
- return cardElm.createCard();
+ return cardElm.newCard();
 }
 
 

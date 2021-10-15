@@ -38,6 +38,7 @@ import { FormValidator } from '../components/FormValidator.js';
 import { API } from '../components/Api.js';
 // для сборки под вебпаком импорт стилей
 import './index.css'; // добавьте импорт главного файла стилей 
+import { values } from "core-js/core/array";
 // переменная для хранения id пользователя
 let userId
 
@@ -133,7 +134,6 @@ const popupChangeAvatar = new PopupWithForm({
     // передаем данные на сервер
     apiData.patchAvatar(item)
     .then((res) => {
-      //profileAvatar.src = res.avatar;
       userInfo.setUserInfo(res);
       popupChangeAvatar.closePopup();
     })
@@ -198,9 +198,28 @@ function createCard(item, userId) {
 
 
 
+Promise.all([
+  apiData.getInitialCards(),
+  //piData.getUserData()
+])
+.then((initialElm)=>{ //попадаем сюда когда оба промиса будут выполнены
+  //console.log(values1, values2);
+  // вызов отрисовки всех карточек на странице 
+  cardList.renderItems(initialElm);
+  // добавление имени пользователя и работы
+  //userInfo.setUserInfo(userData);
+  //userId = userData._id;
+})
+.catch((err)=>{ 
+  console.log(err); // "Что-то пошло не так: ..."
+  //return [];
+});
+
+
+
 
 // создание начальных карточек
-apiData.getInitialCards()
+/*apiData.getInitialCards()
   .then(initialElm => {
     // вызов отрисовки всех карточек на странице 
     cardList.renderItems(initialElm);
@@ -227,7 +246,7 @@ apiData.getInitialCards()
   .catch((err) => {
     console.log(err); // "Что-то пошло не так: ..."
     return [];
-  }); 
+  }); */
 
 
 

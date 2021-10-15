@@ -133,7 +133,8 @@ const popupChangeAvatar = new PopupWithForm({
     // передаем данные на сервер
     apiData.patchAvatar(item)
     .then((res) => {
-      profileAvatar.src = res.avatar;
+      //profileAvatar.src = res.avatar;
+      userInfo.setUserInfo(res);
       popupChangeAvatar.closePopup();
     })
     .catch((err) => {

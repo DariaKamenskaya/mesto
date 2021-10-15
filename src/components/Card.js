@@ -1,4 +1,3 @@
-//import { forEach } from "core-js/core/array";
 
 export class Card {
 
@@ -6,25 +5,16 @@ export class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    this._cardID = data._id;
+    this._cardId = data._id;
     this._ownerId= data.owner._id;
-    //this._userCardName= data.owner.name;
     this._currentUserId = userData;
-    //this._userName = userData.name;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick.bind(this);
     this._handleDeleteClick = handleDeleteClick.bind(this);
     this._handleLikeClick = handleLikeClick.bind(this);
-    //this._element = this._getElement();
-    this._element = {}; //document.querySelector('.element'); //нашли лайк карточки
-    this._likeButton = {}; //this._element.querySelector('.element__heart-button'); //нашли лайк карточки
-    this._deleteButton = {}; //this._element.querySelector('.element__remove-button'); //нашли кнопку удаления карточки
-    this._cardImageElement = {}; //this._element.querySelector('.element__image'); //нашли картинку карточки
-    this._cardTitleElement = {}; //this._element.querySelector('.element__title'); // нашли поле карточки для задания имени
-    this._cardLikesElement = {}; //this._element.querySelector('.element__likes-number'); // нашли поле карточки для задания имени
     this.setLikesInfo = this.setLikesInfo.bind(this);
     this._toggleLike = this._toggleLike.bind(this);
-    }
+  }
   
 
   // функция клонирования элемента/карточки 
@@ -63,23 +53,14 @@ export class Card {
 
   // функция  проверки того, что в массиве лайков есть лайк, айди которого совпадает с айди текущего пользователя 
   isLiked() {
-    //console.log(this._currentUserId, this._likes);
     let status = false;
-    for (let i = 0; i < this._likes.length; i++) { // выведет 0, затем 1, затем 2
-      //console.log(i, this._currentUserId, this._likes[i]._id);
+    for (let i = 0; i < this._likes.length; i++) { 
       if (this._currentUserId === this._likes[i]._id) {
         status = true;
         break;
       }
     }
     return status;
-    /*this._likes.forEach((item) => {
-      if (this._currentUserId === item.id) {
-        return true;
-      }  else {
-        return false;
-      }
-    });*/
   }
 
   // функция  окрашивания лайка
@@ -89,18 +70,16 @@ export class Card {
     } else {
       this._likeButton.classList.add('element__heart-button-active');
     }
-    //this._likeButton.classList.toggle('element__heart-button-active');
     this._cardLikesElement.textContent = likes.length;
     this._likes = likes;
   }
 
   _toggleLike(evt) {
-    this._handleLikeClick(evt.target, this._cardID);
+    this._handleLikeClick(evt.target, this._cardId);
   }
 
   // функция удаления карточки/элемента
   removeCard() {
-    //this.closest('.element').remove();
     this._element.remove();
     this._element = null;
   }

@@ -36,10 +36,10 @@ export class API {
     // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
     });
-    }
+  }
 
     // сохранение на сервере отредактированных данных пользователя
-    setUserData({name, about}) {
+  setUserData({name, about}) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -115,39 +115,39 @@ export class API {
 
   // метод получения данных карточки
   getCard(idCard) {
-      return fetch(`${this._url}/cards/${idCard}`, {
-        headers: {
-          authorization: this._token
-        }
-      })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      });
-    }
+    return fetch(`${this._url}/cards/${idCard}`, {
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
 
   // метод для обновления аватара пользователя
   patchAvatar(data) {
-      return fetch(`${this._url}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: {
-          authorization: this._token,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          avatar: data.link
-        })
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.link
       })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      });
-    }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
 
 }

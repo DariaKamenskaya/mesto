@@ -1,13 +1,11 @@
 
-
 export class Popup {
-
-   _openedClass = 'popup_is-opened';
 
   constructor(className) {
     this._element = document.querySelector(className);
     this._closeBtn = this._element.querySelector('.popup__close');
     this._handleCloseCallback = this.closePopup.bind(this);
+    this._openedClass = 'popup_is-opened';
   }
 
 
@@ -15,14 +13,14 @@ export class Popup {
   openPopup() {
     this._element.classList.add(this._openedClass);
     // навешиваем слушатели
-    this.setEventListeners();
+    this._setEventListeners();
   }
     
   // функция закрытия попапа
   closePopup() {
     this._element.classList.remove(this._openedClass);
     // удаляем слушатели
-    this.removeEventListeners();
+    this._removeEventListeners();
   }
   
   // функция закрытия открытого попапа (для клика по оверлею)
@@ -34,15 +32,13 @@ export class Popup {
 
   // функция закрытия по esc
   _handleEscClose = (evt) => {
-    //if (evt.key === 'Escape' && this._element.classList.contains(this._openedClass)) {
     if (evt.key === 'Escape') {
       this.closePopup();
     } 
   }
 
   // функция навешивания слушателей
-  setEventListeners() {
-    // const closeBtn = this.element.querySelector('.popup__close');
+  _setEventListeners() {
     // закрытие по кнопке крестик
     this._closeBtn.addEventListener('click', this._handleCloseCallback);
     // закрытие по клику на оверлей
@@ -52,8 +48,7 @@ export class Popup {
   }
 
   // функция удаления слушателей
-  removeEventListeners() {
-    //const closeBtn = this.element.querySelector('.popup__close');
+  _removeEventListeners() {
     // удаление слушателя закрытие по кнопке крестик
     this._closeBtn.removeEventListener('click', this._handleCloseCallback);
     // удаление слушателя закрытие по клику на оверлей

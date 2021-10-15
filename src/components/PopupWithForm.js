@@ -1,5 +1,4 @@
 import { Popup } from "./Popup.js";
-//import { config } from "./constant.js";
 
 // класс для попапа с формой
 export class PopupWithForm extends Popup{
@@ -41,15 +40,15 @@ export class PopupWithForm extends Popup{
   }
   
   // функция навешивания слушателей
-  setEventListeners() {
-    super.setEventListeners();
+  _setEventListeners() {
+    super._setEventListeners();
     // обработчик сабмита формы
     this._formElement.addEventListener('submit', this._submitFormCallback);
   }
   
   // функция удаления слушателей
-  removeEventListeners() {
-    super.removeEventListeners();
+  _removeEventListeners() {
+    super._removeEventListeners();
     this._formElement.removeEventListener('submit', this._submitFormCallback);
   }
   

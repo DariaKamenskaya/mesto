@@ -1,10 +1,10 @@
 // класс, который отвечает за отрисовку элементов на странице
 export class Section {
 
-  constructor({items, renderer}, classSelector) {
+  constructor({items, renderer}, classContainer) {
     this._items = items;
     this._renderer = renderer;
-    this._container = document.querySelector(classSelector);
+    this._container = document.querySelector(classContainer);
   }
 
 // метод отрисовки всех элементов

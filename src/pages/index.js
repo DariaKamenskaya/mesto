@@ -15,10 +15,7 @@ import { popupEditProfileButton,
          validationConfig,
          baseUrl,
          baseToken,
-         profileAvatar,
-         cardsContainer,
          popupDeleteSelector,
-         cardSelector,
          popupAvatarSelector,
          profileAvatarButton,
          popupAvatarChange,
@@ -155,7 +152,6 @@ function handleCardClick(userData) {
 
 // обработчик клика по карточке
 function handleSubmitDeleteCard(item, cardElm) {
-  //console.log('aaaa!');
   apiData.deleteCard(item._id)
   .then(() => {
     cardElm.removeCard();
@@ -190,9 +186,9 @@ function createCard(item, userId) {
     });
   },
    userData: userId
-   }, '#element-template');
+  }, '#element-template');
  // Создаём карточку и возвращаем наружу
- return cardElm.newCard();
+  return cardElm.newCard();
 }
 
 
@@ -202,49 +198,16 @@ Promise.all([
   apiData.getUserData()
 ])
 .then((values)=>{ //попадаем сюда когда оба промиса будут выполнены
-  // вызов отрисовки всех карточек на странице 
-  cardList.renderItems(values[0]);
   // добавление имени пользователя и работы
   userInfo.setUserInfo(values[1]);
   userId = values[1]._id;
+  // вызов отрисовки всех карточек на странице 
+  cardList.renderItems(values[0]);
 })
 .catch((err)=>{ 
   console.log(err); // "Что-то пошло не так: ..."
   return [];
 });
-
-
-
-
-// создание начальных карточек
-/*apiData.getInitialCards()
-  .then(initialElm => {
-    // вызов отрисовки всех карточек на странице 
-    cardList.renderItems(initialElm);
-  })
-  .catch((err) => {
-    console.log(err); // "Что-то пошло не так: ..."
-    return [];
-  }); 
-
-
-
-
-
-// начальные данные пользователя
-  apiData.getUserData()
-  .then(userData => {
-    // добавление имени пользователя и работы
-    userInfo.setUserInfo(userData);
-    // добавление картинки пользователя
-    //profileAvatar.src = userData.avatar;
-    //profileAvatar.alt = userData.name;
-    userId = userData._id;
-  })
-  .catch((err) => {
-    console.log(err); // "Что-то пошло не так: ..."
-    return [];
-  }); */
 
 
 

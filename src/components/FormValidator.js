@@ -17,13 +17,11 @@ export class FormValidator {
     const errorElement = this._targetFormElm.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
-    // errorElement.classList.add('popup__input-error_active');
   };
     
   _hideInputError = (inputElement) => {
     const errorElement = this._targetFormElm.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
-    // errorElement.classList.remove('popup__input-error_active');
     errorElement.textContent = '';
   };
     

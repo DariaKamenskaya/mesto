@@ -38,7 +38,6 @@ import { FormValidator } from '../components/FormValidator.js';
 import { API } from '../components/Api.js';
 // для сборки под вебпаком импорт стилей
 import './index.css'; // добавьте импорт главного файла стилей 
-import { values } from "core-js/core/array";
 // переменная для хранения id пользователя
 let userId
 
@@ -200,19 +199,18 @@ function createCard(item, userId) {
 
 Promise.all([
   apiData.getInitialCards(),
-  //piData.getUserData()
+  apiData.getUserData()
 ])
-.then((initialElm)=>{ //попадаем сюда когда оба промиса будут выполнены
-  //console.log(values1, values2);
+.then((values)=>{ //попадаем сюда когда оба промиса будут выполнены
   // вызов отрисовки всех карточек на странице 
-  cardList.renderItems(initialElm);
+  cardList.renderItems(values[0]);
   // добавление имени пользователя и работы
-  //userInfo.setUserInfo(userData);
-  //userId = userData._id;
+  userInfo.setUserInfo(values[1]);
+  userId = values[1]._id;
 })
 .catch((err)=>{ 
   console.log(err); // "Что-то пошло не так: ..."
-  //return [];
+  return [];
 });
 
 
